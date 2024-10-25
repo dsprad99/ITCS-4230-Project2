@@ -39,9 +39,7 @@
   "name":"ITCS-4230-RaceGame",
   "resources":[
     {"id":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},},
-    {"id":{"name":"checkpoint1_obj","path":"objects/checkpoint1_obj/checkpoint1_obj.yy",},},
-    {"id":{"name":"checkpoint2_obj","path":"objects/checkpoint2_obj/checkpoint2_obj.yy",},},
-    {"id":{"name":"checkpoint3_obj","path":"objects/checkpoint3_obj/checkpoint3_obj.yy",},},
+    {"id":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},},
     {"id":{"name":"player_car","path":"objects/player_car/player_car.yy",},},
     {"id":{"name":"track_outline","path":"objects/track_outline/track_outline.yy",},},
     {"id":{"name":"tutorial","path":"rooms/tutorial/tutorial.yy",},},

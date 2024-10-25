@@ -7,7 +7,7 @@
 //the checkpoints
 
 
-checkpoints_needed = ["collision1","collision2","collision3"]
+checkpoints_needed = [1,2,3]
 
 if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 	show_message("Lap completed");
