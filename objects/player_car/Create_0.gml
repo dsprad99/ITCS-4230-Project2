@@ -13,6 +13,8 @@ turn_speed = 1;
 //Davis Spradling
 //Keep track of checkpoints completed
 checkpoints_curr = [];
+press_up = false;
+press_down = false;
 
 
 //Davis Spradling

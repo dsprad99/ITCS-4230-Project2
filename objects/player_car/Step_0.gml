@@ -8,6 +8,8 @@ if (keyboard_check(vk_up) || keyboard_check(ord("W"))){
     if(car_speed>max_speed){
 		car_speed = max_speed; 
 	}
+	press_up = true;
+	press_down = false;
 }
 
 //Davis Spradling
@@ -17,6 +19,8 @@ if(keyboard_check(vk_down) || keyboard_check(ord("S"))){
     if (car_speed< -max_speed){
 		car_speed = -max_speed; 
 	}
+	press_up = false;
+	press_down = true;
 }
 
 //Davis Spradling
