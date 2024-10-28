@@ -7,9 +7,14 @@
 //the checkpoints
 
 
-checkpoints_needed = [1,2,3]
-
+checkpoints_needed = [0,1,2]
+show_debug_message(checkpoints_curr)
 if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 	show_message("Lap completed");
 	checkpoints_curr = [];
 }
+
+
+//show_debug_message(checkpoints_curr)
+
+
