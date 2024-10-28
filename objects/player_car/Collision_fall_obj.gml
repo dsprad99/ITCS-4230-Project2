@@ -6,6 +6,7 @@
 //This will rotate through the checkpoint objects
 //and take the last object that was iterated through
 //and respawn them there
+
 for (var i = 0; i < instance_number(checkpoint_obj); ++i;){
 show_debug_message(checkpoints_curr)
     var instanceid = instance_find(checkpoint_obj, i);
@@ -14,6 +15,7 @@ show_debug_message(checkpoints_curr)
 	    var inst_x = instanceid.x +(instanceid.sprite_width/2);
 	    var inst_y = instanceid.y +(instanceid.sprite_height/2);
 		
+		//save progress made by car before destroying
 		curr_checkpoint_arr = player_car.checkpoints_curr;
 
 	    instance_destroy(player_car);
@@ -23,6 +25,8 @@ show_debug_message(checkpoints_curr)
 		
 		var right_direction = (instanceid.direction+instanceid.rotate_car)%360;
 		new_car_instance.image_angle = right_direction;
+		
+		//readd that progress
 		new_car_instance.checkpoints_curr=curr_checkpoint_arr;
 		
 	}

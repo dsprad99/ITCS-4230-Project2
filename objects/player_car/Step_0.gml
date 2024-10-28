@@ -1,6 +1,10 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+if (!place_meeting(x, y, checkered_obj)) {
+    pass_thru = false
+}
+
 //Davis Spradling
 //If up key is pressed accelerate car in a forward motion
 if (keyboard_check(vk_up) || keyboard_check(ord("W"))){
@@ -35,6 +39,7 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 		car_speed=0; 
 	}
 }
+
 
 //Davis Spradling
 //Give player ability to steer but only if the car is moving

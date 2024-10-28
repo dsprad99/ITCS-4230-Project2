@@ -22,10 +22,10 @@
     {"name":"inst_C6B86B8","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_6EC39982","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_46F264D0","path":"rooms/tutorial/tutorial.yy",},
-    {"name":"inst_34F53BD8","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_5A7168EF","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_1DB82CCD","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_4AA06480","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_79909A22","path":"rooms/tutorial/tutorial.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -48,7 +48,6 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"checkpoint","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":41.6703,"scaleX":0.6668113,"scaleY":1.0,"x":1856.0,"y":3904.0,},
         {"$GMRInstance":"v1","%Name":"inst_46F264D0","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_46F264D0","objectId":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.4230769,"scaleY":1.0,"x":1024.0,"y":1472.0,},
-        {"$GMRInstance":"v1","%Name":"inst_34F53BD8","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_34F53BD8","objectId":{"name":"player_car","path":"objects/player_car/player_car.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1792.0,"y":2432.0,},
         {"$GMRInstance":"v1","%Name":"inst_5A7168EF","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5A7168EF","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"checkpoint","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"rotate_car","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"90",},
@@ -60,6 +59,7 @@
         {"$GMRInstance":"v1","%Name":"inst_4AA06480","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4AA06480","objectId":{"name":"fall_obj","path":"objects/fall_obj/fall_obj.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"fall_obj","path":"objects/fall_obj/fall_obj.yy",},"propertyId":{"name":"checkpoint_go_to","path":"objects/fall_obj/fall_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":3936.0,"y":1216.0,},
+        {"$GMRInstance":"v1","%Name":"inst_79909A22","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_79909A22","objectId":{"name":"player_car","path":"objects/player_car/player_car.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1568.0,"y":2336.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Tiles_Grass_Layer","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_Grass_Layer","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":313,"SerialiseWidth":313,"TileCompressedData":[
           -9452,3,-228,0,-85,3,-228,0,-85,3,-228,0,-85,3,-228,0,-85,3,-228,0,-85,3,-228,0,-85,3,-228,0,-85,3,-228,

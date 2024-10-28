@@ -11,8 +11,13 @@ checkpoints_needed = [0,1,2]
 show_debug_message(checkpoints_curr)
 if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 	show_message("Lap completed");
+	pass_thru = true
 	checkpoints_curr = [];
 }
+if(!pass_thru){
+	car_speed=0;
+}
+
 
 
 //show_debug_message(checkpoints_curr)

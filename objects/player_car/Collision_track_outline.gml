@@ -3,12 +3,14 @@
 
 //Davis Spradling
 //This will act as the outline of our track and will make the 
-//player stop for right now if going off
+//player bounce off the wall it hits
+
 if (press_up) {
     car_speed -= (acceleration+2);
     if (car_speed < -max_speed){
 		car_speed = -max_speed;  
 	}
+
 }
 
 if (press_down) {
@@ -16,4 +18,5 @@ if (press_down) {
     if (car_speed < max_speed){
 		car_speed = max_speed;  
 	}
+
 }
