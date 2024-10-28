@@ -7,12 +7,14 @@
 //and take the last object that was iterated through
 //and respawn them there
 for (var i = 0; i < instance_number(checkpoint_obj); ++i;){
-//show_debug_message(checkpoints_curr)
+show_debug_message(checkpoints_curr)
     var instanceid = instance_find(checkpoint_obj, i);
 	if(fall_obj.checkpoint_go_to ==	instanceid.checkpoint){
         
 	    var inst_x = instanceid.x +(instanceid.sprite_width/2);
 	    var inst_y = instanceid.y +(instanceid.sprite_height/2);
+		
+		curr_checkpoint_arr = player_car.checkpoints_curr;
 
 	    instance_destroy(player_car);
 
@@ -21,6 +23,7 @@ for (var i = 0; i < instance_number(checkpoint_obj); ++i;){
 		
 		var right_direction = (instanceid.direction+instanceid.rotate_car)%360;
 		new_car_instance.image_angle = right_direction;
+		new_car_instance.checkpoints_curr=curr_checkpoint_arr;
 		
 	}
 }
