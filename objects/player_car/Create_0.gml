@@ -1,6 +1,15 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//get the wall tile id for collision reasons in Step.
+wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
+
+//LD Montello
+//scale object 5 times larger
+image_xscale = 5;
+image_yscale = 5;
+
+
 //Davis SPradling
 car_speed = 0; 
 //Apply acceleration through step event ot gradually increase/decrease speed of card

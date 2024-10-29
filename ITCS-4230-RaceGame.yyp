@@ -34,7 +34,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.1.171",
+    "IDEVersion":"2024.8.0.169",
   },
   "name":"ITCS-4230-RaceGame",
   "resources":[
@@ -47,11 +47,14 @@
     {"id":{"name":"finishline_sprite","path":"sprites/finishline_sprite/finishline_sprite.yy",},},
     {"id":{"name":"grass","path":"sprites/grass/grass.yy",},},
     {"id":{"name":"player_car_sprite","path":"sprites/player_car_sprite/player_car_sprite.yy",},},
+    {"id":{"name":"PlayerCar","path":"sprites/PlayerCar/PlayerCar.yy",},},
     {"id":{"name":"purplebar_sprite","path":"sprites/purplebar_sprite/purplebar_sprite.yy",},},
     {"id":{"name":"road","path":"sprites/road/road.yy",},},
+    {"id":{"name":"WallTiles","path":"sprites/WallTiles/WallTiles.yy",},},
     {"id":{"name":"water_sprite","path":"sprites/water_sprite/water_sprite.yy",},},
     {"id":{"name":"yellow_sprite","path":"sprites/yellow_sprite/yellow_sprite.yy",},},
     {"id":{"name":"grass_tile","path":"tilesets/grass_tile/grass_tile.yy",},},
+    {"id":{"name":"LDTileSetDontModify","path":"tilesets/LDTileSetDontModify/LDTileSetDontModify.yy",},},
     {"id":{"name":"road_tile","path":"tilesets/road_tile/road_tile.yy",},},
   ],
   "resourceType":"GMProject",

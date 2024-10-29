@@ -1,6 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+
 if (!place_meeting(x, y, checkered_obj)) {
     pass_thru = false
 }
@@ -13,7 +14,10 @@ if (keyboard_check(vk_up) || keyboard_check(ord("W"))){
 		car_speed = max_speed; 
 	}
 	press_up = true;
-	press_down = false;
+}
+else
+{
+	press_up = false;
 }
 
 //Davis Spradling
@@ -24,7 +28,10 @@ if(keyboard_check(vk_down) || keyboard_check(ord("S"))){
 		car_speed = -max_speed; 
 	}
 	press_up = false;
-	press_down = true;
+}
+else
+{
+	press_up = true;
 }
 
 //Davis Spradling
@@ -54,6 +61,20 @@ if ((keyboard_check(vk_left) || keyboard_check(ord("D"))) && car_speed!=0) {
     image_angle += turn_speed; 
 }
 
+
+//LD Montello, if we 
+//hit a track wall.
+if (place_meeting(x /*+ lengthdir_x(car_speed, image_angle)*/, y /*+ lengthdir_y(car_speed, image_angle)*/, wallTileID))
+{
+	//Davis Spradling
+	//This will act as the outline of our track and will make the 
+	//player bounce off the wall it hits
+	//LD Montello,
+	//just apply opposite speed so we bounce
+	//of in the direction we entered.
+	var enter_speed = car_speed;
+	car_speed = -enter_speed;
+}
 
 //Davis Spradling
 //Update car object based on curr speed and the angle of the the object
