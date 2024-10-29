@@ -1,7 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-
 if (!place_meeting(x, y, checkered_obj)) {
     pass_thru = false
 }
@@ -79,5 +78,18 @@ if (place_meeting(x /*+ lengthdir_x(car_speed, image_angle)*/, y /*+ lengthdir_y
 //Davis Spradling
 //Update car object based on curr speed and the angle of the the object
 x += lengthdir_x(car_speed, image_angle);
-y += lengthdir_y(car_speed, image_angle);  
+y += lengthdir_y(car_speed, image_angle);   
 
+#region draw arrow for velocity debug
+
+//calculate velocity using 
+//current and previous position
+//and convert it to an angle using point_direction.
+layer_sprite_angle(arrow, point_direction(xprevious, yprevious, x, y));
+
+//LD Montello
+//Draw velocity arrow
+layer_sprite_x(arrow, x);
+layer_sprite_y(arrow, y);
+
+#endregion

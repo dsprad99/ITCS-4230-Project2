@@ -9,6 +9,21 @@ wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
 image_xscale = 5;
 image_yscale = 5;
 
+ui_layer = layer_get_id("UI");
+//LD Montello
+//Arrow used to show the
+//direction of the player's
+//current velocity.
+arrow = layer_sprite_create(ui_layer, x, y, spr_arrow);
+layer_sprite_xscale(arrow, 5);
+layer_sprite_yscale(arrow, 5);
+
+//Velocity values
+//so we can have
+//continuous velocity stored
+//so the car can slide.
+vel_x = 0;
+vel_y = 0;
 
 //Davis SPradling
 car_speed = 0; 
