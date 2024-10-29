@@ -20,6 +20,12 @@ shouldDeccel = false;
 
 path_increment = 15;
 
+//LD Montello
+//How many pixels away from
+//a position we can be before
+//resetting our current target to be that position.
+target_accuracy = 5;
+
 #endregion
 
 //LD Montello
@@ -52,3 +58,12 @@ target_y = path_get_point_y(track_path, current_point);
 //path_start(track_path, 5, path_action_restart, true);
 
 #endregion
+
+//LD Montello
+//Arrow used to show the
+//direction of the player's
+//current velocity.
+ui_layer = layer_get_id("UI");
+arrow = layer_sprite_create(ui_layer, x, y, spr_arrow);
+layer_sprite_xscale(arrow, 5);
+layer_sprite_yscale(arrow, 5);
