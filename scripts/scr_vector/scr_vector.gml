@@ -59,7 +59,15 @@ function scr_vector(){
 		///@description returns the magnitude/length of this vector.
 		magnitude = function()
 		{
-			return sqrt(sqr(x) + sqr(y))
+			try {
+				return sqrt(sqr(x) + sqr(y))
+			}
+			//if our sqrt returns not a real number,
+			//then just return zero.
+			catch (e)
+			{
+				return 0;
+			}
 		}
 		
 		/**
@@ -74,6 +82,27 @@ function scr_vector(){
 			normalized_vec.y = y / magnitude();
 			
 			return normalized_vec;
+		}
+		
+		//LD Montello
+		//Clamp magnitude of the vector
+		
+		/**
+		 * @function clamp_magnitude
+		 * @description returns the vector with it's magnitude clamped to the min and max values given.
+		 * param {Real} min the minimum value the magnitude can be (inclusive).
+		 * param {Real} max the maximum value the magnitude can be (inclusive).
+		 * @context
+		 */
+		clamp_magnitude = function(_min, _max)
+		{
+			var temp_vec = self.normalized();
+			if (self.magnitude() > _max)
+				temp_vec = temp_vec.multiply_scalar(_max)
+			else if (self.magnitude() < _max)
+				temp_vec = temp_vec.multiply_scalar(_min)
+		
+			return temp_vec;
 		}
 		
 		//LD Montello

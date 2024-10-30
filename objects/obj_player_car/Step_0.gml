@@ -8,10 +8,15 @@ if (!place_meeting(x, y, checkered_obj)) {
 //Davis Spradling
 //If up key is pressed accelerate car in a forward motion
 if (keyboard_check(vk_up) || keyboard_check(ord("W"))){
-    car_speed+=acceleration;
-    if(car_speed>max_speed){
-		car_speed = max_speed; 
-	}
+    //car_speed+=acceleration;
+    //if(car_speed>max_speed){
+	//	car_speed = max_speed; 
+	//}
+	
+	vel_vec.x += lengthdir_x(acceleration, image_angle);
+	vel_vec.y += lengthdir_y(acceleration, image_angle); 
+	vel_vec = vel_vec.clamp_magnitude(-max_speed, max_speed);
+	
 	press_up = true;
 }
 else
@@ -22,10 +27,15 @@ else
 //Davis Spradling
 //If down key is pressed declerate car
 if(keyboard_check(vk_down) || keyboard_check(ord("S"))){
-    car_speed -= acceleration;
-    if (car_speed< -max_speed){
-		car_speed = -max_speed; 
-	}
+    
+	vel_vec.x -= lengthdir_x(acceleration, image_angle);
+	vel_vec.y -= lengthdir_y(acceleration, image_angle); 
+	vel_vec = vel_vec.clamp_magnitude(-max_speed, max_speed);
+	
+	//car_speed -= acceleration;
+    //if (car_speed< -max_speed){
+	//	car_speed = -max_speed; 
+	//}
 	press_up = false;
 }
 else
@@ -40,23 +50,32 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 	//Note the sign flips a value to 1 if pos and 0 if not
 	//this will help with deciding if the car is going forward/backward
 	//thus slowing the car down each way and applying friction
-	car_speed -= sign(car_speed)*car_friction;
-    if (abs(car_speed)<car_friction){
-		car_speed=0; 
+	//car_speed -= sign(car_speed)*car_friction;
+    //if (abs(car_speed)<car_friction){
+	//	car_speed=0; 
+	//}
+	
+	vel_vec.x -= sign(vel_vec.x)*car_friction;
+	vel_vec.y -= sign(vel_vec.y)*car_friction;
+	if (abs(vel_vec.magnitude())<car_friction){
+		vel_vec.x = 0;
+		vel_vec.y = 0;
 	}
+	
+	
 }
 
 
 //Davis Spradling
 //Give player ability to steer but only if the car is moving
 //Steer Left
-if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && car_speed!=0) {
+if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && vel_vec.magnitude()!=0) {
     image_angle -= turn_speed; 
 }
 
 //Davis Spradling
 //Steer Right
-if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && car_speed!=0) {
+if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && vel_vec.magnitude()!=0) {
     image_angle += turn_speed; 
 }
 
@@ -73,15 +92,12 @@ if (place_meeting(x /*+ lengthdir_x(car_speed, image_angle)*/, y /*+ lengthdir_y
 	//of in the direction we entered.
 	var enter_speed = car_speed;
 	car_speed = -enter_speed;
-}
-
-vel_vec.x = lengthdir_x(car_speed, image_angle);
-vel_vec.y = lengthdir_y(car_speed, image_angle);   
+}  
 
 //Davis Spradling
 //Update car object based on curr speed and the angle of the the object
-x += lengthdir_x(car_speed, image_angle);
-y += lengthdir_y(car_speed, image_angle);   
+x += vel_vec.x;
+y += vel_vec.y;
 
 #region draw arrow for velocity debug
 
