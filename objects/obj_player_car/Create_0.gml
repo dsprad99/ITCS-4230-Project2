@@ -20,7 +20,7 @@ layer_sprite_yscale(arrow, 5);
 
 //LD Montello
 //Vector to store directional built up momentum
-vec_vel = new Vector2()
+vel_vec = new Vector2(0, 0);
 
 //Davis SPradling
 car_speed = 0; 

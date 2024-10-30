@@ -75,6 +75,9 @@ if (place_meeting(x /*+ lengthdir_x(car_speed, image_angle)*/, y /*+ lengthdir_y
 	car_speed = -enter_speed;
 }
 
+vel_vec.x = lengthdir_x(car_speed, image_angle);
+vel_vec.y = lengthdir_y(car_speed, image_angle);   
+
 //Davis Spradling
 //Update car object based on curr speed and the angle of the the object
 x += lengthdir_x(car_speed, image_angle);
