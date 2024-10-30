@@ -14,13 +14,22 @@ ui_layer = layer_get_id("UI");
 //Arrow used to show the
 //direction of the player's
 //current velocity.
-arrow = layer_sprite_create(ui_layer, x, y, spr_arrow);
-layer_sprite_xscale(arrow, 5);
-layer_sprite_yscale(arrow, 5);
+//arrow = layer_sprite_create(ui_layer, x, y, spr_arrow);
+//layer_sprite_xscale(arrow, 5);
+//layer_sprite_yscale(arrow, 5);
 
 //LD Montello
 //Vector to store directional built up momentum
 vel_vec = new Vector2(0, 0);
+cur_vel = vel_vec;
+
+//The speed at which
+//the car can convert it's current
+//velocity to face the driving direction,
+//basically, how fast the car can recover
+//when turning quickly or spinning out.
+traction = 0.1;
+cur_traction = 0.5;
 
 //Davis SPradling
 car_speed = 0; 
@@ -29,7 +38,7 @@ acceleration = 0.2;
 max_speed = 8;   
 //The car friction will act as a constant if we want to slow the card down more
 car_friction = 0.05;     
-turn_speed = 1;              
+turn_speed = 5;              
 
 //Davis Spradling
 //Keep track of checkpoints completed

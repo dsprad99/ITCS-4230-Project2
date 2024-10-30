@@ -24,10 +24,12 @@ function scr_vector(){
 	    x = _x;
 	    y = _y;
 		
-		static Add = function(_vec2)
+		static add = function(_vec2)
 		{
-			x += _vec2.x;
-			y += _vec2.y;
+			var temp_vec = self;
+			temp_vec.x += _vec2.x;
+			temp_vec.y += _vec2.y;
+			return temp_vec;
 		}
 		
 		
@@ -42,11 +44,16 @@ function scr_vector(){
 		 */
 		multiply_scalar = function(scalar)
 		{
-			x *= scalar;
-			y *= scalar;
+			show_debug_message(self.x);
+			
+			show_debug_message(scalar);
+			show_debug_message(self.x * scalar);
+			var temp_vec = self;
+			temp_vec.x *= scalar;
+			temp_vec.y *= scalar;
 			//Return self so that this
 			//function can be used in inline math operations.
-			return self;
+			return temp_vec;
 		}
 		
 		
@@ -77,7 +84,15 @@ function scr_vector(){
 		 */
 		normalized = function()
 		{
+			
 			var normalized_vec = new Vector2();
+			//if the magnitude is zero,
+			//then return a zero vector so we
+			//don't divide by zero;
+			if (magnitude() == 0)
+			{
+				return normalized_vec;
+			}
 			normalized_vec.x = x / magnitude();
 			normalized_vec.y = y / magnitude();
 			
@@ -96,12 +111,34 @@ function scr_vector(){
 		 */
 		clamp_magnitude = function(_min, _max)
 		{
-			var temp_vec = self.normalized();
-			if (self.magnitude() > _max)
-				temp_vec = temp_vec.multiply_scalar(_max)
-			else if (self.magnitude() < _max)
-				temp_vec = temp_vec.multiply_scalar(_min)
+			try {
+				var temp_vec = self;
+				if (self.magnitude() > _max)
+					temp_vec = temp_vec.normalized().multiply_scalar(_max)
+				else if (self.magnitude() < _min)
+					temp_vec = temp_vec.normalized().multiply_scalar(_min)
 		
+				return temp_vec;
+			}
+			catch (e)
+			{
+				return self;
+			}
+		}
+		
+		static angle_to_vector = function(_angle)
+		{
+			//For whatever reason
+			//the way gamemaker handles
+			//angle clamping we need to subtract 90.
+			//_angle = -(_angle-90) mod 360;
+			_angle = -_angle;
+			
+			show_debug_log(_angle);
+			//cos(radians) = x value
+			//sin(radians) = y value
+			//create vector pointing in direction.
+			var temp_vec = new Vector2(dcos(_angle),dsin(_angle)) 
 			return temp_vec;
 		}
 		
