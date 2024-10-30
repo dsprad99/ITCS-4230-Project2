@@ -16,12 +16,12 @@ show_debug_message(checkpoints_curr)
 	    var inst_y = instanceid.y +(instanceid.sprite_height/2);
 		
 		//save progress made by car before destroying
-		curr_checkpoint_arr = player_car.checkpoints_curr;
+		curr_checkpoint_arr = obj_player_car.checkpoints_curr;
 
-	    instance_destroy(player_car);
+	    instance_destroy(obj_player_car);
 
 
-	    var new_car_instance = instance_create_layer(inst_x, inst_y, "Instances", player_car);
+	    var new_car_instance = instance_create_layer(inst_x, inst_y, "Instances", obj_player_car);
 		
 		var right_direction = (instanceid.direction+instanceid.rotate_car)%360;
 		new_car_instance.image_angle = right_direction;

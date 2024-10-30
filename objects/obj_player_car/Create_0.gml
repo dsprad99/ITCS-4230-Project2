@@ -18,12 +18,9 @@ arrow = layer_sprite_create(ui_layer, x, y, spr_arrow);
 layer_sprite_xscale(arrow, 5);
 layer_sprite_yscale(arrow, 5);
 
-//Velocity values
-//so we can have
-//continuous velocity stored
-//so the car can slide.
-vel_x = 0;
-vel_y = 0;
+//LD Montello
+//Vector to store directional built up momentum
+vec_vel = new Vector2()
 
 //Davis SPradling
 car_speed = 0; 

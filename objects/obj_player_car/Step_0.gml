@@ -50,13 +50,13 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 //Davis Spradling
 //Give player ability to steer but only if the car is moving
 //Steer Left
-if ((keyboard_check(vk_right) || keyboard_check(ord("A"))) && car_speed!=0) {
+if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && car_speed!=0) {
     image_angle -= turn_speed; 
 }
 
 //Davis Spradling
 //Steer Right
-if ((keyboard_check(vk_left) || keyboard_check(ord("D"))) && car_speed!=0) {
+if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && car_speed!=0) {
     image_angle += turn_speed; 
 }
 

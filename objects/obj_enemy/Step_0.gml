@@ -38,7 +38,7 @@ for (var i = 0; i < path_len; i+=path_increment)
 	
 	var heading_x = x + lengthdir_x(car_speed, image_angle);
 	var heading_y = y + lengthdir_y(car_speed, image_angle);
-	show_debug_message(i);
+	//show_debug_message(i);
 	//if this is the closest point on the path,
 	//And it is ahead of the current point,
 	//path towards it.
@@ -104,32 +104,44 @@ if (distance_to_point(cur_x,cur_y) < 1)
 
 
 
-//TODO:
-//Make it so that if the angle between
-//our current point and our next point is sharp
-//enough, that we decelerate to match the curve.
-//USE NEXT_X AND NEXT_Y
-if (angle_difference(image_angle, point_direction(x,y, next_x, next_y)) > 25)
-{
-	shouldAccel = false;
+#region Slowdown for turns
+
+shouldAccel = true;
+
+//var far_point = current_point + path_increment * 6;
+//var far_x = path_get_point_x(track_path, next_point)
+//var far_y = path_get_point_y(track_path, next_point) 
+
+////TODO:
+////Make it so that if the angle between
+////our current point and our next point is sharp
+////enough, that we decelerate to match the curve.
+////USE NEXT_X AND NEXT_Y
+//if (angle_difference(image_angle, point_direction(x,y, far_x, far_y)) > 25)
+//{
+//	shouldAccel = false;
 	
-	//TODO: Calculate
-	//the minimum speed to reach
-	//on this turn, 
-	//so that we know if we need
-	//to start deccelerating and
-	//then turn "shouldDeccel" 
-	//to true.
-	if (car_speed > 1)
-		shouldDeccel = true;
-	else
-		shouldDeccel = false;
-}
-else
-{
-	shouldAccel = true;
-	shouldDeccel = false;
-}
+//	//TODO: Calculate
+//	//the minimum speed to reach
+//	//on this turn, 
+//	//so that we know if we need
+//	//to start deccelerating and
+//	//then turn "shouldDeccel" 
+//	//to true.
+//	if (car_speed > 1)
+//		shouldDeccel = true;
+//	else
+//		shouldDeccel = false;
+//}
+//else
+//{
+//	shouldAccel = true;
+//	shouldDeccel = false;
+//}
+
+#endregion
+
+
 
 //get our target positions
 //by getting our 0-1 percentage
@@ -137,6 +149,8 @@ else
 //so we know where along the path to move to.
 target_x = path_get_x(track_path, current_point / path_get_length(track_path));
 target_y = path_get_y(track_path, current_point / path_get_length(track_path));
+
+#region turning
 
 var targetRot = point_direction(x, y, target_x, target_y);
 
@@ -149,10 +163,12 @@ else if (angle_difference(image_angle, targetRot) < 0)
 	image_angle += turn_speed;
 }
 
+
 //Look towards where we want to go,
 //NOT our current velocity.
 //image_angle = point_direction(x, y, target_x, target_y);
 direction = image_angle
+#endregion
 
 //mp_potential_step_object(path_get_point_x(track_path, i), track
 //Path using car_speed
