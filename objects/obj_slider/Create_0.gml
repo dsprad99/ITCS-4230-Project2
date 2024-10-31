@@ -75,7 +75,7 @@ set_cur_value = function(_value)
 	//Calculate offset from the leftmost
 	//point to the desired point to calculate
 	//where to draw the sprite.
-	cur_offset = (slider_width * ((cur_value - min_value) / (max_value-min_value)));
+	cur_offset = ((slider_width) * ((cur_value - min_value) / (max_value - min_value)));
 }
 
 //LD Montello,

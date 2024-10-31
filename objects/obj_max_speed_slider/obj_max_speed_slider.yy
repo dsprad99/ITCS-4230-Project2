@@ -1,20 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"obj_traction_slider",
+  "%Name":"obj_max_speed_slider",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_traction_slider",
+  "name":"obj_max_speed_slider",
   "overriddenProperties":[
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"screen_x","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"(300/2) + 30",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"slider_width","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"300",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"font_size","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"16",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"text_vertical_offset","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"64",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"display_name","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Traction",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"cur_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0.1",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"max_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"screen_y","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"(1080/5)*3",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"display_name","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Max Speed",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"max_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"128",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"screen_y","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"(1080/5)*2",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"min_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"8",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"cur_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"8",},
   ],
   "parent":{
     "name":"UI",

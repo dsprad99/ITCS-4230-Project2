@@ -44,10 +44,10 @@ function scr_vector(){
 		 */
 		multiply_scalar = function(scalar)
 		{
-			show_debug_message(self.x);
+			//show_debug_message(self.x);
 			
-			show_debug_message(scalar);
-			show_debug_message(self.x * scalar);
+			//show_debug_message(scalar);
+			//show_debug_message(self.x * scalar);
 			var temp_vec = self;
 			temp_vec.x *= scalar;
 			temp_vec.y *= scalar;
@@ -134,7 +134,7 @@ function scr_vector(){
 			//_angle = -(_angle-90) mod 360;
 			_angle = -_angle;
 			
-			show_debug_log(_angle);
+			//show_debug_log(_angle);
 			//cos(radians) = x value
 			//sin(radians) = y value
 			//create vector pointing in direction.

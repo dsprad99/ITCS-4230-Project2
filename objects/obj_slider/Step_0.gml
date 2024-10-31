@@ -64,7 +64,7 @@ else
 //the player x value
 if (is_holding_slider)
 {
-	var position_on_slider = 0;
+	var position_on_slider = min_value;
 	
 	//Clamp position on slider to the 
 	//left and right most positions
