@@ -28,11 +28,16 @@
     {"name":"inst_79909A22","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_4C225065","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_21986752","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_4312E188","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_624FF7C","path":"rooms/tutorial/tutorial.yy",},
   ],
   "isDnd":false,
   "layers":[
     {"$GMRPathLayer":"","%Name":"Path_1","colour":4278190335,"depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Path_1","pathId":{"name":"TutorialTrack","path":"paths/TutorialTrack/TutorialTrack.yy",},"properties":[],"resourceType":"GMRPathLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
-    {"$GMRInstanceLayer":"","%Name":"UI","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"UI","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+    {"$GMRInstanceLayer":"","%Name":"UI","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
+        {"$GMRInstance":"v1","%Name":"inst_4312E188","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4312E188","objectId":{"name":"obj_traction_slider","path":"objects/obj_traction_slider/obj_traction_slider.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2456.0,"y":2519.0,},
+        {"$GMRInstance":"v1","%Name":"inst_624FF7C","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_624FF7C","objectId":{"name":"obj_turn_speed_slider","path":"objects/obj_turn_speed_slider/obj_turn_speed_slider.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2476.0,"y":2494.0,},
+      ],"layers":[],"name":"UI","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Wall_Tiles_Layer","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Wall_Tiles_Layer","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":63,"SerialiseWidth":63,"TileCompressedData":[
           -327,20,-3,5,-42,2,-2,4,-16,20,2,5,6,-43,-2147483648,2,8,4,-16,20,1,10,-45,-2147483648,1,14,-16,20,1,
           10,-45,-2147483648,1,14,-16,20,1,10,-45,-2147483648,1,14,-16,20,1,10,-45,-2147483648,1,14,-16,20,1,10,
