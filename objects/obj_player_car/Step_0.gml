@@ -72,20 +72,51 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 //Give player ability to steer but only if the car is moving
 //Steer Left
 if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && vel_vec.magnitude()!=0) {
-    image_angle -= turn_speed; 
+    
+	image_angle -= turn_speed; 
+	
+	//Check if we are currently intersecting
+	//a wall, and if we are, push us out of it.
+	if (place_meeting(x, y, wallTileID))
+	{
+		//We would be hitting the wall at this angle,
+		//so rotate back to the previous position,
+		//so we aren't clipping into the wall.
+		image_angle += turn_speed;
+		
+		//Move us away from the wall we were hitting.
+		var dirVec = Vector2.angle_to_vector(image_angle);
+		dirVec = dirVec.normalized().multiply_scalar(acceleration);
+	}
+	
+	
 }
 
 //Davis Spradling
 //Steer Right
 if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && vel_vec.magnitude()!=0) {
-    image_angle += turn_speed; 
+    image_angle += turn_speed;
+	
+	//Check if we are currently intersecting
+	//a wall, and if we are, push us out of it.
+	if (place_meeting(x, y, wallTileID))
+	{
+		//We would be hitting the wall at this angle,
+		//so rotate back to the previous position,
+		//so we aren't clipping into the wall.
+		image_angle -= turn_speed;
+		
+		//Move us away from the wall we were hitting.
+		var dirVec = Vector2.angle_to_vector(image_angle);
+		dirVec = dirVec.normalized().multiply_scalar(acceleration);
+	}
 }
 
 image_angle = image_angle % 360;
 
 //LD Montello, if we 
 //hit a track wall.
-if (place_meeting(x /*+ lengthdir_x(car_speed, image_angle)*/, y /*+ lengthdir_y(car_speed, image_angle)*/, wallTileID))
+if (place_meeting(x+vel_vec.x, y+vel_vec.y, wallTileID))
 {
 	//Davis Spradling
 	//This will act as the outline of our track and will make the 
@@ -97,7 +128,9 @@ if (place_meeting(x /*+ lengthdir_x(car_speed, image_angle)*/, y /*+ lengthdir_y
 	//maybe get the normal of the location
 	//we hit and bounce off in the direction
 	//of the normal instead.
-	vel_vec = vel_vec.multiply_scalar(-1.5);
+	vel_vec = vel_vec.multiply_scalar(-1);
+	
+	
 }  
 
 
