@@ -15,7 +15,7 @@
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"max_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"screen_y","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"(1080/5)",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"min_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0.2",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"cur_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0.2",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_slider","path":"objects/obj_slider/obj_slider.yy",},"propertyId":{"name":"cur_value","path":"objects/obj_slider/obj_slider.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0.20",},
   ],
   "parent":{
     "name":"UI",

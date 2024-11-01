@@ -130,7 +130,7 @@ if (place_meeting(x+vel_vec.x, y+vel_vec.y, wallTileID))
 	//of the normal instead.
 	vel_vec = vel_vec.multiply_scalar(-1);
 	
-	
+	vel_vec = vel_vec.clamp_magnitude(max_bounce_speed)
 }  
 
 
