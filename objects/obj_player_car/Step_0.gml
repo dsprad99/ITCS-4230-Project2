@@ -77,7 +77,7 @@ if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && vel_vec.magnitude(
 	
 	//Check if we are currently intersecting
 	//a wall, and if we are, push us out of it.
-	if (place_meeting(x, y, wallTileID))
+	if (place_meeting(x, y, bounceables))
 	{
 		//We would be hitting the wall at this angle,
 		//so rotate back to the previous position,
@@ -99,7 +99,7 @@ if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && vel_vec.magnitude()
 	
 	//Check if we are currently intersecting
 	//a wall, and if we are, push us out of it.
-	if (place_meeting(x, y, wallTileID))
+	if (place_meeting(x, y, bounceables))
 	{
 		//We would be hitting the wall at this angle,
 		//so rotate back to the previous position,
@@ -116,7 +116,7 @@ image_angle = image_angle % 360;
 
 //LD Montello, if we 
 //hit a track wall.
-if (place_meeting(x+vel_vec.x, y+vel_vec.y, wallTileID))
+if (place_meeting(x+vel_vec.x, y+vel_vec.y, bounceables))
 {
 	//Davis Spradling
 	//This will act as the outline of our track and will make the 
@@ -128,10 +128,31 @@ if (place_meeting(x+vel_vec.x, y+vel_vec.y, wallTileID))
 	//maybe get the normal of the location
 	//we hit and bounce off in the direction
 	//of the normal instead.
-	vel_vec = vel_vec.multiply_scalar(-1);
+	vel_vec = vel_vec.multiply_scalar(-0.5);
 	
 	vel_vec = vel_vec.clamp_magnitude(max_bounce_speed)
 }  
+
+
+
+//LD Montello, if we hit an enemy car,
+//let that car push us, or bounce out 
+//of it's way.
+var _inst = instance_place(x, y, obj_enemy)
+if (_inst != noone)
+{
+	//Decrease speed of car,
+	vel_vec.multiply_scalar(0);
+	//add speed of the car we hit.
+	//that way we are pushed by it.
+	//vel_vec.add(new Vector2(1,1).normalized().multiply_scalar(_inst.car_speed));
+	//Calculate vector from our car to the other car,
+	//to make sure we can't collide
+	var newVec = new Vector2(x - _inst.x, y - _inst.y);
+	//Normalize the vector, and multiply it's scale by 2
+	//so you bounce off at a speed of 2
+	vel_vec.add(newVec.normalized().multiply_scalar(2));
+}
 
 
 

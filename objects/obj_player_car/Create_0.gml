@@ -4,6 +4,16 @@
 //get the wall tile id for collision reasons in Step.
 wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
 
+
+//LD Montello
+//the array objects that we'll bounce against
+bounceables = [wallTileID]
+
+//LD Montello
+//the array of objects that we'll get pushed
+//by or stopped by.
+collideables = [obj_enemy]
+
 //LD Montello
 //scale object 5 times larger
 image_xscale = 5;

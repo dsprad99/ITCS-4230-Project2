@@ -1,28 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-#region handle car physics
 
-if (shouldAccel)
-{
-	
-	//Stolen from Davis' code.
-	car_speed+=acceleration;
-    if(car_speed>max_speed){
-		car_speed = max_speed; 
-	}
-}
-
-if (shouldDeccel)
-{
-	//Stolen from davis' code.
-	car_speed -= acceleration;
-    if (car_speed< -max_speed){
-		car_speed = -max_speed; 
-	}
-}
-
-#endregion
 
 #region pathing
 
@@ -54,6 +33,22 @@ for (var i = 0; i < path_len; i+=path_increment)
 		target_y = new_y;
 	}
 	
+	//if we have exceeded the path length,
+	//the path is closed so go back to the beginning
+	//of the path and continue.
+	if (current_point + path_increment > path_len)
+	{
+		//show_message("HERE");
+		//current_point = (current_point + 15) - path_len;
+		current_point++;
+		
+		//rollover to next point if we have reached
+		//the "end" of our path.
+		if (current_point - path_len < 1)
+		{
+			current_point = 0;
+		}
+	}
 }
 
 var next_point = current_point + path_increment;
@@ -152,6 +147,17 @@ target_y = path_get_y(track_path, current_point / path_get_length(track_path));
 
 #region turning
 
+//Get the vector from the current point to the next point,
+//and turn to face that vector so we aim
+//towards the direction of the path instead of the 
+//direction of the individual point.
+var next_target_x = path_get_x(track_path, current_point + (path_increment * 4) / path_get_length(track_path));
+var next_target_y = path_get_y(track_path, current_point + (path_increment * 4) / path_get_length(track_path));
+
+var heading = point_direction(target_x, target_y, next_target_x, next_target_y);
+
+heading_vec = Vector2.angle_to_vector(heading);
+
 var targetRot = point_direction(x, y, target_x, target_y);
 
 if (angle_difference(image_angle, targetRot) > 0)
@@ -170,10 +176,157 @@ else if (angle_difference(image_angle, targetRot) < 0)
 direction = image_angle
 #endregion
 
+
+
+#region handle car physics
+
+if (shouldAccel)
+{
+	
+	//Stolen from Davis' code.
+	car_speed+=acceleration;
+    if(car_speed>max_speed){
+		car_speed = max_speed; 
+	}
+	
+	//var target_vec = Vector2.angle_to_vector(image_angle)
+
+
+	//if (point_distance(x, y, target_x, target_y) > acceleration)
+	//{
+	//	target_vec = target_vec.normalized().multiply_scalar(acceleration);
+
+	//	vel_vec.x += target_vec.x;
+	//	vel_vec.y += target_vec.y;
+	//}
+}
+
+if (shouldDeccel)
+{
+	//Stolen from davis' code.
+	car_speed -= acceleration;
+    if (car_speed< -max_speed){
+		car_speed = -max_speed; 
+	}
+}
+
+#endregion
+
+#region collision handling
+
+//LD Montello, if we hit an enemy car,
+//let that car push us, or bounce out 
+//of it's way.
+var _inst = instance_place(x, y, [obj_enemy, obj_player_car])
+if (_inst != noone)
+{
+	//Decrease speed of car,
+	vel_vec.multiply_scalar(0.5);
+	//add speed of the car we hit.
+	//that way we are pushed by it.
+	//vel_vec.add(new Vector2(1,1).normalized().multiply_scalar(_inst.car_speed));
+	//Calculate vector from our car to the other car,
+	//to make sure we can't collide
+	var newVec = new Vector2(x - _inst.x, y - _inst.y);
+	//Normalize the vector, and multiply it's scale by 2
+	//so you bounce off at a speed of 2
+	vel_vec.add(newVec.normalized().multiply_scalar(2));
+}
+
+#endregion
+
+
+#region handle wall bouncing
+
+//LD Montello, if we 
+//hit a track wall.
+if (place_meeting(x+vel_vec.x, y+vel_vec.y, bounceables))
+{
+	//Davis Spradling
+	//This will act as the outline of our track and will make the 
+	//player bounce off the wall it hits
+	//LD Montello,
+	//just apply opposite speed so we bounce
+	//of in the direction we entered.
+	//var enter_speed = vel_vec.magnitude();
+	//maybe get the normal of the location
+	//we hit and bounce off in the direction
+	//of the normal instead.
+	vel_vec = vel_vec.multiply_scalar(-0.5);
+	
+	vel_vec = vel_vec.clamp_magnitude(max_bounce_speed)
+}  
+
+#endregion
+
+
+//var goal_x = x + vel_vec.x;
+//var goal_y = y + vel_vec.y;
+
+//x += vel_vec.x;
+//y += vel_vec.y;
+
+#region steering
+
+//LD's Research source:
+//https://code.tutsplus.com/understanding-steering-behaviors-seek--gamedev-849t
+
+//calculate desired velocity
+//var desired_velocity = Vector2.angle_to_vector(image_angle).normalized().multiply_scalar(max_speed);;;
+var desired_velocity = new Vector2(target_x - x, target_y - y).normalized().multiply_scalar(max_speed);
+var steering = desired_velocity;
+steering = steering.subtract(vel_vec)
+steering = steering.clamp_magnitude(steering, max_speed);
+//0-1 value for how fast
+//we want to change velocity.
+//Research: https://gamedev.stackexchange.com/questions/73361/understanding-the-seek-steering-behavior
+scalar = 0.05;
+steering = steering.multiply_scalar(scalar);
+
+//mass = 1;
+//steering = steering.multiply_scalar(steering.magnitude() / mass);
+
+
+//WE NO LONGER ADD OUR ACTUAL STEERING
+//VECTOR, BECAUSE WE ACCELERATE IN THE DIRECTION WE 
+//ARE FACING.
+vel_vec = vel_vec.clamp_magnitude(vel_vec.add(steering), max_speed)
+
+
+//LD's Research for this section:
+//https://gamedev.stackexchange.com/questions/149875/how-can-i-apply-steering-behaviors-to-a-car-controlled-with-turning-and-accelera
+#region turning
+//var maxSteerAngleInRad = 2 * pi / 180;
+
+//var fullSteers = arccos(Vector2.dot(desired_velocity.normalized(), vel_vec.normalized())) / maxSteerAngleInRad
+//var steerAngle = fullSteers * (sign(Vector2.dot(desired_velocity.left_perp(), vel_vec)))
+
+//steerAngle = clamp(steerAngle, -1, 1);
+
+
+
+//image_angle = radtodeg(steerAngle);
+//direction = image_angle;
+
+#endregion
+
+//Acceleration.
+//if (desired_velocity.magnitude() > vel_vec.magnitude())
+//vel_vec = vel_vec.clamp_magnitude(vel_vec.add(Vector2.angle_to_vector(image_angle).normalized().multiply_scalar(acceleration)), max_speed)
+
+
+
+x += vel_vec.x;
+y += vel_vec.y;
+
+#endregion
+
+//x+= lengthdir_x(car_speed, image_angle)
+//y+= lengthdir_y(car_speed, image_angle)
+
 //mp_potential_step_object(path_get_point_x(track_path, i), track
 //Path using car_speed
-mp_potential_step(target_x, target_y, car_speed, false);
-
+//mp_potential_step(target_x, target_y, car_speed, false);
 
 
 //So, the problem I'm having now is that

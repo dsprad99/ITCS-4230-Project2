@@ -24,14 +24,21 @@ function scr_vector(){
 	    x = _x;
 	    y = _y;
 		
-		static add = function(_vec2)
+		add = function(_vec2)
 		{
 			var temp_vec = self;
 			temp_vec.x += _vec2.x;
 			temp_vec.y += _vec2.y;
 			return temp_vec;
 		}
-		
+
+		subtract = function(_vec2)
+		{
+			var temp_vec = self;
+			temp_vec.x -= _vec2.x;
+			temp_vec.y -= _vec2.y;
+			return temp_vec;
+		}		
 		
 		//Where LD learned how to do 
 		//JSdoc: https://www.reddit.com/r/gamemaker/comments/1gapo72/how_do_i_do_a_pretty_description_for_my_game/
@@ -53,6 +60,12 @@ function scr_vector(){
 			temp_vec.y *= scalar;
 			//Return self so that this
 			//function can be used in inline math operations.
+			return temp_vec;
+		}
+		
+		multiply_vector = function(_vec2)
+		{
+			var temp_vec = new Vector2(self.x * _vec2.x, self.y * _vec2.y);
 			return temp_vec;
 		}
 		
@@ -139,6 +152,41 @@ function scr_vector(){
 			//sin(radians) = y value
 			//create vector pointing in direction.
 			var temp_vec = new Vector2(dcos(_angle),dsin(_angle)) 
+			return temp_vec;
+		}
+		
+		static vector_to_angle = function(_vec)
+		{
+			return point_direction(0, 0, _vec.x, _vec.y);
+		}
+		
+		//same formula as calculating
+		//magnitude, but this time we
+		//can use two different vectors
+		//to calculate distance.
+		static distance = function(_vec1, _vec2)
+		{
+			try {
+				return sqrt(sqr(_vec1.x - _vec2.x) + sqr(_vec1.y - _vec2.y))
+			}
+			//if our sqrt returns not a real number,
+			//then just return zero.
+			catch (e)
+			{
+				return 0;
+			}
+		}
+		
+		//just return using gamemaker's 
+		//dot function, it isn't complex anyway.
+		static dot = function(_vec1, _vec2)
+		{
+			return dot_product(_vec1.x, _vec1.y, _vec2.x, _vec2.y);
+		}
+		
+		left_perp = function()
+		{
+			var temp_vec = new Vector2(self.y, -self.x);
 			return temp_vec;
 		}
 		

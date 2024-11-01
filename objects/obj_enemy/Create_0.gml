@@ -1,6 +1,14 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//get the wall tile id for collision reasons in Step.
+wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
+
+
+//LD Montello
+//the array objects that we'll bounce against
+bounceables = [wallTileID]
+
 //LD Montello
 #region davis' params from the player
 
@@ -25,6 +33,10 @@ path_increment = 15;
 //a position we can be before
 //resetting our current target to be that position.
 target_accuracy = 5;
+
+vel_vec = new Vector2(0, 0);
+
+heading_vec = new Vector2(0, 0);
 
 #endregion
 
