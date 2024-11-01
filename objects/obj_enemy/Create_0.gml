@@ -38,6 +38,12 @@ vel_vec = new Vector2(0, 0);
 
 heading_vec = new Vector2(0, 0);
 
+left_perp_vec = new Vector2(0, 0);
+right_perp_vec = new Vector2(0, 0);
+
+path_point_x = 0;
+path_point_y = 0;
+
 #endregion
 
 //LD Montello

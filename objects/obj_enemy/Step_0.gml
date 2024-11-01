@@ -22,6 +22,9 @@ for (var i = 0; i < path_len; i+=path_increment)
 	//And it is ahead of the current point,
 	//path towards it.
 	var newDist = point_distance(heading_x, heading_y, new_x, new_y);
+	
+	
+	
 	//LD position_empty is where you were.
 	if (current_point < i and position_empty(new_x, new_y) and newDist < lastDist)
 	{
@@ -142,8 +145,78 @@ shouldAccel = true;
 //by getting our 0-1 percentage
 //along the path using our current_point / path_len
 //so we know where along the path to move to.
-target_x = path_get_x(track_path, current_point / path_get_length(track_path));
-target_y = path_get_y(track_path, current_point / path_get_length(track_path));
+path_point_x = path_get_x(track_path, current_point / path_get_length(track_path));
+path_point_y = path_get_y(track_path, current_point / path_get_length(track_path));
+
+#region get point within radius from path
+
+//LD 
+//Get the distance that we are from the track,
+//if it's less than our max distance
+//from the path
+//then get the right perpendicular vector
+//or left perpendicular vector
+//and normalize them and then multiply
+//by our current distance from the path
+//or max distance if we are exceeding it,
+//and then make our current target be that
+//point. 
+
+//Get the left and right perpendicular vectors
+
+var prev_point = current_point - path_increment;
+if (prev_point < 0)
+{
+	prev_point = path_len - (path_increment - current_point);
+}
+var prev_x = path_get_x(track_path, prev_point / path_get_length(track_path));
+var prev_y = path_get_y(track_path, prev_point / path_get_length(track_path));
+
+var future_point = current_point + path_increment;
+if (future_point > path_len)
+{
+	future_point = (path_len - current_point) + path_increment;
+}
+var future_x = path_get_x(track_path, future_point / path_get_length(track_path));
+var future_y = path_get_y(track_path, future_point / path_get_length(track_path));
+
+var path_dir = new Vector2(prev_x - future_x, prev_y - future_y);
+
+left_perp_vec = path_dir.left_perp();
+right_perp_vec = path_dir.right_perp();
+
+
+//Set our target position by
+//using our current distance from
+//the path, multiplied
+//by the normalized perpendicular vector.
+
+var left_dist = point_distance(x, y, path_point_x + left_perp_vec.x, path_point_y + left_perp_vec.y);
+var right_dist = point_distance(x, y, path_point_x + right_perp_vec.x, path_point_y + right_perp_vec.y)
+
+//if we are on the left side of the path
+if (left_dist < right_dist)
+{
+	left_perp_vec = left_perp_vec.normalized().multiply_scalar(left_dist);
+	
+	target_x = path_point_x + left_perp_vec.x
+	target_y = path_point_y + left_perp_vec.y
+
+}
+//if we are on the right side of the path
+else
+{
+	right_perp_vec = right_perp_vec.normalized().multiply_scalar(right_dist);
+	
+	target_x = path_point_x + right_perp_vec.x
+	target_y = path_point_y + right_perp_vec.y
+
+}
+
+//target_x = path_get_x(track_path, current_point / path_get_length(track_path));
+//target_y = path_get_y(track_path, current_point / path_get_length(track_path));
+
+#endregion
 
 #region turning
 

@@ -190,6 +190,12 @@ function scr_vector(){
 			return temp_vec;
 		}
 		
+		right_perp = function()
+		{
+			var temp_vec = new Vector2(-self.y, self.x);
+			return temp_vec;
+		}
+		
 		//LD Montello
 		//
 		
