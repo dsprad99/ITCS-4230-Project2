@@ -44,6 +44,9 @@ right_perp_vec = new Vector2(0, 0);
 path_point_x = 0;
 path_point_y = 0;
 
+left_dist = 0;
+right_dist = 0;
+
 #endregion
 
 //LD Montello

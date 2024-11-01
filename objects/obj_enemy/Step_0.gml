@@ -70,7 +70,7 @@ var cur_y = path_get_y(track_path, current_point / path_get_length(track_path))
 //}
 
 //if we've reached our current point
-if (distance_to_point(cur_x,cur_y) < 1)
+if (distance_to_point(target_x,target_y) < 1)
 {
 	//show_message("HREE");
 	//current_point++;
@@ -162,20 +162,22 @@ path_point_y = path_get_y(track_path, current_point / path_get_length(track_path
 //and then make our current target be that
 //point. 
 
+//var max_dist_from_path = 25;
+
 //Get the left and right perpendicular vectors
 
-var prev_point = current_point - path_increment;
+var prev_point = current_point - 1;
 if (prev_point < 0)
 {
-	prev_point = path_len - (path_increment - current_point);
+	prev_point = path_len - (path_increment - 1);
 }
 var prev_x = path_get_x(track_path, prev_point / path_get_length(track_path));
 var prev_y = path_get_y(track_path, prev_point / path_get_length(track_path));
 
-var future_point = current_point + path_increment;
+var future_point = current_point + 1;
 if (future_point > path_len)
 {
-	future_point = (path_len - current_point) + path_increment;
+	future_point = (path_len - current_point) + 1;
 }
 var future_x = path_get_x(track_path, future_point / path_get_length(track_path));
 var future_y = path_get_y(track_path, future_point / path_get_length(track_path));
@@ -191,13 +193,14 @@ right_perp_vec = path_dir.right_perp();
 //the path, multiplied
 //by the normalized perpendicular vector.
 
-var left_dist = point_distance(x, y, path_point_x + left_perp_vec.x, path_point_y + left_perp_vec.y);
-var right_dist = point_distance(x, y, path_point_x + right_perp_vec.x, path_point_y + right_perp_vec.y)
+left_dist = point_distance(x, y, path_point_x + left_perp_vec.x, path_point_y + left_perp_vec.y);
+right_dist = point_distance(x, y, path_point_x + right_perp_vec.x, path_point_y + right_perp_vec.y)
 
 //if we are on the left side of the path
 if (left_dist < right_dist)
 {
-	left_perp_vec = left_perp_vec.normalized().multiply_scalar(left_dist);
+	
+	left_perp_vec = left_perp_vec.normalized().multiply_scalar(clamp(left_dist, 0, max_dist_from_path));
 	
 	target_x = path_point_x + left_perp_vec.x
 	target_y = path_point_y + left_perp_vec.y
@@ -206,7 +209,7 @@ if (left_dist < right_dist)
 //if we are on the right side of the path
 else
 {
-	right_perp_vec = right_perp_vec.normalized().multiply_scalar(right_dist);
+	right_perp_vec = right_perp_vec.normalized().multiply_scalar(clamp(right_dist, 0, max_dist_from_path));
 	
 	target_x = path_point_x + right_perp_vec.x
 	target_y = path_point_y + right_perp_vec.y
