@@ -1,5 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
+// Test thing
+
 
 //get the wall tile id for collision reasons in Step.
 wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
