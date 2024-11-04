@@ -16,7 +16,9 @@ bounceables = [wallTileID]
 car_speed = 0; 
 //Apply acceleration through step event ot gradually increase/decrease speed of card
 acceleration = 0.2;     
-max_speed = 8;   
+base_max_speed = 10;   
+max_speed = 10;
+prev_base_max_speed = base_max_speed;
 //The car friction will act as a constant if we want to slow the card down more
 car_friction = 0.05;     
 turn_speed = 1;    

@@ -6,5 +6,5 @@ event_inherited();
 
 if (instance_exists(obj_player_car))
 {
-	obj_player_car.max_speed = cur_value;
+	obj_player_car.base_max_speed = cur_value;
 }

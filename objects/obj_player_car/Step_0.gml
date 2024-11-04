@@ -5,6 +5,20 @@ if (!place_meeting(x, y, checkered_obj)) {
     pass_thru = false
 }
 
+//James Reneo
+//Max_Speed changed
+if base_max_speed != prev_base_max_speed {
+    // base_max_speed has changed
+    show_debug_message("base_max_speed has been updated: " + string(base_max_speed));
+    
+    // Update max_speed if needed
+    max_speed = base_max_speed;
+    
+    // Update prev_base_max_speed to the current value
+    prev_base_max_speed = base_max_speed;
+}
+
+
 //Davis Spradling
 //If up key is pressed accelerate car in a forward motion
 if (keyboard_check(vk_up) || keyboard_check(ord("W"))){
@@ -151,7 +165,7 @@ if (_inst != noone)
 	var newVec = new Vector2(x - _inst.x, y - _inst.y);
 	//Normalize the vector, and multiply it's scale by 2
 	//so you bounce off at a speed of 2
-	vel_vec.add(newVec.normalized().multiply_scalar(2));
+	vel_vec.add(newVec.normalized().multiply_scalar(4));
 }
 
 

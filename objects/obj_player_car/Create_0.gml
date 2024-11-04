@@ -1,7 +1,5 @@
 /// @description Insert description here
 // You can write your code in this editor
-// Test thing
-
 
 //get the wall tile id for collision reasons in Step.
 wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
@@ -47,7 +45,10 @@ cur_traction = 0.5;
 car_speed = 0; 
 //Apply acceleration through step event ot gradually increase/decrease speed of card
 acceleration = 0.2;     
-max_speed = 8;   
+base_max_speed = 8;   
+max_speed = 8;
+prev_base_max_speed = base_max_speed;
+
 //The car friction will act as a constant if we want to slow the card down more
 car_friction = 0.05;     
 turn_speed = 5;              

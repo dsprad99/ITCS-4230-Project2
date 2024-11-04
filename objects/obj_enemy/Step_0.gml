@@ -306,7 +306,7 @@ if (_inst != noone)
 	var newVec = new Vector2(x - _inst.x, y - _inst.y);
 	//Normalize the vector, and multiply it's scale by 2
 	//so you bounce off at a speed of 2
-	vel_vec.add(newVec.normalized().multiply_scalar(2));
+	vel_vec.add(newVec.normalized().multiply_scalar(3.5));
 }
 
 #endregion
