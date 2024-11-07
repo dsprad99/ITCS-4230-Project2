@@ -1,6 +1,14 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//LD Montello
+//if we  can't move,
+//don't execute the step event.
+if (!can_move)
+{
+	return;
+}
+
 if (!place_meeting(x, y, checkered_obj)) {
     pass_thru = false
 }

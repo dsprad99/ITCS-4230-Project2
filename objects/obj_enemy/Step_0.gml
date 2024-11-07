@@ -1,7 +1,12 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-
+//if we can't move, 
+//don't execute this event.
+if (!can_move)
+{
+	return;
+}
 
 #region pathing
 
@@ -10,7 +15,7 @@ var lastDist = point_distance(x, y, target_x, target_y);
 //LD Montello,
 //loop through the remaining points 
 //in the path
-for (var i = 0; i < path_len; i+=path_increment)
+for (var i = 0; i < path_len; i += path_increment)
 {
 	var new_x = path_get_x(track_path, i / path_len)
 	var new_y = path_get_y(track_path, i / path_len) 
