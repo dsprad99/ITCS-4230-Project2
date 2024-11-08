@@ -9,11 +9,11 @@
 if(tutorial_check_bool){
 	//function to pull up popup
 	
-	//var new_tut_next = instance_create_layer(obj_player_car.x, obj_player_car.y+300, "Instances", tutorial_next_button_obj);
-	//new_tut_next.image_xscale = 1;
-	//new_tut_next.image_yscale = 1;
+	var new_tut_next = instance_create_layer(obj_player_car.x, obj_player_car.y+300, "tutorial_popup", tutorial_next_button_obj);
+	new_tut_next.image_xscale = .5;
+	new_tut_next.image_yscale = .5;
 	
-	var new_check = instance_create_layer(obj_player_car.x, obj_player_car.y, "Instances", checkpoint_msg_obj);
+	var new_check = instance_create_layer(obj_player_car.x, obj_player_car.y, "tutorial_popup", checkpoint_msg_obj);
 	new_check.image_xscale = 1.8;
 	new_check.image_yscale = 1.8;
 

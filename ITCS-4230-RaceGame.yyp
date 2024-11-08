@@ -51,6 +51,7 @@
     {"id":{"name":"obj_accel_slider","path":"objects/obj_accel_slider/obj_accel_slider.yy",},},
     {"id":{"name":"obj_car_spawnpoint","path":"objects/obj_car_spawnpoint/obj_car_spawnpoint.yy",},},
     {"id":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},},
+    {"id":{"name":"obj_level_manager","path":"objects/obj_level_manager/obj_level_manager.yy",},},
     {"id":{"name":"obj_max_speed_slider","path":"objects/obj_max_speed_slider/obj_max_speed_slider.yy",},},
     {"id":{"name":"obj_player_car","path":"objects/obj_player_car/obj_player_car.yy",},},
     {"id":{"name":"obj_power_spawner","path":"objects/obj_power_spawner/obj_power_spawner.yy",},},
