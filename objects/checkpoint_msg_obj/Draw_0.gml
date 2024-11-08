@@ -5,6 +5,9 @@ draw_self();
 
 // Set the font
 draw_set_font(fnt_gamecuben);
+draw_set_halign(fa_center)
+draw_set_valign(fa_middle)
+
 
 // Get the sprite's height (assuming the sprite is assigned to the instance)
 var curr_sprite_height = sprite_get_height(sprite_index);
@@ -13,7 +16,15 @@ var curr_sprite_height = sprite_get_height(sprite_index);
 var text_y = y - curr_sprite_height / 2;
 
 // Draw the text at the upper center of the sprite
-draw_text(x, text_y, txt1);
-draw_text(x, text_y + 80, txt2);  // Adjusted for the smaller font size
-draw_text(x, text_y + 160, txt3);
+//draw_text(x, text_y, txt1);
+//draw_text(x, text_y + 80, txt2);  // Adjusted for the smaller font size
+//draw_text(x, text_y + 160, txt3);
+
+draw_text_ext_transformed(x, text_y, text_to_draw, 1, 250,.5,.5,0)
+
+draw_set_valign(-1)
+draw_set_halign(-1)
+draw_set_font(-1)
+
+
 

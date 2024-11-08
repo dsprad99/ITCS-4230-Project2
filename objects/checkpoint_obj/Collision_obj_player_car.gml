@@ -16,8 +16,8 @@ if(tutorial_check_bool){
 	var new_check = instance_create_layer(obj_player_car.x, obj_player_car.y, "Instances", checkpoint_msg_obj);
 	new_check.image_xscale = 1.8;
 	new_check.image_yscale = 1.8;
-	
-	//new_check.text_to_draw = text
+
+	checkpoint_msg_obj.words_to_draw  = text
 	
 	
 	//Be used to break up the instructions into three different lines
