@@ -61,6 +61,7 @@
     {"id":{"name":"obj_traction_slider","path":"objects/obj_traction_slider/obj_traction_slider.yy",},},
     {"id":{"name":"obj_turn_speed_slider","path":"objects/obj_turn_speed_slider/obj_turn_speed_slider.yy",},},
     {"id":{"name":"track_outline","path":"objects/track_outline/track_outline.yy",},},
+    {"id":{"name":"tut_finish_msg_obj","path":"objects/tut_finish_msg_obj/tut_finish_msg_obj.yy",},},
     {"id":{"name":"tutorial_next_button_obj","path":"objects/tutorial_next_button_obj/tutorial_next_button_obj.yy",},},
     {"id":{"name":"TutorialTrack","path":"paths/TutorialTrack/TutorialTrack.yy",},},
     {"id":{"name":"playground","path":"rooms/playground/playground.yy",},},

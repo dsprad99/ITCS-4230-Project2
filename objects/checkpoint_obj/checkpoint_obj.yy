@@ -35,12 +35,13 @@
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"checkpoint","filters":[],"listItems":[],"multiselect":false,"name":"checkpoint","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"1","varType":1,},
     {"$GMObjectProperty":"v1","%Name":"rotate_car","filters":[],"listItems":[],"multiselect":false,"name":"rotate_car","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"30","varType":0,},
-    {"$GMObjectProperty":"v1","%Name":"tutorial_check_bool","filters":[],"listItems":[],"multiselect":false,"name":"tutorial_check_bool","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
+    {"$GMObjectProperty":"v1","%Name":"tutorial_check_bool","filters":[],"listItems":[],"multiselect":false,"name":"tutorial_check_bool","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
     {"$GMObjectProperty":"v1","%Name":"checkpoint_to_check_tutorial","filters":[],"listItems":[],"multiselect":false,"name":"checkpoint_to_check_tutorial","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":2,},
     {"$GMObjectProperty":"v1","%Name":"text","filters":[],"listItems":[
         "\"Go through powerups for\"",
         "\"special abilities!\"",
       ],"multiselect":false,"name":"text","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Go through powerups to help gain special abilities!","varType":2,},
+    {"$GMObjectProperty":"v1","%Name":"tutorial_check","filters":[],"listItems":[],"multiselect":false,"name":"tutorial_check","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"tutorial_check_1","varType":2,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
