@@ -1,5 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
+/*
 draw_self()
 
 #region
@@ -13,3 +14,4 @@ if(show_checkpoint_msg){
 }
 
 #endregion
+*/
