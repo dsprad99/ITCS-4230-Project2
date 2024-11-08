@@ -40,4 +40,6 @@ Vector2.draw_vector2_color(scaled_vec, 15, x, y, c_yellow);
 
 draw_text_transformed_color(x, y, image_angle, 5, 5, 0, c_black, c_black, c_black, c_black, 1);
 
+
+
 #endregion

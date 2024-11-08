@@ -9,25 +9,19 @@
 
 checkpoints_needed = [0,1,2]
 show_debug_message(checkpoints_curr)
-if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
-	show_message("Lap completed");
-	pass_thru = true
-	checkpoints_curr = [];
-}
-if(!pass_thru){
-	car_speed=0;
-}
 
-if(other.tutorial_check){
+if(checkpoints_complete(checkpoints_needed, checkpoints_curr) && other.tutorial_check){
 	//Be used to break up the instructions into three different lines
 	//for readability
-	var new_tut_next = instance_create_layer(obj_player_car.x, obj_player_car.y+300, "tutorial_popup", tutorial_next_button_obj);
-	new_tut_next.image_xscale = .5;
-	new_tut_next.image_yscale = .5;
+	//var new_tut_next = instance_create_layer(obj_player_car.x, obj_player_car.y+300, "tutorial_popup", next_room_button_obj);
+	//new_tut_next.image_xscale = .5;
+	//new_tut_next.image_yscale = .5;
+	//new_tut_next.room_to = other.room_go
 	
 	var new_check = instance_create_layer(obj_player_car.x, obj_player_car.y, "tutorial_popup", tut_finish_msg_obj);
 	new_check.image_xscale = 1.8;
 	new_check.image_yscale = 1.8;
+	new_check.room_to = other.room_go
 	
 	
 	var words_array = string_split(other.text, " ");
@@ -39,8 +33,9 @@ if(other.tutorial_check){
 	var var1 = "";
 	var var2 = "";
 	
+	//Break the text into two seperate lines
 	for (var i = 0; i < total_words; i++) {
-	    if (i < half) {
+	    if (i<half) {
 	        var1 += words_array[i] + " ";
 		}
 			else {
@@ -55,6 +50,14 @@ if(other.tutorial_check){
 	other.tutorial_check = false;
 }
 
+else if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
+	show_message("Lap completed");
+	pass_thru = true
+	checkpoints_curr = [];
+}
+if(!pass_thru){
+	car_speed=0;
+}
 
 
 //show_debug_message(checkpoints_curr)

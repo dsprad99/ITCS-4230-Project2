@@ -7,8 +7,6 @@
 //and take the last object that was iterated through
 //and respawn them there
 
-tutorial_check_2 = true;
-
 for (var i = 0; i < instance_number(checkpoint_obj); ++i;){
 show_debug_message(checkpoints_curr)
     var instanceid = instance_find(checkpoint_obj, i);
@@ -30,6 +28,7 @@ show_debug_message(checkpoints_curr)
 		
 		//readd that progress
 		new_car_instance.checkpoints_curr=curr_checkpoint_arr;
+		new_car_instance.can_move = true
 		
 	}
 }

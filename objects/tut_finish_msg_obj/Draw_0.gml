@@ -16,8 +16,10 @@ var curr_sprite_height = sprite_get_height(sprite_index);
 var text_y = y - curr_sprite_height / 2;
 
 // Draw the text at the upper center of the sprite
-draw_text_transformed(x, text_y, txt1, .5, .5,0);
-draw_text_transformed(x, text_y + 80, txt2, .5, .5,0); 
+draw_text_transformed(x, text_y, txt1, .8, .8,0);
+draw_text_transformed(x, text_y + 150, txt2, .8, .8,0); 
+
+draw_text_transformed(x, text_y + 400, "Press space to continue!", .8, .8,0);
 
 //draw_text_ext_transformed(x, text_y, text_to_draw, 50, 300,.05,.05,0)
 

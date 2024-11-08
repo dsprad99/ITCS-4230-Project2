@@ -26,6 +26,16 @@ if base_max_speed != prev_base_max_speed {
     prev_base_max_speed = base_max_speed;
 }
 
+//Davis Spradling
+//If in tutorial room make in_tutorial true
+if (room == tutorial) {
+	in_tutorial = true
+}
+else{
+	in_tutorial = false
+}
+
+
 
 //Davis Spradling
 //If up key is pressed accelerate car in a forward motion
