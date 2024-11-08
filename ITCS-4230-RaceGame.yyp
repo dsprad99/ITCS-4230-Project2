@@ -28,8 +28,8 @@
     {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"background","folderPath":"folders/Sprites/background.yy","name":"background","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"cars","folderPath":"folders/Sprites/cars.yy","name":"cars","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"props","folderPath":"folders/Sprites/props.yy","name":"props","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"powerups","folderPath":"folders/Sprites/powerups.yy","name":"powerups","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"props","folderPath":"folders/Sprites/props.yy","name":"props","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"tiles","folderPath":"folders/Sprites/tiles.yy","name":"tiles","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"UI","folderPath":"folders/Sprites/UI.yy","name":"UI","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tile Sets","folderPath":"folders/Tile Sets.yy","name":"Tile Sets","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -39,12 +39,13 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.0.169",
+    "IDEVersion":"2024.8.1.171",
   },
   "name":"ITCS-4230-RaceGame",
   "resources":[
     {"id":{"name":"fnt_gamecuben","path":"fonts/fnt_gamecuben/fnt_gamecuben.yy",},},
     {"id":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},},
+    {"id":{"name":"checkpoint_msg_obj","path":"objects/checkpoint_msg_obj/checkpoint_msg_obj.yy",},},
     {"id":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},},
     {"id":{"name":"fall_obj","path":"objects/fall_obj/fall_obj.yy",},},
     {"id":{"name":"obj_accel_slider","path":"objects/obj_accel_slider/obj_accel_slider.yy",},},
@@ -60,6 +61,7 @@
     {"id":{"name":"obj_turn_speed_slider","path":"objects/obj_turn_speed_slider/obj_turn_speed_slider.yy",},},
     {"id":{"name":"track_outline","path":"objects/track_outline/track_outline.yy",},},
     {"id":{"name":"TutorialTrack","path":"paths/TutorialTrack/TutorialTrack.yy",},},
+    {"id":{"name":"playground","path":"rooms/playground/playground.yy",},},
     {"id":{"name":"tutorial","path":"rooms/tutorial/tutorial.yy",},},
     {"id":{"name":"scr_vector","path":"scripts/scr_vector/scr_vector.yy",},},
     {"id":{"name":"car_slot","path":"sprites/car_slot/car_slot.yy",},},
@@ -74,6 +76,7 @@
     {"id":{"name":"spr_power_spawner","path":"sprites/spr_power_spawner/spr_power_spawner.yy",},},
     {"id":{"name":"spr_slider_bar_nine_slice","path":"sprites/spr_slider_bar_nine_slice/spr_slider_bar_nine_slice.yy",},},
     {"id":{"name":"spr_speed_boost","path":"sprites/spr_speed_boost/spr_speed_boost.yy",},},
+    {"id":{"name":"tutorial_check_sprite","path":"sprites/tutorial_check_sprite/tutorial_check_sprite.yy",},},
     {"id":{"name":"WallTiles","path":"sprites/WallTiles/WallTiles.yy",},},
     {"id":{"name":"water_sprite","path":"sprites/water_sprite/water_sprite.yy",},},
     {"id":{"name":"yellow_sprite","path":"sprites/yellow_sprite/yellow_sprite.yy",},},
@@ -85,6 +88,7 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"tutorial","path":"rooms/tutorial/tutorial.yy",},},
+    {"roomId":{"name":"playground","path":"rooms/playground/playground.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

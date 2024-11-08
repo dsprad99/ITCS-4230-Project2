@@ -5,6 +5,7 @@
 
 // James Reneo
 // Logic for colliding with speed boost
+tutorial_check_1 = true;
 instance_destroy(other)
 max_speed = base_max_speed + 10 // Temporarily increase max speed
 alarm[1] = 1.5 * 60  //1.5 seconds given 60 frames per second
