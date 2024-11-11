@@ -44,6 +44,10 @@
     {"name":"inst_5B2C524C","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_3D223534_1","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_A9B9C0C","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_429172F","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_9CD27E4","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_33E296E7","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_38B0BF31","path":"rooms/tutorial/tutorial.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -75,6 +79,10 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"text","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"Go through powerups to help to gain special abilities!\"",},
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"tutorial_check_bool","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":90.453186,"scaleX":0.68069416,"scaleY":1.0,"x":3136.0,"y":4512.0,},
+        {"$GMRInstance":"v1","%Name":"inst_429172F","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_429172F","objectId":{"name":"forward_arr_obj","path":"objects/forward_arr_obj/forward_arr_obj.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":-89.55706,"scaleX":1.0,"scaleY":1.0,"x":2272.0,"y":2176.0,},
+        {"$GMRInstance":"v1","%Name":"inst_33E296E7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_33E296E7","objectId":{"name":"forward_arr_obj","path":"objects/forward_arr_obj/forward_arr_obj.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":89.57147,"scaleX":1.0,"scaleY":1.0,"x":3712.0,"y":2496.0,},
+        {"$GMRInstance":"v1","%Name":"inst_9CD27E4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_9CD27E4","objectId":{"name":"forward_arr_obj","path":"objects/forward_arr_obj/forward_arr_obj.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.14831734,"scaleX":1.0,"scaleY":1.0,"x":2880.0,"y":2976.0,},
+        {"$GMRInstance":"v1","%Name":"inst_38B0BF31","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_38B0BF31","objectId":{"name":"forward_arr_obj","path":"objects/forward_arr_obj/forward_arr_obj.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":180.47968,"scaleX":0.9642058,"scaleY":1.0,"x":3168.0,"y":1600.0,},
         {"$GMRInstance":"v1","%Name":"inst_46F264D0_1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_46F264D0_1","objectId":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},"propertyId":{"name":"tutorial_check","path":"objects/checkered_obj/checkered_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"True",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.4615384,"scaleY":1.0,"x":1024.0,"y":1472.0,},
