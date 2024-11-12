@@ -1,7 +1,9 @@
 {
   "$GMObject":"",
   "%Name":"forward_arr_obj",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"forward_arr_obj",
   "overriddenProperties":[],
@@ -28,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"forward_arrow_sprite",
-    "path":"sprites/forward_arrow_sprite/forward_arrow_sprite.yy",
+    "name":"Arrows",
+    "path":"sprites/Arrows/Arrows.yy",
   },
   "spriteMaskId":null,
   "visible":true,

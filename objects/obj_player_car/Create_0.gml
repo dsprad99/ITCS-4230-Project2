@@ -43,20 +43,20 @@ cur_vel = vel_vec;
 //velocity to face the driving direction,
 //basically, how fast the car can recover
 //when turning quickly or spinning out.
-traction = 0.1;
-cur_traction = 0.5;
+traction = 0.03;
+cur_traction = 0.03;
 
 //Davis SPradling
 car_speed = 0; 
 //Apply acceleration through step event ot gradually increase/decrease speed of card
 acceleration = 0.2;     
-base_max_speed = 8;   
-max_speed = 8;
+base_max_speed = 16;   
+max_speed = 16;
 prev_base_max_speed = base_max_speed;
 
 //The car friction will act as a constant if we want to slow the card down more
 car_friction = 0.05;     
-turn_speed = 5;              
+turn_speed = 1.73;              
 
 //Davis Spradling
 //Keep track of checkpoints completed
