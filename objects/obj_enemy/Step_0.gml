@@ -427,7 +427,11 @@ y += vel_vec.y;
 #endregion
 
 
+#region underglow
+
 //LD Montello
-//Draw sprite at the target position
-layer_sprite_x(arrow, target_x);
-layer_sprite_y(arrow, target_y);
+//Draw underglow
+layer_sprite_x(ug1, x);
+layer_sprite_y(ug1, y);
+
+#endregion

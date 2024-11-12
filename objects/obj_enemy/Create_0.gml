@@ -16,8 +16,8 @@ bounceables = [wallTileID]
 car_speed = 0; 
 //Apply acceleration through step event ot gradually increase/decrease speed of card
 acceleration = 0.2;     
-base_max_speed = 10;   
-max_speed = 10;
+base_max_speed = 16;   
+max_speed = 16;
 prev_base_max_speed = base_max_speed;
 //The car friction will act as a constant if we want to slow the card down more
 car_friction = 0.05;     
@@ -87,6 +87,28 @@ target_y = path_get_point_y(track_path, current_point);
 //direction of the player's
 //current velocity.
 ui_layer = layer_get_id("UI");
-arrow = layer_sprite_create(ui_layer, x, y, spr_arrow);
-layer_sprite_xscale(arrow, 5);
-layer_sprite_yscale(arrow, 5);
+
+
+#region underglow
+
+//LD Montello
+//https://manual.gamemaker.io/beta/en/GameMaker_Language/GML_Reference/Asset_Management/Rooms/Background_Layers/layer_background_xscale.htm#:~:text=This%20function%20can%20be%20used,then%20set%20the%20scale%20value.
+//This changes 
+//the size of the grid background
+//to the size I want.
+grid_id = layer_get_id("Grid");
+grid_background_id = layer_background_get_id(grid_id);
+layer_background_xscale(grid_background_id, 2.5);
+layer_background_yscale(grid_background_id, 2.5);
+
+//LD Montello
+//The underglow effect
+//that we place between
+//the background and the grid
+//to make it look like the lines are glowing
+//because of the object's color.
+ug1 = layer_sprite_create(grid_id, x, y, spr_magenta_underglow);
+layer_sprite_xscale(ug1, 5);
+layer_sprite_yscale(ug1, 5);
+
+#endregion

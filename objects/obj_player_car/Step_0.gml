@@ -245,3 +245,12 @@ y += vel_vec.y;
 //layer_sprite_y(arrow, y);
 
 #endregion
+
+#region underglow
+
+//LD Montello
+//Draw underglow
+layer_sprite_x(ug1, x);
+layer_sprite_y(ug1, y);
+
+#endregion
