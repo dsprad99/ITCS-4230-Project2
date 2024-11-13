@@ -44,7 +44,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.0.169",
+    "IDEVersion":"2024.8.1.171",
   },
   "name":"ITCS-4230-RaceGame",
   "resources":[
@@ -86,10 +86,8 @@
     {"id":{"name":"finishline_hitbox","path":"sprites/finishline_hitbox/finishline_hitbox.yy",},},
     {"id":{"name":"FinishLineRainbow_Small","path":"sprites/FinishLineRainbow_Small/FinishLineRainbow_Small.yy",},},
     {"id":{"name":"FinishLineRainbow","path":"sprites/FinishLineRainbow/FinishLineRainbow.yy",},},
-    {"id":{"name":"forward_arrow_sprite","path":"sprites/forward_arrow_sprite/forward_arrow_sprite.yy",},},
     {"id":{"name":"grass","path":"sprites/grass/grass.yy",},},
     {"id":{"name":"main_screen_sprite","path":"sprites/main_screen_sprite/main_screen_sprite.yy",},},
-    {"id":{"name":"next_sprite","path":"sprites/next_sprite/next_sprite.yy",},},
     {"id":{"name":"purplebar_sprite","path":"sprites/purplebar_sprite/purplebar_sprite.yy",},},
     {"id":{"name":"road","path":"sprites/road/road.yy",},},
     {"id":{"name":"spr_arrow","path":"sprites/spr_arrow/spr_arrow.yy",},},
