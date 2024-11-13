@@ -51,7 +51,12 @@ if(in_tutorial and checkpoints_complete(checkpoints_needed, checkpoints_curr) &&
 }
 
 else if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
-	show_message("Lap completed");
+	//show_message("Lap completed");
+	//LD Montello show finish popup.
+	if (instance_exists(obj_popup_controller))
+	{
+		obj_popup_controller.show_finish_popup();
+	}
 	pass_thru = true
 	checkpoints_curr = [];
 }

@@ -26,6 +26,7 @@
     {"name":"inst_33E296E7","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_38B0BF31","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_2F698C1C","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_4B52C93E","path":"rooms/tutorial/tutorial.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -68,6 +69,7 @@
         {"$GMRInstance":"v1","%Name":"inst_3E204615_1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3E204615_1","objectId":{"name":"obj_power_spawner","path":"objects/obj_power_spawner/obj_power_spawner.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":0.42000005,"scaleY":0.42000005,"x":4448.0,"y":2528.0,},
         {"$GMRInstance":"v1","%Name":"inst_3D223534_1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3D223534_1","objectId":{"name":"obj_race_controller","path":"objects/obj_race_controller/obj_race_controller.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1536.0,"y":1294.0,},
         {"$GMRInstance":"v1","%Name":"inst_A9B9C0C","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_A9B9C0C","objectId":{"name":"obj_level_manager","path":"objects/obj_level_manager/obj_level_manager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2464.0,"y":1888.0,},
+        {"$GMRInstance":"v1","%Name":"inst_4B52C93E","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4B52C93E","objectId":{"name":"obj_popup_controller","path":"objects/obj_popup_controller/obj_popup_controller.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1056.0,"y":2432.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Instances_drawn_under_cars","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v1","%Name":"inst_2F698C1C","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2F698C1C","objectId":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},"properties":[
