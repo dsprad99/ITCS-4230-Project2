@@ -58,6 +58,13 @@ if(tutorial_check_bool ==true){
 
 
 if(!array_contains(obj_player_car.checkpoints_curr, checkpoint)) {
+	//LD Montello
+	//Show the checkpoint popup
+	if (!obj_player_car.in_tutorial and instance_exists(obj_popup_controller))
+	{
+		obj_popup_controller.show_checkpoint_popup();
+	}
+	
 	array_push(obj_player_car.checkpoints_curr, checkpoint);
 }
 //show_debug_message(obj_player_car.checkpoints_curr)

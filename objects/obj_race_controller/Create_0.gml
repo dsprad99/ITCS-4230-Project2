@@ -10,7 +10,9 @@ seconds_till_race_start = 3;
 //On create 
 //we'll have the countdown happen
 //and start the race
-show_message("Start Race")
+//show_message("Start Race")
+
+
 
 #region start light
 

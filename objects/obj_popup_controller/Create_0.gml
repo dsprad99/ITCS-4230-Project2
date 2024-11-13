@@ -30,3 +30,17 @@ function show_finish_popup()
 	cur_popup = layer_sequence_create("Sequences", center_x, center_y, seq_finish);
 	has_popup = true;
 }
+
+function show_checkpoint_popup()
+{
+	if (has_popup)
+	{
+		//TODO:
+		//kill the previous popup and 
+		//make the new popup show up instead.
+	}
+	
+	//create the traffic light for the start of the race.
+	cur_popup = layer_sequence_create("Sequences", center_x, center_y, seq_checkpoint);
+	has_popup = true;
+}
