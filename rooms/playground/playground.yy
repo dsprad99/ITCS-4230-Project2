@@ -21,7 +21,6 @@
     {"name":"inst_519DFC81","path":"rooms/playground/playground.yy",},
     {"name":"inst_C6B86B8","path":"rooms/playground/playground.yy",},
     {"name":"inst_6EC39982","path":"rooms/playground/playground.yy",},
-    {"name":"inst_46F264D0","path":"rooms/playground/playground.yy",},
     {"name":"inst_5A7168EF","path":"rooms/playground/playground.yy",},
     {"name":"inst_1DB82CCD","path":"rooms/playground/playground.yy",},
     {"name":"inst_4AA06480","path":"rooms/playground/playground.yy",},
@@ -40,6 +39,7 @@
     {"name":"inst_5E1EA09C","path":"rooms/playground/playground.yy",},
     {"name":"inst_15D33396","path":"rooms/playground/playground.yy",},
     {"name":"inst_6FAE14A8","path":"rooms/playground/playground.yy",},
+    {"name":"inst_7E6BD977","path":"rooms/playground/playground.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -95,11 +95,13 @@
         {"$GMRInstance":"v1","%Name":"inst_6EC39982","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_6EC39982","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"checkpoint","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":41.6703,"scaleX":0.6668113,"scaleY":1.0,"x":1856.0,"y":3904.0,},
-        {"$GMRInstance":"v1","%Name":"inst_46F264D0","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_46F264D0","objectId":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.4230769,"scaleY":1.0,"x":1024.0,"y":1472.0,},
         {"$GMRInstance":"v1","%Name":"inst_5A7168EF","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5A7168EF","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"checkpoint","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"rotate_car","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"90",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":0.5418655,"scaleY":0.71929824,"x":3456.0,"y":2016.0,},
+        {"$GMRInstance":"v1","%Name":"inst_7E6BD977","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_7E6BD977","objectId":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkered_obj","path":"objects/checkered_obj/checkered_obj.yy",},"propertyId":{"name":"tutorial_check","path":"objects/checkered_obj/checkered_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"True",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.5050976,"scaleY":0.42307693,"x":1728.0,"y":1600.0,},
         {"$GMRInstance":"v1","%Name":"inst_1DB82CCD","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1DB82CCD","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"checkpoint","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"2",},
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"checkpoint_obj","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"propertyId":{"name":"rotate_car","path":"objects/checkpoint_obj/checkpoint_obj.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"180",},

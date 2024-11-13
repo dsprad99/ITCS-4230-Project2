@@ -1,7 +1,10 @@
 {
   "$GMObject":"",
   "%Name":"checkered_obj",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"checkered_obj",
   "overriddenProperties":[],
@@ -32,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"finishline_sprite",
-    "path":"sprites/finishline_sprite/finishline_sprite.yy",
+    "name":"finishline_hitbox",
+    "path":"sprites/finishline_hitbox/finishline_hitbox.yy",
   },
   "spriteMaskId":null,
   "visible":true,

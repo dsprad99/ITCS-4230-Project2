@@ -1,6 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+pass_thru = false;
 
 //Davis Spradling
 //Used to keep track of if in tutorial or not
