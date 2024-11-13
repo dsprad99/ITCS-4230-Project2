@@ -1,7 +1,15 @@
 Circuit Racers -- Team Neon
 Objective
-Win the race against other “Bits” in order to help save the security of the system and stop the malware from spreading. Each race will be 3 laps so coming in first on the 3rd lap means you “Win” the race. 
-How to Play
-To go forward, left, down, and right use WASD keys or arrow keys.
+Win the race against other “Bits” to help save the system's security and stop the malware from spreading. Each race consists of 3 laps, and coming in first on the 3rd lap means you "Win" the race.
+
+How to Play (can also use arrow keys)
+Use the WASD keys or arrow keys to move:
+* W - Up Arrow: Move forward
+* A - Left Arrow: Move left
+* S - Down Arrow: Move down
+* D - Right Arrow: Move right
+
 Helpful Tips
-Utilize power ups throughout the game to help give you a short burst in increase in speed and also make sure to avoid the blue pits in order to not slow you down and force you to go back to the previous checkpoint. There is realistic acceleration, friction, and momentum in the game and thus if you are going too fast around a turn you can spin out.
+Power-ups: Utilize power-ups throughout the game for a temporary speed boost.
+Avoid obstacles: Steer clear of the blue pits to avoid slowing down or being sent back to the previous checkpoint.
+Realistic physics: The game incorporates realistic acceleration, friction, and momentum. If you're moving too fast around a turn, you risk spinning out!
