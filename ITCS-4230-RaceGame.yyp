@@ -66,6 +66,7 @@
     {"id":{"name":"obj_start_light","path":"objects/obj_start_light/obj_start_light.yy",},},
     {"id":{"name":"obj_traction_slider","path":"objects/obj_traction_slider/obj_traction_slider.yy",},},
     {"id":{"name":"obj_turn_speed_slider","path":"objects/obj_turn_speed_slider/obj_turn_speed_slider.yy",},},
+    {"id":{"name":"quit_button","path":"objects/quit_button/quit_button.yy",},},
     {"id":{"name":"room_button","path":"objects/room_button/room_button.yy",},},
     {"id":{"name":"track_outline","path":"objects/track_outline/track_outline.yy",},},
     {"id":{"name":"tut_finish_msg_obj","path":"objects/tut_finish_msg_obj/tut_finish_msg_obj.yy",},},
