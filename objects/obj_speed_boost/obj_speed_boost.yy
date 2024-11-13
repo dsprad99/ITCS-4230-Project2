@@ -3,6 +3,7 @@
   "%Name":"obj_speed_boost",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_speed_boost",
@@ -30,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_speed_boost",
-    "path":"sprites/spr_speed_boost/spr_speed_boost.yy",
+    "name":"spr_OverclockPowerup",
+    "path":"sprites/spr_OverclockPowerup/spr_OverclockPowerup.yy",
   },
   "spriteMaskId":null,
   "visible":true,
