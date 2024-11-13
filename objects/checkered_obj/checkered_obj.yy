@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"finishline_hitbox",
-    "path":"sprites/finishline_hitbox/finishline_hitbox.yy",
+    "name":"FinishLineRainbow",
+    "path":"sprites/FinishLineRainbow/FinishLineRainbow.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -10,7 +10,7 @@
 checkpoints_needed = [0,1,2]
 show_debug_message(checkpoints_curr)
 
-if(checkpoints_complete(checkpoints_needed, checkpoints_curr) && other.tutorial_check){
+if(in_tutorial and checkpoints_complete(checkpoints_needed, checkpoints_curr) && other.tutorial_check){
 	//Be used to break up the instructions into three different lines
 	//for readability
 	//var new_tut_next = instance_create_layer(obj_player_car.x, obj_player_car.y+300, "tutorial_popup", next_room_button_obj);
