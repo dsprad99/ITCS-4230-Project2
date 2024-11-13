@@ -1,4 +1,4 @@
-### Circuit Racers -- Team Neon
+# Circuit Racers -- Team Neon
 ## Objective
 Win the race against other “Bits” to help save the system's security and stop the malware from spreading. Each race consists of 3 laps, and coming in first on the 3rd lap means you "Win" the race.
 
