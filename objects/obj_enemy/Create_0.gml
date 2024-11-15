@@ -80,7 +80,141 @@ target_y = path_get_point_y(track_path, current_point);
 
 //path_start(track_path, 5, path_action_restart, true);
 
+#region collision avoidance
 
+max_avoid_force = 15;
+
+function collision_avoidance()
+{
+	//calculate the dynamic magnitude
+	//so we make the length of ahead be
+	//relative to if we're slowing down or speeding up.
+	dynamic_magnitude =100// magnitude(vel_vec) / max_speed
+
+	////find the 
+	//with ([obj_player_car, obj_enemy])
+	//{
+	//	//if the object is within our radius, add it's
+	//	//force to our avoidance force.
+	//	if (distance_to_object(other) <= avoidance_radius)
+	//	{
+	//		array_push(self);
+	//	}
+	//}
+	
+	ahead = normalized(vel_vec);
+	ahead = multiply_scalar(ahead, dynamic_magnitude);
+	ahead_world = add([x, y], ahead);
+	//ahead2 = velocity.normalized().multiply_scalar(max_see_ahead * 0.5);
+	var _inst = collision_line(x, y, x + ahead[0], y + ahead[1], [obj_player_car, obj_enemy], false, true)
+	
+	//var _inst = collision_line(x, y, x + ahead[0], y + ahead[1], wallTileID, false, true)
+	if (_inst)
+	{
+		show_message(_inst);
+		
+		var obstacle_vec = [_inst.x, _inst.y]
+	
+		//if our line intersects the cell
+		//if (distance(obstacle_vec, ahead) <= 16 || distance(obstacle_vec, ahead2) <= 16)
+		//{
+		//	cur_obst_dist = distance_to_object(_inst);
+		//	avoidance_force = new Vector2((ahead.x) - _inst.x, (ahead.y) - _inst.y)
+	
+		//	avoidance_force = avoidance_force.normalized().multiply_scalar(max_avoid_force);
+		//	steering = steering.add(avoidance_force);	
+		//}
+	
+		cur_obst_dist = distance_to_object(_inst);
+		//avoidance_force = [(ahead_world[0]) - _inst.x, (ahead_world[1]) - _inst.y]
+		avoidance_force = [(ahead_world[0]) - _inst.x, (ahead_world[1]) - _inst.y]
+		
+		avoidance_force = normalized(avoidance_force);
+		avoidance_force = multiply_scalar(avoidance_force, max_avoid_force);
+		
+		return avoidance_force;
+		//steering = steering.add(avoidance_force);
+	
+	}	
+	return [0, 0];
+}
+
+#endregion
+
+#region separation
+//separation
+separation_radius = (24 * 5) * 1.5;
+
+max_separation = (24 * 5);
+
+function separation()
+{
+	var force = [0,0];
+	var neighbourCount = 0;
+	
+	
+	//loop through all
+	//cells near us and find
+	//our neighbours.
+	with (obj_enemy)
+	{
+		//self in this with statement
+		//is the current cell we are looping
+		//through, and other is the object
+		//calling the with statement.
+		
+		//if our current cell is within the separation radius
+		//to this calling cell and not this calling cell
+		if (self != other and point_distance(other.x, other.y, self.x, self.y) <= separation_radius)
+		{
+			//show_message("HERE");
+			#region attempt to smooth out avoidance.
+			//var _dynamic_magnitude = velocity.magnitude() / max_velocity
+			//var _ahead = velocity.normalized().multiply_scalar(_dynamic_magnitude);
+			//var _ahead_world = new Vector2(x, y).add(_ahead);
+			
+			//var _avoidance_force = new Vector2((_ahead_world.x) - self.x, (_ahead_world.y) - self.y)
+	
+			//_avoidance_force = _avoidance_force.normalized().multiply_scalar(max_avoid_force);
+			
+			//force = force.add(_avoidance_force);
+			
+			#endregion
+			
+			//add the vector
+			//from the neighbouring cell
+			//to the calling cell
+			//to our force.
+			force[0] += self.x - other.x;
+			force[1] += self.y - other.y;
+			
+			
+			
+			//increment neighbourcount
+			//so we know how to scale our separation values.
+			neighbourCount++;
+		}
+	}
+	
+	if (neighbourCount != 0)
+	{
+		//make sure
+		//each neighbour has an
+		//equal effect on our force.
+		force[0] /= neighbourCount;
+		force[1] /= neighbourCount;
+		
+		//invert force
+		force = multiply_scalar(force, -1);
+	}
+	
+	force = normalized(force);
+	force = multiply_scalar(force, max_separation);
+	
+	return force;
+}
+
+#endregion
 
 #endregion
 

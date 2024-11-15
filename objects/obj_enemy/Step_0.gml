@@ -374,11 +374,13 @@ steering = multiply_scalar(steering, scalar);
 
 #region add the collision avoidance to the steering
 
-
-//steering = steering.add(collision_avoidance());
+//steering = collision_avoidance()
 
 #endregion
 
+steering = add(steering, separation());
+
+steering = clamp_magnitude(steering, -max_speed, max_speed);
 
 //WE NO LONGER ADD OUR ACTUAL STEERING
 //VECTOR, BECAUSE WE ACCELERATE IN THE DIRECTION WE 
