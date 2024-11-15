@@ -15,6 +15,7 @@ if event_data[? "event_type"] == "sequence event" // or you can check "sprite ev
 		//recieved is the Race Start
 		//message, then let's start it.
         case "Race Start":
+			start_time = current_time;
 			start_race();
         break;
     }

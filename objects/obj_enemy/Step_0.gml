@@ -378,7 +378,15 @@ steering = multiply_scalar(steering, scalar);
 
 #endregion
 
+//LD Montello
+//The params for separation
+//need to be tuned to make this
+//look really good.
+#region separation
+
 steering = add(steering, separation());
+
+#endregion
 
 steering = clamp_magnitude(steering, -max_speed, max_speed);
 

@@ -1,6 +1,23 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//LD Montello,
+//variables to store the
+//time for each lap
+#region lap info
+
+//did the car finish the race.
+did_finish = false;
+cur_lap = 1;
+
+lap1_time = 999999;
+lap2_time = 999999;
+lap3_time = 999999;
+
+#endregion
+
+
+
 pass_thru = false;
 
 //Davis Spradling

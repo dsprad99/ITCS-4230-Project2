@@ -12,7 +12,34 @@ seconds_till_race_start = 3;
 //and start the race
 //show_message("Start Race")
 
+#region race times
 
+//LD Montello
+//The time at which the race starts.
+//we set this in the broadcast event
+start_time = 0;
+
+//the time since the race has started
+//we set this in the step event
+//and draw it in Draw GUI.
+time_taken = 0;
+
+//LD Montello
+//Draw the time with formatting given a position
+//and a time.
+function draw_time_formatted(_x, _y, _time)
+{
+	//LD Montello
+//Where I found the way to calculate the time values:
+//https://stackoverflow.com/questions/10874048/from-milliseconds-to-hour-minutes-seconds-and-milliseconds
+	var milliseconds = _time;
+	var seconds = floor((milliseconds / 1000) % 60)
+	var minutes = floor((milliseconds / (1000*60)) % 60);
+	var hours = floor((milliseconds / (1000*60*60)) % 24);
+	draw_text_transformed_color(_x, _y, string(minutes) + "m " + string(seconds) + "s " + string(milliseconds % 1000) + "ms ", 2, 2, 0, c_aqua, c_aqua, c_aqua, c_aqua, 1);
+}
+
+#endregion
 
 #region start light
 

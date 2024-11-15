@@ -52,11 +52,45 @@ if(in_tutorial and checkpoints_complete(checkpoints_needed, checkpoints_curr) &&
 
 else if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 	//show_message("Lap completed");
-	//LD Montello show finish popup.
-	if (instance_exists(obj_popup_controller))
+
+	//LD Montello
+	//Store whatever lap time we're
+	//at as the lap time for our current
+	//lap 
+	if (cur_lap == 1)
 	{
-		obj_popup_controller.show_finish_popup();
+		lap1_time = obj_race_controller.time_taken;
 	}
+	else if (cur_lap == 2)
+	{
+		lap2_time = obj_race_controller.time_taken;
+	}
+	else if (cur_lap == 3)
+	{
+		lap3_time = obj_race_controller.time_taken;
+	}
+	
+	if (cur_lap == 3)
+	{
+		//The race should end for the player here,
+		//and we should do some waiting for the other
+		//cars to finish and then the race controller
+		//will know which cars have finished
+		//because our car will tell it here that we've
+		//finished, we'll do the same thing in the enemies.
+		did_finish = true;
+		can_move = false;
+		//LD Montello show finish popup.
+		if (instance_exists(obj_popup_controller))
+		{
+			obj_popup_controller.show_finish_popup();
+		}
+	
+	}
+	else
+		cur_lap++;
+
+	
 	pass_thru = true
 	checkpoints_curr = [];
 }

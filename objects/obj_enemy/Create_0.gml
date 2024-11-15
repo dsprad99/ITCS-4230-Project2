@@ -143,7 +143,7 @@ function collision_avoidance()
 
 #region separation
 //separation
-separation_radius = (24 * 5) * 1.5;
+separation_radius = (24 * 5) * 1.2;
 
 max_separation = (24 * 5);
 
