@@ -45,9 +45,9 @@ if (keyboard_check(vk_up) || keyboard_check(ord("W"))){
 	//	car_speed = max_speed; 
 	//}
 	
-	vel_vec.x += lengthdir_x(acceleration, image_angle);
-	vel_vec.y += lengthdir_y(acceleration, image_angle); 
-	vel_vec = vel_vec.clamp_magnitude(-max_speed, max_speed);
+	vel_vec[0] += lengthdir_x(acceleration, image_angle);
+	vel_vec[1] += lengthdir_y(acceleration, image_angle); 
+	vel_vec = clamp_magnitude(vel_vec, -max_speed, max_speed);
 	
 	press_up = true;
 }
@@ -61,9 +61,9 @@ else
 if(keyboard_check(vk_down) || keyboard_check(ord("S"))){
     
 	//apply acceleration to velocity.
-	vel_vec.x -= lengthdir_x(acceleration, image_angle);
-	vel_vec.y -= lengthdir_y(acceleration, image_angle); 
-	vel_vec = vel_vec.clamp_magnitude(-max_speed, max_speed);
+	vel_vec[0] -= lengthdir_x(acceleration, image_angle);
+	vel_vec[1] -= lengthdir_y(acceleration, image_angle); 
+	vel_vec = clamp_magnitude(vel_vec, -max_speed, max_speed);
 	
 	//car_speed -= acceleration;
     //if (car_speed< -max_speed){
@@ -89,11 +89,11 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 	//}
 	
 	
-	vel_vec.x -= sign(vel_vec.x)*car_friction;
-	vel_vec.y -= sign(vel_vec.y)*car_friction;
-	if (abs(vel_vec.magnitude())<car_friction){
-		vel_vec.x = 0;
-		vel_vec.y = 0;
+	vel_vec[0] -= sign(vel_vec[0])*car_friction;
+	vel_vec[1] -= sign(vel_vec[1])*car_friction;
+	if (abs(magnitude(vel_vec))<car_friction){
+		vel_vec[0] = 0;
+		vel_vec[1] = 0;
 	}
 	
 	
@@ -103,7 +103,7 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 //Davis Spradling
 //Give player ability to steer but only if the car is moving
 //Steer Left
-if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && vel_vec.magnitude()!=0) {
+if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && magnitude(vel_vec)!=0) {
     
 	image_angle -= turn_speed; 
 	
@@ -117,8 +117,9 @@ if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && vel_vec.magnitude(
 		image_angle += turn_speed;
 		
 		//Move us away from the wall we were hitting.
-		var dirVec = Vector2.angle_to_vector(image_angle);
-		dirVec = dirVec.normalized().multiply_scalar(acceleration);
+		var dirVec = angle_to_vector(image_angle);
+		dirVec = normalized(dirVec);
+		dirVec = multiply_scalar(dirVec, acceleration);
 	}
 	
 	
@@ -126,7 +127,7 @@ if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && vel_vec.magnitude(
 
 //Davis Spradling
 //Steer Right
-if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && vel_vec.magnitude()!=0) {
+if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && magnitude(vel_vec)!=0) {
     image_angle += turn_speed;
 	
 	//Check if we are currently intersecting
@@ -139,8 +140,9 @@ if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && vel_vec.magnitude()
 		image_angle -= turn_speed;
 		
 		//Move us away from the wall we were hitting.
-		var dirVec = Vector2.angle_to_vector(image_angle);
-		dirVec = dirVec.normalized().multiply_scalar(acceleration);
+		var dirVec = angle_to_vector(image_angle);
+		dirVec = normalized(dirVec);
+		dirVec = multiply_scalar(dirVec, acceleration);
 	}
 }
 
@@ -148,7 +150,7 @@ image_angle = image_angle % 360;
 
 //LD Montello, if we 
 //hit a track wall.
-if (place_meeting(x+vel_vec.x, y+vel_vec.y, bounceables))
+if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
 {
 	//Davis Spradling
 	//This will act as the outline of our track and will make the 
@@ -160,9 +162,9 @@ if (place_meeting(x+vel_vec.x, y+vel_vec.y, bounceables))
 	//maybe get the normal of the location
 	//we hit and bounce off in the direction
 	//of the normal instead.
-	vel_vec = vel_vec.multiply_scalar(-0.5);
+	vel_vec = multiply_scalar(vel_vec, -0.5);
 	
-	vel_vec = vel_vec.clamp_magnitude(max_bounce_speed)
+	vel_vec = clamp_magnitude(vel_vec, -max_bounce_speed, max_bounce_speed)
 }  
 
 
@@ -174,21 +176,23 @@ var _inst = instance_place(x, y, obj_enemy)
 if (_inst != noone)
 {
 	//Decrease speed of car,
-	vel_vec.multiply_scalar(0);
+	vel_vec = multiply_scalar(vel_vec, 0);
 	//add speed of the car we hit.
 	//that way we are pushed by it.
 	//vel_vec.add(new Vector2(1,1).normalized().multiply_scalar(_inst.car_speed));
 	//Calculate vector from our car to the other car,
 	//to make sure we can't collide
-	var newVec = new Vector2(x - _inst.x, y - _inst.y);
+	var newVec = [x - _inst.x, y - _inst.y];
 	//Normalize the vector, and multiply it's scale by 2
 	//so you bounce off at a speed of 2
-	vel_vec.add(newVec.normalized().multiply_scalar(4));
+	newVec = normalized(newVec);
+	newVec = multiply_scalar(newVec, 4);
+	vel_vec = add(vel_vec, newVec);
 }
 
 
 
-if (!is_nan(vel_vec.x) and !is_nan(vel_vec.y))
+if (!is_nan(vel_vec[0]) and !is_nan(vel_vec[1]))
 {
 
 if (cur_traction >= 1)
@@ -213,24 +217,25 @@ else
 if (press_up or press_down) {
 
 	//show_message("HERE");
-	var prev_vel = vel_vec.magnitude();
-	var target_vec = Vector2.angle_to_vector(image_angle).multiply_scalar(prev_vel);
+	var prev_vel = magnitude(vel_vec);
+	var target_vec = angle_to_vector(image_angle);
+	target_vec = multiply_scalar(target_vec, prev_vel);
 	
-	vel_vec.x = lerp(vel_vec.x, target_vec.x, traction)
-	vel_vec.y = lerp(vel_vec.y, target_vec.y, traction)
+	vel_vec[0] = lerp(vel_vec[0], target_vec[0], traction)
+	vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
 
 }
 
 #endregion
 
-//new Vector2(lengthdir_x(vel_vec.x, image_angle), lengthdir_y(vel_vec.y, image_angle))
+//new Vector2(lengthdir_x(vel_vec[0], image_angle), lengthdir_y(vel_vec[1], image_angle))
 	
 //vel_vec = vel_vec.multiply_scalar(prev_vel);
 	
 //Davis Spradling
 //Update car object based on curr speed and the angle of the the object
-x += vel_vec.x;
-y += vel_vec.y;
+x += vel_vec[0];
+y += vel_vec[1];
 }
 #region draw arrow for velocity debug
 

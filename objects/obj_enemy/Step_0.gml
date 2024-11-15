@@ -187,10 +187,10 @@ if (future_point > path_len)
 var future_x = path_get_x(track_path, future_point / path_get_length(track_path));
 var future_y = path_get_y(track_path, future_point / path_get_length(track_path));
 
-var path_dir = new Vector2(prev_x - future_x, prev_y - future_y);
+var path_dir = [prev_x - future_x, prev_y - future_y];
 
-left_perp_vec = path_dir.left_perp();
-right_perp_vec = path_dir.right_perp();
+left_perp_vec = left_perp(path_dir);
+right_perp_vec = right_perp(path_dir);
 
 
 //Set our target position by
@@ -198,26 +198,28 @@ right_perp_vec = path_dir.right_perp();
 //the path, multiplied
 //by the normalized perpendicular vector.
 
-left_dist = point_distance(x, y, path_point_x + left_perp_vec.x, path_point_y + left_perp_vec.y);
-right_dist = point_distance(x, y, path_point_x + right_perp_vec.x, path_point_y + right_perp_vec.y)
+left_dist = point_distance(x, y, path_point_x + left_perp_vec[0], path_point_y + left_perp_vec[1]);
+right_dist = point_distance(x, y, path_point_x + right_perp_vec[0], path_point_y + right_perp_vec[1])
 
 //if we are on the left side of the path
 if (left_dist < right_dist)
 {
+	left_perp_vec = normalized(left_perp_vec);
+	left_perp_vec = multiply_scalar(left_perp_vec, clamp(left_dist, 0, max_dist_from_path));
 	
-	left_perp_vec = left_perp_vec.normalized().multiply_scalar(clamp(left_dist, 0, max_dist_from_path));
 	
-	target_x = path_point_x + left_perp_vec.x
-	target_y = path_point_y + left_perp_vec.y
+	target_x = path_point_x + left_perp_vec[0]
+	target_y = path_point_y + left_perp_vec[1]
 
 }
 //if we are on the right side of the path
 else
 {
-	right_perp_vec = right_perp_vec.normalized().multiply_scalar(clamp(right_dist, 0, max_dist_from_path));
+	right_perp_vec = normalized(right_perp_vec);
+	right_perp_vec = multiply_scalar(right_perp_vec, clamp(right_dist, 0, max_dist_from_path));
 	
-	target_x = path_point_x + right_perp_vec.x
-	target_y = path_point_y + right_perp_vec.y
+	target_x = path_point_x + right_perp_vec[0]
+	target_y = path_point_y + right_perp_vec[1]
 
 }
 
@@ -237,7 +239,7 @@ var next_target_y = path_get_y(track_path, current_point + (path_increment * 4) 
 
 var heading = point_direction(target_x, target_y, next_target_x, next_target_y);
 
-heading_vec = Vector2.angle_to_vector(heading);
+heading_vec = angle_to_vector(heading);
 
 var targetRot = point_direction(x, y, target_x, target_y);
 
@@ -302,16 +304,18 @@ var _inst = instance_place(x, y, [obj_enemy, obj_player_car])
 if (_inst != noone)
 {
 	//Decrease speed of car,
-	vel_vec.multiply_scalar(0.5);
+	vel_vec = multiply_scalar(vel_vec, 0.5);
 	//add speed of the car we hit.
 	//that way we are pushed by it.
 	//vel_vec.add(new Vector2(1,1).normalized().multiply_scalar(_inst.car_speed));
 	//Calculate vector from our car to the other car,
 	//to make sure we can't collide
-	var newVec = new Vector2(x - _inst.x, y - _inst.y);
+	var newVec = [x - _inst.x, y - _inst.y];
 	//Normalize the vector, and multiply it's scale by 2
 	//so you bounce off at a speed of 2
-	vel_vec.add(newVec.normalized().multiply_scalar(3.5));
+	newVec = normalized(newVec);
+	newVec = multiply_scalar(newVec, 3.5);
+	vel_vec = add(vel_vec, newVec);
 }
 
 #endregion
@@ -321,7 +325,7 @@ if (_inst != noone)
 
 //LD Montello, if we 
 //hit a track wall.
-if (place_meeting(x+vel_vec.x, y+vel_vec.y, bounceables))
+if (place_meeting(x+vel_vec[0], y+vel_vec[0], bounceables))
 {
 	//Davis Spradling
 	//This will act as the outline of our track and will make the 
@@ -333,9 +337,9 @@ if (place_meeting(x+vel_vec.x, y+vel_vec.y, bounceables))
 	//maybe get the normal of the location
 	//we hit and bounce off in the direction
 	//of the normal instead.
-	vel_vec = vel_vec.multiply_scalar(-0.5);
+	vel_vec = multiply_scalar(vel_vec, -0.5);
 	
-	vel_vec = vel_vec.clamp_magnitude(max_bounce_speed)
+	vel_vec = clamp_magnitude(vel_vec, -max_bounce_speed, max_bounce_speed)
 }  
 
 #endregion
@@ -354,24 +358,33 @@ if (place_meeting(x+vel_vec.x, y+vel_vec.y, bounceables))
 
 //calculate desired velocity
 //var desired_velocity = Vector2.angle_to_vector(image_angle).normalized().multiply_scalar(max_speed);;;
-var desired_velocity = new Vector2(target_x - x, target_y - y).normalized().multiply_scalar(max_speed);
+var desired_velocity = normalized([target_x - x, target_y - y]);
+desired_velocity = multiply_scalar(desired_velocity, max_speed);
 var steering = desired_velocity;
-steering = steering.subtract(vel_vec)
-steering = steering.clamp_magnitude(steering, max_speed);
+steering = subtract(steering, vel_vec)
+steering = clamp_magnitude(steering, -max_speed, max_speed);
 //0-1 value for how fast
 //we want to change velocity.
 //Research: https://gamedev.stackexchange.com/questions/73361/understanding-the-seek-steering-behavior
 scalar = 0.05;
-steering = steering.multiply_scalar(scalar);
+steering = multiply_scalar(steering, scalar);
 
 //mass = 1;
 //steering = steering.multiply_scalar(steering.magnitude() / mass);
+
+#region add the collision avoidance to the steering
+
+
+//steering = steering.add(collision_avoidance());
+
+#endregion
 
 
 //WE NO LONGER ADD OUR ACTUAL STEERING
 //VECTOR, BECAUSE WE ACCELERATE IN THE DIRECTION WE 
 //ARE FACING.
-vel_vec = vel_vec.clamp_magnitude(vel_vec.add(steering), max_speed)
+var added_vel = add(vel_vec, steering);
+vel_vec = clamp_magnitude(added_vel, -max_speed, max_speed);
 
 
 //LD's Research for this section:
@@ -397,8 +410,8 @@ vel_vec = vel_vec.clamp_magnitude(vel_vec.add(steering), max_speed)
 
 
 
-x += vel_vec.x;
-y += vel_vec.y;
+x += vel_vec[0];
+y += vel_vec[1];
 
 #endregion
 

@@ -30,11 +30,13 @@ draw_self()
 //by multiplying our desired max length
 //for the visual of the vector by the percentage
 //for how close we are to the max speed.
-var scaled_vec = vel_vec.normalized().multiply_scalar(100 * (vel_vec.magnitude() / max_speed));
+var scaled_vec = normalized(vel_vec);
+scaled_vec = multiply_scalar(scaled_vec, 100 * (magnitude(vel_vec) / max_speed));
+
 //Draw the velocity vector
 //so we can see how fast they
 //are going.
-Vector2.draw_vector2_color(scaled_vec, 15, x, y, c_yellow);
+draw_vector2_color(scaled_vec, 15, x, y, c_yellow);
 //show_debug_message(string(vel_vec.x) + ", " + string(vel_vec.y) + ", magnitude:" + string(vel_vec.magnitude()));
 
 

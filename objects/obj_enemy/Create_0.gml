@@ -36,12 +36,12 @@ path_increment = 15;
 //resetting our current target to be that position.
 target_accuracy = 5;
 
-vel_vec = new Vector2(0, 0);
+vel_vec = [0, 0];
 
-heading_vec = new Vector2(0, 0);
+heading_vec = [0, 0];
 
-left_perp_vec = new Vector2(0, 0);
-right_perp_vec = new Vector2(0, 0);
+left_perp_vec = [0, 0];
+right_perp_vec = [0, 0];
 
 path_point_x = 0;
 path_point_y = 0;
@@ -80,7 +80,12 @@ target_y = path_get_point_y(track_path, current_point);
 
 //path_start(track_path, 5, path_action_restart, true);
 
+
+
 #endregion
+
+
+
 
 //LD Montello
 //Arrow used to show the

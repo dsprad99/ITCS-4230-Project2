@@ -17,27 +17,45 @@ function scr_vector(){
 	
 }
 
+//create new global global.temp_vec
+//global.temp_vec = new Vector2();
+
 //LD Montello
 	//Constructor for Vector2 struct
-	function Vector2(_x = 0, _y = 0) constructor
+	function Vector2(_vec1) constructor
 	{
-	    x = _x;
-	    y = _y;
 		
-		add = function(_vec2)
-		{
-			var temp_vec = self;
-			temp_vec.x += _vec2.x;
-			temp_vec.y += _vec2.y;
-			return temp_vec;
-		}
+		//Never access this ever,
+		//but we use this to optimize making
+		//new structs, so we set this one's
+		//values in the below methods
+		//instead of making a new one every time.
+		//var global.temp_vec = new Vector2(0, 0);
+		
+		
+		
+		
+	}
+	
+	
+	function add(_vec1, _vec2)
+	{
+		var x1 = _vec1[0];
+		var y1 = _vec1[1];
+		var x2 = _vec2[0];
+		var y2 = _vec2[1];
+			
+		return [x1 + x2, y1 + y2]
+	}
 
-		subtract = function(_vec2)
+		function subtract(_vec1, _vec2)
 		{
-			var temp_vec = self;
-			temp_vec.x -= _vec2.x;
-			temp_vec.y -= _vec2.y;
-			return temp_vec;
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			var x2 = _vec2[0];
+			var y2 = _vec2[1];
+			
+			return [x1 - x2, y1 - y2]
 		}		
 		
 		//Where LD learned how to do 
@@ -46,27 +64,34 @@ function scr_vector(){
 		/**
 		 * @function multiply_scalar
 		 * @description Multiplies this vector by a scalar
+		 * @param {Array} scalar to multiply this vector by.
 		 * @param {Real} scalar to multiply this vector by.
 		 * 
 		 */
-		multiply_scalar = function(scalar)
+		function multiply_scalar(_vec1, scalar)
 		{
-			//show_debug_message(self.x);
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
 			
-			//show_debug_message(scalar);
-			//show_debug_message(self.x * scalar);
-			var temp_vec = self;
-			temp_vec.x *= scalar;
-			temp_vec.y *= scalar;
-			//Return self so that this
-			//function can be used in inline math operations.
-			return temp_vec;
+			return [x1 * scalar, y1 * scalar]
 		}
 		
-		multiply_vector = function(_vec2)
+		function multiply_vector(_vec1, _vec2)
 		{
-			var temp_vec = new Vector2(self.x * _vec2.x, self.y * _vec2.y);
-			return temp_vec;
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			var x2 = _vec2[0];
+			var y2 = _vec2[1];
+			
+			return [x1 * x2, y1 * y2]
+		}
+		
+		function divide_scalar(_vec1, scalar)
+		{
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			
+			return [x1 / scalar, y1 / scalar]
 		}
 		
 		
@@ -77,17 +102,23 @@ function scr_vector(){
 		//show up as an autocomplete when 
 		//typing.
 		///@description returns the magnitude/length of this vector.
-		magnitude = function()
+		function magnitude(_vec1)
 		{
-			try {
-				return sqrt(sqr(x) + sqr(y))
-			}
-			//if our sqrt returns not a real number,
-			//then just return zero.
-			catch (e)
-			{
-				return 0;
-			}
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			
+			//show_message(x1);
+			
+			return sqrt(sqr(x1) + sqr(y1))
+			//try {
+			//	return sqrt(sqr(x1) + sqr(y1))
+			//}
+			////if our sqrt returns not a real number,
+			////then just return zero.
+			//catch (e)
+			//{
+			//	return 0;
+			//}
 		}
 		
 		/**
@@ -95,21 +126,17 @@ function scr_vector(){
 		 * @description returns the vector with it's magnitude scaled to 1.
 		 * @context
 		 */
-		normalized = function()
+		function normalized(_vec1)
 		{
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
 			
-			var normalized_vec = new Vector2();
-			//if the magnitude is zero,
-			//then return a zero vector so we
-			//don't divide by zero;
-			if (magnitude() == 0)
+			if (magnitude(_vec1) == 0)
 			{
-				return normalized_vec;
+				return [0,0]
 			}
-			normalized_vec.x = x / magnitude();
-			normalized_vec.y = y / magnitude();
 			
-			return normalized_vec;
+			return [x1 / magnitude(_vec1), y1 / magnitude(_vec1)]
 		}
 		
 		//LD Montello
@@ -122,24 +149,36 @@ function scr_vector(){
 		 * param {Real} max the maximum value the magnitude can be (inclusive).
 		 * @context
 		 */
-		clamp_magnitude = function(_min, _max)
+		function clamp_magnitude(_vec1, _min, _max)
 		{
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			
+			
 			try {
-				var temp_vec = self;
-				if (self.magnitude() > _max)
-					temp_vec = temp_vec.normalized().multiply_scalar(_max)
-				else if (self.magnitude() < _min)
-					temp_vec = temp_vec.normalized().multiply_scalar(_min)
-		
-				return temp_vec;
+				//create a copy of ourself
+				var temp = [x1, y1]
+				if (magnitude(temp) > _max)
+				{
+					temp = normalized(temp);
+					temp = multiply_scalar(temp, _max);
+				}
+				else if (magnitude(temp) < _min)
+				{
+					temp = normalized(temp);
+					temp = multiply_scalar(temp, _min);
+				}
+				return temp;
 			}
 			catch (e)
 			{
-				return self;
+				return [x1, y1]//new Vector2(self.x, self.y);
 			}
 		}
 		
-		static angle_to_vector = function(_angle)
+		//Apparently you can't
+		//make static non-anonymous functions.
+		function angle_to_vector(_angle)
 		{
 			//For whatever reason
 			//the way gamemaker handles
@@ -151,23 +190,49 @@ function scr_vector(){
 			//cos(radians) = x value
 			//sin(radians) = y value
 			//create vector pointing in direction.
-			var temp_vec = new Vector2(dcos(_angle),dsin(_angle)) 
-			return temp_vec;
+			return [dcos(_angle), dsin(_angle)];
 		}
 		
-		static vector_to_angle = function(_vec)
+		function vector_to_angle(_vec1)
 		{
-			return point_direction(0, 0, _vec.x, _vec.y);
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			
+			return point_direction(0, 0, x1, y1);
+		}
+		
+		function set_angle(_vec1, _angle)
+		{
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			
+			
+			//get the angle as a vector
+			var temp = angle_to_vector(_angle);
+			//set the new vector's magnitude
+			//to be our old magnitude.
+			//this will make it the same vector,
+			//with a change in angle.
+			temp = normalized(temp);
+			temp = multiply_scalar(temp, magnitude(temp));
+			
+			//return the new rotated vector.
+			return temp;
 		}
 		
 		//same formula as calculating
 		//magnitude, but this time we
 		//can use two different vectors
 		//to calculate distance.
-		static distance = function(_vec1, _vec2)
+		function distance(_vec1, _vec2)
 		{
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			var x2 = _vec2[0];
+			var y2 = _vec2[1];
+			
 			try {
-				return sqrt(sqr(_vec1.x - _vec2.x) + sqr(_vec1.y - _vec2.y))
+				return sqrt(sqr(x1 - x2) + sqr(y1 - y2))
 			}
 			//if our sqrt returns not a real number,
 			//then just return zero.
@@ -179,21 +244,37 @@ function scr_vector(){
 		
 		//just return using gamemaker's 
 		//dot function, it isn't complex anyway.
-		static dot = function(_vec1, _vec2)
+		function dot(_vec1, _vec2)
 		{
-			return dot_product(_vec1.x, _vec1.y, _vec2.x, _vec2.y);
+			
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			var x2 = _vec2[0];
+			var y2 = _vec2[1];
+			
+			return dot_product(x1, y1, x2, y2);
 		}
 		
-		left_perp = function()
+		function left_perp(_vec1)
 		{
-			var temp_vec = new Vector2(self.y, -self.x);
-			return temp_vec;
+			//global.temp_vec.x = self.y;
+			//global.temp_vec.y = -self.x;
+			
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			
+			return [y1, -x1];
 		}
 		
-		right_perp = function()
+		function right_perp(_vec1)
 		{
-			var temp_vec = new Vector2(-self.y, self.x);
-			return temp_vec;
+			var x1 = _vec1[0];
+			var y1 = _vec1[1];
+			
+			//var global.temp_vec = new Vector2(-self.y, self.x);
+			//global.temp_vec.x = -self.y;
+			//global.temp_vec.y = self.x;
+			return [-y1, x1];
 		}
 		
 		//LD Montello
@@ -208,9 +289,9 @@ function scr_vector(){
 		 * @param {Real} y y position to draw vector at.
 		 * @context
 		 */
-		static draw_vector2 = function(_vec2, size = 15, start_x = 0, start_y = 0)
+		function draw_vector2(_vec2, size = 15, start_x = 0, start_y = 0)
 		{
-			draw_arrow(start_x, start_y, start_x + _vec2.x, start_y + _vec2.y, size);
+			draw_arrow(start_x, start_y, start_x + _vec2[0], start_y + _vec2[1], size);
 		}
 		
 		/**
@@ -223,15 +304,14 @@ function scr_vector(){
 		 * @param {Color} Color to draw the origin of this vector at.
 		 * @context
 		 */
-		static draw_vector2_color = function(_vec2, size = 15, start_x = 0, start_y = 0, color = c_white)
+		function draw_vector2_color(_vec2, size = 15, start_x = 0, start_y = 0, color = c_white)
 		{
 			//Store previous draw color.
 			var prev_color = draw_get_color();
 			//set to the desired draw color
 			draw_set_color(color);
 			//draw arrow
-			draw_arrow(start_x, start_y, start_x + _vec2.x, start_y + _vec2.y, size);
+			draw_arrow(start_x, start_y, start_x + _vec2[0], start_y + _vec2[1], size);
 			//set the draw color back to the original color.
 			draw_set_color(prev_color);
 		}
-	}

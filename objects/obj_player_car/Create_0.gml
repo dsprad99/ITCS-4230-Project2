@@ -36,7 +36,7 @@ ui_layer = layer_get_id("UI");
 
 //LD Montello
 //Vector to store directional built up momentum
-vel_vec = new Vector2(0, 0);
+vel_vec = [0, 0];
 cur_vel = vel_vec;
 
 //The speed at which
