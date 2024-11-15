@@ -11,3 +11,7 @@ draw_vector2_color(multiply_scalar(normalized(left_perp_vec), left_dist), 15, pa
 draw_vector2_color(multiply_scalar(normalized(right_perp_vec), right_dist), 15, path_point_x, path_point_y, c_blue);
 
 draw_circle(x, y, separation_radius, true);
+
+//draw the circle we must be inside
+//of in order to calculate the next target point.
+draw_circle_color(target_x, target_y, arrive_radius, c_red, c_red, true);

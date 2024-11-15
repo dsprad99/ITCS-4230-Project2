@@ -75,7 +75,7 @@ var cur_y = path_get_y(track_path, current_point / path_get_length(track_path))
 //}
 
 //if we've reached our current point
-if (distance_to_point(target_x,target_y) < 1)
+if (distance_to_point(target_x,target_y) < arrive_radius)
 {
 	//show_message("HREE");
 	//current_point++;
@@ -353,30 +353,14 @@ if (place_meeting(x+vel_vec[0], y+vel_vec[0], bounceables))
 
 #region steering
 
-//LD's Research source:
-//https://code.tutsplus.com/understanding-steering-behaviors-seek--gamedev-849t
-
-//calculate desired velocity
-//var desired_velocity = Vector2.angle_to_vector(image_angle).normalized().multiply_scalar(max_speed);;;
-var desired_velocity = normalized([target_x - x, target_y - y]);
-desired_velocity = multiply_scalar(desired_velocity, max_speed);
-var steering = desired_velocity;
-steering = subtract(steering, vel_vec)
-steering = clamp_magnitude(steering, -max_speed, max_speed);
-//0-1 value for how fast
-//we want to change velocity.
-//Research: https://gamedev.stackexchange.com/questions/73361/understanding-the-seek-steering-behavior
-scalar = 0.05;
-steering = multiply_scalar(steering, scalar);
-
-//mass = 1;
-//steering = steering.multiply_scalar(steering.magnitude() / mass);
-
-#region add the collision avoidance to the steering
-
-//steering = collision_avoidance()
-
+#region old steering
+steering = custom_arrive()
 #endregion
+
+//Arrive code as seen in BOIDS behavior.
+//steering = arrive(target_x, target_y);
+
+
 
 //LD Montello
 //The params for separation
@@ -384,17 +368,65 @@ steering = multiply_scalar(steering, scalar);
 //look really good.
 #region separation
 
-steering = add(steering, separation());
+//only do seperation
+//to the point where we stop
+//moving, we never want to reverse
+//when seperating.
+//If a car in front of you stops too
+//fast, do you break and then shift into reverse?
+//exactly, so just do seperation until we stop.
+if (magnitude(vel_vec) > 0)
+{
+
+	steering = add(steering, separation());
+}
+#endregion
+
+#region add the collision avoidance to the steering
+
+//steering = add(steering, collision_avoidance());
 
 #endregion
 
 steering = clamp_magnitude(steering, -max_speed, max_speed);
 
+
+
+
+
 //WE NO LONGER ADD OUR ACTUAL STEERING
 //VECTOR, BECAUSE WE ACCELERATE IN THE DIRECTION WE 
 //ARE FACING.
 var added_vel = add(vel_vec, steering);
+
+//clamp steering to our current facing direction 
+//basically, we have calculated an acceleration
+//we want to apply to our velocity,
+//but we aren't allowed to apply acceleration
+//in any direction other than the car's facing direction,
+//so we are just nullifying any values that would
+//break our rules. 
+added_vel = clamp_vector_to_direction(added_vel, angle_to_vector(image_angle));
+
+//LD needs to make it so any steering
+//is clamped to the car's direction
+//but that velocity isn't so that
+//the cars can drift. 
+//then LD just needs to design
+//something where the car is aware
+//of it's velocity being
+//in the wrong direction so that
+//it first presses the break to slow down
+//until velocity is either 0 or it's
+//close enough to the direction the car
+//is facing that it can begin accelerating
+//once again.
+//because technically the line of code
+//above essentially makes the AI
+//not be able to drift. 
+
 vel_vec = clamp_magnitude(added_vel, -max_speed, max_speed);
+
 
 
 //LD's Research for this section:

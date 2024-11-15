@@ -67,6 +67,12 @@ image_yscale = 5;
 //to be the very first point.
 current_point = 0;
 
+//the radius we must be within
+//to count as arriving at the point
+//to be allowed to move on to the next
+//target point along the track.
+arrive_radius = 128
+
 //Get the target x and y 
 //positions to path to
 target_x = path_get_point_x(track_path, current_point);
@@ -79,6 +85,106 @@ target_y = path_get_point_y(track_path, current_point);
 //y = path_get_point_y(track_path, path_get_number(track_path))
 
 //path_start(track_path, 5, path_action_restart, true);
+
+
+//LD Montello
+//this function will restrict a given
+//vector to a specific direction,
+//it's used so that when we calculate
+//the velocity needed to reach a point
+//we only apply that velocity in the direction
+//that the car can drive.
+//we apply this to the steering variable
+//after all behavior rules have been added
+//so that those behaviors don't break 
+//the rules of the car's movement. (only allowed
+//to move in the axis/direction we are facing).
+function clamp_vector_to_direction(vector_to_clamp, direction_vector)
+{
+	//By normalizing the target vector, you ensure that 
+	//the resulting clamped vector will have a magnitude of 
+	//1 in the direction of the target vector.
+	var unit_vector = normalized(direction_vector);
+	
+	//The dot product is used to find the component of the 
+	//vector to be clamped that aligns with the target vector's 
+	//direction.
+	var dotProduct = dot(vector_to_clamp, unit_vector);
+	
+	//Multiplying the dot product with the unit target vector 
+	//effectively projects the vector onto the target vector's 
+	//direction.
+	var clamped_vector = multiply_scalar(unit_vector, dotProduct);
+	
+	return clamped_vector;
+}
+
+
+
+function custom_arrive()
+{
+	//LD's Research source:
+	//https://code.tutsplus.com/understanding-steering-behaviors-seek--gamedev-849t
+
+	//calculate desired velocity
+	//var desired_velocity = Vector2.angle_to_vector(image_angle).normalized().multiply_scalar(max_speed);;;
+	var desired_velocity = normalized([target_x - x, target_y - y]);
+	desired_velocity = multiply_scalar(desired_velocity, max_speed);
+	var steering = desired_velocity;
+	steering = subtract(steering, vel_vec)
+	steering = clamp_magnitude(steering, -max_speed, max_speed);
+	//0-1 value for how fast
+	//we want to change velocity.
+	//Research: https://gamedev.stackexchange.com/questions/73361/understanding-the-seek-steering-behavior
+	scalar = 0.05;
+	steering = multiply_scalar(steering, scalar);
+
+	//mass = 1;
+	//steering = steering.multiply_scalar(steering.magnitude() / mass);
+	return steering;
+}
+
+#region arrive
+
+slowing_radius = 32 * 3;
+
+//calculate force
+//to arrive at position
+//given target x and target y values.
+function arrive(_tx, _ty)
+{
+	//calculate desired velocity to reach target
+	var _desired_velocity = [_tx - x, _ty - y];
+
+	//Calculate distance from target
+	var _target_dist = magnitude(_desired_velocity);
+	
+	
+	//arrival slowdown if we are
+	//within the slowdown radius
+	if (_target_dist < slowing_radius)
+	{
+		_desired_velocity = normalized(_desired_velocity);
+		
+		_desired_velocity = multiply_scalar(_desired_velocity, max_speed * (_target_dist / slowing_radius))
+		
+		
+	}
+	else
+	{
+		_desired_velocity = normalized(_desired_velocity);
+
+		_desired_velocity = multiply_scalar(_desired_velocity, max_speed)
+		
+
+	}
+	
+	
+	
+	return subtract(_desired_velocity, vel_vec);
+}
+
+#endregion
 
 #region collision avoidance
 
@@ -143,9 +249,9 @@ function collision_avoidance()
 
 #region separation
 //separation
-separation_radius = (24 * 5) * 1.2;
+separation_radius = (24 * 5) * 2;
 
-max_separation = (24 * 5);
+max_separation = 0.9;
 
 function separation()
 {
