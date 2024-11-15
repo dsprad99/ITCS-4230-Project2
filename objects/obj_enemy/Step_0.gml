@@ -10,54 +10,69 @@ if (!can_move)
 
 #region pathing
 
-var lastDist = point_distance(x, y, target_x, target_y);
 
-//LD Montello,
-//loop through the remaining points 
-//in the path
-for (var i = 0; i < path_len; i += path_increment)
-{
-	var new_x = path_get_x(track_path, i / path_len)
-	var new_y = path_get_y(track_path, i / path_len) 
+//LD's TODO:
+//The commented out code below will find
+//the nearest point on the path to our car,
+//in the correct driving direction of the track.
+//This code is really resource intensive as it loops
+//through the entire track and it shouldn't
+//I'll have to optimize it. 
+//But, basically I need to code something
+//that checks if we're either facing the wrong way
+//or we're going backwards along the track from our current position.
+//then we can run this code.
+
+
+
+//var lastDist = point_distance(x, y, target_x, target_y);
+
+////LD Montello,
+////loop through the remaining points 
+////in the path
+//for (var i = 0; i < path_len; i += path_increment)
+//{
+//	var new_x = path_get_x(track_path, i / path_len)
+//	var new_y = path_get_y(track_path, i / path_len) 
 	
-	var heading_x = x + lengthdir_x(car_speed, image_angle);
-	var heading_y = y + lengthdir_y(car_speed, image_angle);
-	//show_debug_message(i);
-	//if this is the closest point on the path,
-	//And it is ahead of the current point,
-	//path towards it.
-	var newDist = point_distance(heading_x, heading_y, new_x, new_y);
+//	var heading_x = x + lengthdir_x(car_speed, image_angle);
+//	var heading_y = y + lengthdir_y(car_speed, image_angle);
+//	//show_debug_message(i);
+//	//if this is the closest point on the path,
+//	//And it is ahead of the current point,
+//	//path towards it.
+//	var newDist = point_distance(heading_x, heading_y, new_x, new_y);
 	
 	
 	
-	//LD position_empty is where you were.
-	if (current_point < i and position_empty(new_x, new_y) and newDist < lastDist)
-	{
-		//show_message("HERE");
-		lastDist = point_distance(heading_x, heading_y, new_x, new_y);
-		//Reset the nearest point to be the current point
-		current_point = i;
-		target_x = new_x;
-		target_y = new_y;
-	}
+//	//LD position_empty is where you were.
+//	if (current_point < i and position_empty(new_x, new_y) and newDist < lastDist)
+//	{
+//		//show_message("HERE");
+//		lastDist = point_distance(heading_x, heading_y, new_x, new_y);
+//		//Reset the nearest point to be the current point
+//		current_point = i;
+//		target_x = new_x;
+//		target_y = new_y;
+//	}
 	
-	//if we have exceeded the path length,
-	//the path is closed so go back to the beginning
-	//of the path and continue.
-	if (current_point + path_increment > path_len)
-	{
-		//show_message("HERE");
-		//current_point = (current_point + 15) - path_len;
-		current_point++;
+//	//if we have exceeded the path length,
+//	//the path is closed so go back to the beginning
+//	//of the path and continue.
+//	if (current_point + path_increment > path_len)
+//	{
+//		//show_message("HERE");
+//		//current_point = (current_point + 15) - path_len;
+//		current_point++;
 		
-		//rollover to next point if we have reached
-		//the "end" of our path.
-		if (current_point - path_len < 1)
-		{
-			current_point = 0;
-		}
-	}
-}
+//		//rollover to next point if we have reached
+//		//the "end" of our path.
+//		if (current_point - path_len < 1)
+//		{
+//			current_point = 0;
+//		}
+//	}
+//}
 
 var next_point = current_point + path_increment;
 var next_x = path_get_point_x(track_path, next_point)

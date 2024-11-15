@@ -3,9 +3,12 @@
   "%Name":"LDTileSetDontModify",
   "autoTileSets":[],
   "macroPageTiles":{
-    "SerialiseHeight":0,
-    "SerialiseWidth":0,
-    "TileSerialiseData":[],
+    "SerialiseHeight":8,
+    "SerialiseWidth":11,
+    "TileCompressedData":[
+      -2,0,-4,4,-6,0,-6,4,-4,0,-8,4,-3,0,1,20,-7,4,-3,0,-8,4,-3,0,-8,4,-4,0,-6,4,-6,0,-4,4,-5,0,
+    ],
+    "TileDataFormat":1,
   },
   "name":"LDTileSetDontModify",
   "out_columns":5,
