@@ -261,11 +261,16 @@ else
 //traction should only apply when moving.
 var forward_vec = angle_to_vector(image_angle);
 var target_vec = clamp_vector_to_direction(vel_vec, forward_vec);
-//vel_vec[0] = lerp(vel_vec[0], target_vec[0], traction)
-//vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
-var drift = subtract(vel_vec, target_vec);
+vel_vec[0] = lerp(vel_vec[0], target_vec[0], traction)
+vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
+//var drift = subtract(vel_vec, target_vec);
 
-vel_vec = add(target_vec, multiply_scalar(drift, (1 - traction)));
+//var left_vec = angle_to_vector(image_angle + 90)
+//var left_constricted = clamp_vector_to_direction(vel_vec, left_vec);
+
+//vel_vec = subtract(vel_vec, multiply_scalar(left_constricted, traction));
+
+//vel_vec = add(target_vec, multiply_scalar(drift, (1 - traction)));
 
 #endregion
 

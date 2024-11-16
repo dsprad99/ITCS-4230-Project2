@@ -12,8 +12,8 @@ show_debug_message(checkpoints_curr)
     var instanceid = instance_find(checkpoint_obj, i);
 	if(fall_obj.checkpoint_go_to ==	instanceid.checkpoint){
         
-	    var inst_x = instanceid.x +(instanceid.sprite_width/2);
-	    var inst_y = instanceid.y +(instanceid.sprite_height/2);
+	    var inst_x = instanceid.x //+(instanceid.sprite_width/2);
+	    var inst_y = instanceid.y //+(instanceid.sprite_height/2);
 		
 		//save progress made by car before destroying
 		curr_checkpoint_arr = obj_player_car.checkpoints_curr;
@@ -22,9 +22,9 @@ show_debug_message(checkpoints_curr)
 
 		//Note changed layer to UI where the instance is created 
 		//so the object will appear above the checkered race track
-	    var new_car_instance = instance_create_layer(inst_x, inst_y, "UI", obj_player_car);
+	    var new_car_instance = instance_create_layer(inst_x, inst_y, "Instances", obj_player_car);
 		
-		var right_direction = (instanceid.direction+instanceid.rotate_car)%360;
+		var right_direction = (instanceid.image_angle+90)%360;
 		new_car_instance.image_angle = right_direction;
 		
 		//readd that progress
