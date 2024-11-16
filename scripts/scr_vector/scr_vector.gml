@@ -315,3 +315,44 @@ function scr_vector(){
 			//set the draw color back to the original color.
 			draw_set_color(prev_color);
 		}
+		
+		/// @func   collision_normal(x, y, obj, radius, spacing)
+///
+/// @desc   Returns a 2D "surface normal" at a point on or near an
+///         instance within a test area. The test area is circular
+///         and the detected normal direction is returned in degrees.
+///         If no collision is found, (-1) is returned. Uses about
+///         pi*(radius*radius)/(spacing*spacing) collision checks.
+///
+/// @param  {real}      x           x-coordinate of point near an instance
+/// @param  {real}      y           y-coordinate of point near an instance
+/// @param  {object}    obj         object or instance (or all)
+/// @param  {real}      radius      radius of test area (default 4)
+/// @param  {real}      spacing     space between each sample (default 1)
+///
+/// @return {real}      direction pointing away from the detected surface
+///
+/// GMLscripts.com/license
+
+//LD Montello did not code this,
+//It was found here: https://web.archive.org/web/20230810151732/https://www.gmlscripts.com/script/collision_normal
+function collision_normal(_x, _y, obj, radius=4, spacing=1)
+{
+    var nx = 0;
+    var ny = 0;
+    if (collision_circle(_x, _y, radius, obj, true, true) != noone) {
+        for (var j=spacing; j<=radius; j+=spacing) {
+            for (var i=0; i<radius; i+=spacing) {
+                if (point_distance(0, 0, i, j) <= radius) {
+                    if (collision_point(_x+i, _y+j, obj, true, true) == noone) { nx += i; ny += j; }
+                    if (collision_point(_x+j, _y-i, obj, true, true) == noone) { nx += j; ny -= i; }
+                    if (collision_point(_x-i, _y-j, obj, true, true) == noone) { nx -= i; ny -= j; }
+                    if (collision_point(_x-j, _y+i, obj, true, true) == noone) { nx -= j; ny += i; }
+                }
+            }
+        }
+        if (nx == 0 && ny == 0) return (-1);
+        return point_direction(0, 0, nx, ny);
+    }
+    return (-1);
+}

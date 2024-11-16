@@ -1,6 +1,14 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//positions where the normal should be
+//drawn from.
+normal_x = 0;
+normal_y = 0;
+//vector for the normal 
+//of the obejct we hit.
+normal = [0,0]
+
 //LD Montello,
 //variables to store the
 //time for each lap

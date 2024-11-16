@@ -39,6 +39,8 @@ scaled_vec = multiply_scalar(scaled_vec, 100 * (magnitude(vel_vec) / max_speed))
 draw_vector2_color(scaled_vec, 15, x, y, c_yellow);
 //show_debug_message(string(vel_vec.x) + ", " + string(vel_vec.y) + ", magnitude:" + string(vel_vec.magnitude()));
 
+//Draw the normal vector of any objects we hit.
+draw_vector2_color(multiply_scalar(normalized(normal), 100), 15, normal_x, normal_y, c_white);
 
 draw_text_transformed_color(x, y, image_angle, 5, 5, 0, c_black, c_black, c_black, c_black, 1);
 

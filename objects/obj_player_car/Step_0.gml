@@ -152,6 +152,24 @@ image_angle = image_angle % 360;
 //hit a track wall.
 if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
 {
+	//LD Montello,
+	//finding the normal vector
+	//of the object we hit,
+	//just find the direction from the other
+	//object to us.
+	//normal = //[(x+vel_vec[0]) - x, (y+vel_vec[1]) - y]
+	normal_x = x+vel_vec[0];
+	normal_y = y+vel_vec[1];
+	
+	//where LD found the code to get the normal
+	//https://web.archive.org/web/20230810151732/https://www.gmlscripts.com/script/collision_normal
+	var angle = collision_normal(x+vel_vec[0], y+vel_vec[1], bounceables, 32 * 5, 1);
+	if (angle != -1)
+	{
+		normal = angle_to_vector(angle);
+	}
+	
+	
 	//Davis Spradling
 	//This will act as the outline of our track and will make the 
 	//player bounce off the wall it hits
