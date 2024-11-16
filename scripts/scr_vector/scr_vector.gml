@@ -315,8 +315,26 @@ function scr_vector(){
 			//set the draw color back to the original color.
 			draw_set_color(prev_color);
 		}
+
+//LD Montello,
+//Reflect some vector
+//over a normal vector.
+//formula explanation: https://math.stackexchange.com/questions/13261/how-to-get-a-reflection-vector
+function reflect(_vec_to_reflect, _normal)
+{
+	//Normal must be normalized.
+	_normal = normalized(_normal);
+	//R = 2 * (v dot n) / (n dot n) * n - v
+	var v_dot_n = dot(_vec_to_reflect, _normal);
+	var n_dot_n = dot(_normal, _normal);
+	var scalar = 2 * (v_dot_n);
+	var reflected = multiply_scalar(_normal, scalar);
+	reflected = subtract(reflected, _vec_to_reflect);
+	
+	return reflected;
+}
 		
-		/// @func   collision_normal(x, y, obj, radius, spacing)
+/// @func   collision_normal(x, y, obj, radius, spacing)
 ///
 /// @desc   Returns a 2D "surface normal" at a point on or near an
 ///         instance within a test area. The test area is circular

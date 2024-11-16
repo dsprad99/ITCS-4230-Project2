@@ -70,10 +70,12 @@ if(keyboard_check(vk_down) || keyboard_check(ord("S"))){
 	//	car_speed = -max_speed; 
 	//}
 	press_up = false;
+	//press_down = true;
 }
 else
 {
 	press_up = true;
+	//press_down = false;
 }
 
 //Davis Spradling
@@ -103,50 +105,19 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 //Davis Spradling
 //Give player ability to steer but only if the car is moving
 //Steer Left
-if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) && magnitude(vel_vec)!=0) {
+if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) ) {
     
 	image_angle -= turn_speed; 
-	
-	//Check if we are currently intersecting
-	//a wall, and if we are, push us out of it.
-	if (place_meeting(x, y, bounceables))
-	{
-		//We would be hitting the wall at this angle,
-		//so rotate back to the previous position,
-		//so we aren't clipping into the wall.
-		image_angle += turn_speed;
-		
-		//Move us away from the wall we were hitting.
-		var dirVec = angle_to_vector(image_angle);
-		dirVec = normalized(dirVec);
-		dirVec = multiply_scalar(dirVec, acceleration);
-	}
-	
-	
 }
 
 //Davis Spradling
 //Steer Right
-if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) && magnitude(vel_vec)!=0) {
+if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) ) {
     image_angle += turn_speed;
-	
-	//Check if we are currently intersecting
-	//a wall, and if we are, push us out of it.
-	if (place_meeting(x, y, bounceables))
-	{
-		//We would be hitting the wall at this angle,
-		//so rotate back to the previous position,
-		//so we aren't clipping into the wall.
-		image_angle -= turn_speed;
-		
-		//Move us away from the wall we were hitting.
-		var dirVec = angle_to_vector(image_angle);
-		dirVec = normalized(dirVec);
-		dirVec = multiply_scalar(dirVec, acceleration);
-	}
 }
 
 image_angle = image_angle % 360;
+
 
 //LD Montello, if we 
 //hit a track wall.
@@ -163,12 +134,12 @@ if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
 	
 	//where LD found the code to get the normal
 	//https://web.archive.org/web/20230810151732/https://www.gmlscripts.com/script/collision_normal
-	var angle = collision_normal(x+vel_vec[0], y+vel_vec[1], bounceables, 32 * 5, 1);
+	var angle = collision_normal(x+vel_vec[0], y+vel_vec[1], bounceables, 32 * 2, 1);
 	if (angle != -1)
 	{
 		normal = angle_to_vector(angle);
 	}
-	
+
 	
 	//Davis Spradling
 	//This will act as the outline of our track and will make the 
@@ -180,9 +151,18 @@ if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
 	//maybe get the normal of the location
 	//we hit and bounce off in the direction
 	//of the normal instead.
-	vel_vec = multiply_scalar(vel_vec, -0.5);
+	vel_vec = multiply_scalar(vel_vec, -1);
 	
-	vel_vec = clamp_magnitude(vel_vec, -max_bounce_speed, max_bounce_speed)
+	var reflected = reflect(vel_vec, normalized(normal));
+	
+	vel_vec = clamp_magnitude(reflected, -max_bounce_speed, max_bounce_speed)
+	
+	//this is for handling
+	//when the car rotates and could
+	//clip into an object.
+	//we always add the normal vector if
+	//we hit something.
+	vel_vec = add(vel_vec, multiply_scalar(normalized(normal), 1));
 }  
 
 
