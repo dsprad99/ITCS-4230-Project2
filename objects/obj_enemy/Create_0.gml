@@ -87,37 +87,6 @@ target_y = path_get_point_y(track_path, current_point);
 //path_start(track_path, 5, path_action_restart, true);
 
 
-//LD Montello
-//this function will restrict a given
-//vector to a specific direction,
-//it's used so that when we calculate
-//the velocity needed to reach a point
-//we only apply that velocity in the direction
-//that the car can drive.
-//we apply this to the steering variable
-//after all behavior rules have been added
-//so that those behaviors don't break 
-//the rules of the car's movement. (only allowed
-//to move in the axis/direction we are facing).
-function clamp_vector_to_direction(vector_to_clamp, direction_vector)
-{
-	//By normalizing the target vector, you ensure that 
-	//the resulting clamped vector will have a magnitude of 
-	//1 in the direction of the target vector.
-	var unit_vector = normalized(direction_vector);
-	
-	//The dot product is used to find the component of the 
-	//vector to be clamped that aligns with the target vector's 
-	//direction.
-	var dotProduct = dot(vector_to_clamp, unit_vector);
-	
-	//Multiplying the dot product with the unit target vector 
-	//effectively projects the vector onto the target vector's 
-	//direction.
-	var clamped_vector = multiply_scalar(unit_vector, dotProduct);
-	
-	return clamped_vector;
-}
 
 
 

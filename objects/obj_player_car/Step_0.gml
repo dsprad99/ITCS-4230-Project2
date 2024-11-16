@@ -45,9 +45,32 @@ if (keyboard_check(vk_up) || keyboard_check(ord("W"))){
 	//	car_speed = max_speed; 
 	//}
 	
-	vel_vec[0] += lengthdir_x(acceleration, image_angle);
-	vel_vec[1] += lengthdir_y(acceleration, image_angle); 
-	vel_vec = clamp_magnitude(vel_vec, -max_speed, max_speed);
+	//if we're not moving,
+	//decide what "gear" we're
+	//in by setting is_reversing to false.
+	//this tells the code for reversing
+	//to know that it needs to brake
+	//to a stop before switching to actually
+	//reversing.
+	if (magnitude(vel_vec) == 0)
+	{
+		is_reversing = false;
+	}
+	
+	//Before we start driving forwards 
+	//if we're reversing, we need to slow
+	//down to zero before
+	//we can switch into drive to go forward.
+	if (is_reversing)
+	{
+		brake();
+	}
+	else
+	{
+		vel_vec[0] += lengthdir_x(acceleration, image_angle);
+		vel_vec[1] += lengthdir_y(acceleration, image_angle); 
+		vel_vec = clamp_magnitude(vel_vec, -max_speed, max_speed);
+	}
 	
 	press_up = true;
 }
@@ -60,22 +83,46 @@ else
 //If down key is pressed declerate car
 if(keyboard_check(vk_down) || keyboard_check(ord("S"))){
     
-	//apply acceleration to velocity.
-	vel_vec[0] -= lengthdir_x(acceleration, image_angle);
-	vel_vec[1] -= lengthdir_y(acceleration, image_angle); 
-	vel_vec = clamp_magnitude(vel_vec, -max_speed, max_speed);
+	
+	if (magnitude(vel_vec) == 0)
+	{
+		is_reversing = true;
+	}
+	
+	
+	//Before we start reversing in our backwards direction,
+	//our velocity must first slow down to 0.
+	if (!is_reversing)
+	{
+		brake();
+	}
+	else
+	{
+		//apply acceleration to velocity.
+		vel_vec[0] -= lengthdir_x(acceleration, image_angle);
+		vel_vec[1] -= lengthdir_y(acceleration, image_angle); 
+		vel_vec = clamp_magnitude(vel_vec, -max_speed, max_speed);
+	}
+	
+	
 	
 	//car_speed -= acceleration;
     //if (car_speed< -max_speed){
 	//	car_speed = -max_speed; 
 	//}
-	press_up = false;
-	//press_down = true;
+	//press_up = false;
+	press_down = true;
 }
 else
 {
-	press_up = true;
-	//press_down = false;
+	//press_up = true;
+	press_down = false;
+}
+
+//breaking
+if (keyboard_check(vk_space))
+{
+	brake();
 }
 
 //Davis Spradling
@@ -212,17 +259,13 @@ else
 #region traction application
 
 //traction should only apply when moving.
-if (press_up or press_down) {
+var forward_vec = angle_to_vector(image_angle);
+var target_vec = clamp_vector_to_direction(vel_vec, forward_vec);
+//vel_vec[0] = lerp(vel_vec[0], target_vec[0], traction)
+//vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
+var drift = subtract(vel_vec, target_vec);
 
-	//show_message("HERE");
-	var prev_vel = magnitude(vel_vec);
-	var target_vec = angle_to_vector(image_angle);
-	target_vec = multiply_scalar(target_vec, prev_vel);
-	
-	vel_vec[0] = lerp(vel_vec[0], target_vec[0], traction)
-	vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
-
-}
+vel_vec = add(target_vec, multiply_scalar(drift, (1 - traction)));
 
 #endregion
 
@@ -257,3 +300,6 @@ layer_sprite_x(ug1, x);
 layer_sprite_y(ug1, y);
 
 #endregion
+
+//Set previous velocity
+prev_vel = vel_vec;

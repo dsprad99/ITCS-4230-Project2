@@ -63,6 +63,29 @@ ui_layer = layer_get_id("UI");
 //Vector to store directional built up momentum
 vel_vec = [0, 0];
 cur_vel = vel_vec;
+prev_vel = [0,0];
+
+
+is_reversing = false;
+
+
+//LD Montello
+//used when breaking.
+braking_force = 0.5;
+
+function brake()
+{
+	//subtract the current velocity direction
+	//scaled by braking force from the current
+	//velocity to slow down linearly.
+	vel_vec = subtract(vel_vec, multiply_scalar(normalized(vel_vec), braking_force))
+	
+	//set velocity to zero if we're close enough.
+	if (abs(magnitude(vel_vec))<=0.5)
+	{
+		vel_vec = [0,0]
+	}
+}
 
 //The speed at which
 //the car can convert it's current
