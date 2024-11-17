@@ -40,6 +40,14 @@ target_accuracy = 5;
 
 vel_vec = [0, 0];
 
+//stored when
+//we collide with something,
+//so that we can bounce off of it
+//properly.
+normal = [0,0]
+normal_x = 0;
+normal_y = 0;
+
 heading_vec = [0, 0];
 
 left_perp_vec = [0, 0];

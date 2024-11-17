@@ -15,3 +15,6 @@ draw_circle(x, y, separation_radius, true);
 //draw the circle we must be inside
 //of in order to calculate the next target point.
 draw_circle_color(target_x, target_y, arrive_radius, c_red, c_red, true);
+
+//Draw the normal vector of any objects we hit.
+draw_vector2_color(multiply_scalar(normalized(normal), 100), 15, normal_x, normal_y, c_white);

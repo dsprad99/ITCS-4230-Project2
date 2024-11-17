@@ -166,74 +166,7 @@ if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) ) {
 image_angle = image_angle % 360;
 
 
-//LD Montello, if we 
-//hit a track wall.
-if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
-{
-	//LD Montello,
-	//finding the normal vector
-	//of the object we hit,
-	//just find the direction from the other
-	//object to us.
-	//normal = //[(x+vel_vec[0]) - x, (y+vel_vec[1]) - y]
-	normal_x = x+vel_vec[0];
-	normal_y = y+vel_vec[1];
-	
-	//where LD found the code to get the normal
-	//https://web.archive.org/web/20230810151732/https://www.gmlscripts.com/script/collision_normal
-	var angle = collision_normal(x+vel_vec[0], y+vel_vec[1], bounceables, 32 * 2, 1);
-	if (angle != -1)
-	{
-		normal = angle_to_vector(angle);
-	}
 
-	
-	//Davis Spradling
-	//This will act as the outline of our track and will make the 
-	//player bounce off the wall it hits
-	//LD Montello,
-	//just apply opposite speed so we bounce
-	//of in the direction we entered.
-	//var enter_speed = vel_vec.magnitude();
-	//maybe get the normal of the location
-	//we hit and bounce off in the direction
-	//of the normal instead.
-	vel_vec = multiply_scalar(vel_vec, -1);
-	
-	var reflected = reflect(vel_vec, normalized(normal));
-	
-	vel_vec = clamp_magnitude(reflected, -max_bounce_speed, max_bounce_speed)
-	
-	//this is for handling
-	//when the car rotates and could
-	//clip into an object.
-	//we always add the normal vector if
-	//we hit something.
-	vel_vec = add(vel_vec, multiply_scalar(normalized(normal), 1));
-}  
-
-
-
-//LD Montello, if we hit an enemy car,
-//let that car push us, or bounce out 
-//of it's way.
-var _inst = instance_place(x, y, obj_enemy)
-if (_inst != noone)
-{
-	//Decrease speed of car,
-	vel_vec = multiply_scalar(vel_vec, 0);
-	//add speed of the car we hit.
-	//that way we are pushed by it.
-	//vel_vec.add(new Vector2(1,1).normalized().multiply_scalar(_inst.car_speed));
-	//Calculate vector from our car to the other car,
-	//to make sure we can't collide
-	var newVec = [x - _inst.x, y - _inst.y];
-	//Normalize the vector, and multiply it's scale by 2
-	//so you bounce off at a speed of 2
-	newVec = normalized(newVec);
-	newVec = multiply_scalar(newVec, 4);
-	vel_vec = add(vel_vec, newVec);
-}
 
 
 
@@ -271,6 +204,106 @@ vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
 //vel_vec = subtract(vel_vec, multiply_scalar(left_constricted, traction));
 
 //vel_vec = add(target_vec, multiply_scalar(drift, (1 - traction)));
+
+#endregion
+
+
+#region collision handling.
+
+//LD Montello, if we 
+//hit a track wall.
+if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
+{
+	//LD Montello,
+	//finding the normal vector
+	//of the object we hit,
+	//just find the direction from the other
+	//object to us.
+	//normal = //[(x+vel_vec[0]) - x, (y+vel_vec[1]) - y]
+	normal_x = x+vel_vec[0];
+	normal_y = y+vel_vec[1];
+	
+	//where LD found the code to get the normal
+	//https://web.archive.org/web/20230810151732/https://www.gmlscripts.com/script/collision_normal
+	var angle = collision_normal(x+vel_vec[0], y+vel_vec[1], bounceables, 32 * 2, 1);
+	if (angle != -1)
+	{
+		normal = angle_to_vector(angle);
+	}
+
+	
+	//Davis Spradling
+	//This will act as the outline of our track and will make the 
+	//player bounce off the wall it hits
+	//LD Montello,
+	//just apply opposite speed so we bounce
+	//of in the direction we entered.
+	//var enter_speed = vel_vec.magnitude();
+	//maybe get the normal of the location
+	//we hit and bounce off in the direction
+	//of the normal instead.
+	vel_vec = multiply_scalar(vel_vec, -1);
+	
+	var reflected = reflect(vel_vec, normalized(normal));
+	
+	vel_vec = clamp_magnitude(reflected, -max_speed, max_speed)
+	
+	//this is for handling
+	//when the car rotates and could
+	//clip into an object.
+	//we always add the normal vector if
+	//we hit something.
+	vel_vec = add(vel_vec, multiply_scalar(normalized(normal), 1));
+}  
+
+
+
+//LD Montello, if we hit an enemy car,
+//let that car push us, or bounce out 
+//of it's way.
+//LD Montello
+//Research:https://stackoverflow.com/questions/1736734/circle-circle-collision
+var _inst = instance_place(x + vel_vec[0], y + vel_vec[1], obj_enemy);
+if (_inst != noone)
+{
+
+	//get collision direction.
+	var _dir = [_inst.x - x, _inst.y - y];
+
+    //var normal_x = dx / distance;
+	//var normal_y = dy / distance;
+		
+	//Calculate overlap (for circle collision)
+	//we'll say the radius is 24 for now.
+	var car_radius = 24;
+	var overlap = max(0, car_radius * 2 - magnitude(_dir));
+
+	//normalize the direction
+	_dir = normalized(_dir);
+
+	//Resolve the overlap
+	if (overlap > 0)
+	{
+	    vel_vec[0] += overlap * _dir[0];
+	    vel_vec[1] += overlap * _dir[1];
+	}
+
+	//Project velocity onto the collision direction
+	var self_proj = vel_vec[0] * _dir[0] + vel_vec[1] * _dir[1];
+
+	//LD Montello
+	//Adjust only enough velocity to resolve collision
+	//it took me lots of trial and error to figure
+	//this out.
+	if (self_proj > 0)
+	{
+		//0.5 because the other car in the collision 
+		//will also do this calculation.
+	    var resolve_factor = 0.5; 
+	    vel_vec[0] -= self_proj * _dir[0] * resolve_factor;
+	    vel_vec[1] -= self_proj * _dir[1] * resolve_factor;
+	}
+}
 
 #endregion
 
