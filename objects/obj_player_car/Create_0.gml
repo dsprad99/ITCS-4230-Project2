@@ -10,6 +10,11 @@ normal_y = 0;
 normal = [0,0]
 
 //LD Montello,
+//the name of this car
+//that we display on the leaderboard
+car_name = "USER"
+
+//LD Montello,
 //variables to store the
 //time for each lap
 #region lap info
@@ -18,13 +23,52 @@ normal = [0,0]
 did_finish = false;
 cur_lap = 1;
 
+lap_start_time = 0;
+
 lap1_time = 999999;
 lap2_time = 999999;
 lap3_time = 999999;
 
 #endregion
 
+#region update ourselves in the car placement queue
 
+function update_placement()
+{
+	if (instance_exists(obj_race_controller))
+	{
+		//if this car is in the priority queue already,
+		//then update it's priority.
+		if (ds_priority_find_priority(obj_race_controller.car_placement_queue, self) != undefined)
+		{
+			//calculate the progression along the current path.
+			current_track_path_progression = obj_race_controller.get_closest_point_on_path(x, y) / obj_race_controller.path_len;
+		
+			//calculate priority by adding the current lap to our
+			//distance in the track.
+			var priority = cur_lap + current_track_path_progression;
+			
+			//change the priority of ourselves
+			ds_priority_change_priority(obj_race_controller.car_placement_queue, self, priority);
+		}
+		//if we aren't in the priority queue,
+		//we need to add ourselves.
+		else
+		{
+			//calculate the progression along the current path.
+			current_track_path_progression = obj_race_controller.get_closest_point_on_path(x, y) / obj_race_controller.path_len;
+			
+			//calculate priority by adding the current lap to our
+			//distance in the track.
+			var priority = cur_lap + current_track_path_progression;
+			
+			//add our priority to the priority queue.
+			ds_priority_add(obj_race_controller.car_placement_queue, self, priority)
+		}
+	}
+}
+
+#endregion
 
 pass_thru = false;
 
@@ -163,3 +207,56 @@ layer_sprite_xscale(ug1, 5);
 layer_sprite_yscale(ug1, 5);
 
 #endregion
+
+
+//LD Montello,
+//I turned davis'
+//code into this function so
+//we can just call this when a car
+//is "destroyed" by an obstacle
+//or power up.
+function reset_to_last_checkpoint()
+{
+	//Davis Spradling
+	//This will rotate through the checkpoint objects
+	//and take the last object that was iterated through
+	//and respawn them there
+
+	for (var i = 0; i < instance_number(checkpoint_obj); ++i;){
+	show_debug_message(checkpoints_curr)
+	    var instanceid = instance_find(checkpoint_obj, i);
+		if(fall_obj.checkpoint_go_to ==	instanceid.checkpoint){
+        
+		    var inst_x = instanceid.x //+(instanceid.sprite_width/2);
+		    var inst_y = instanceid.y //+(instanceid.sprite_height/2);
+		
+			//save progress made by car before destroying
+			curr_checkpoint_arr = obj_player_car.checkpoints_curr;
+		
+		
+			//remove ourselves from the priority queue.
+			//otherwise we end up with duplicates
+			ds_priority_delete_value(obj_race_controller.car_placement_queue, self);
+		
+		    instance_destroy(obj_player_car);
+
+			//Note changed layer to UI where the instance is created 
+			//so the object will appear above the checkered race track
+		    var new_car_instance = instance_create_layer(inst_x, inst_y, "Instances", obj_player_car);
+		
+			var right_direction = (instanceid.image_angle+90)%360;
+			new_car_instance.image_angle = right_direction;
+		
+		
+		
+			//readd that progress
+			new_car_instance.checkpoints_curr=curr_checkpoint_arr;
+			new_car_instance.can_move = true
+			new_car_instance.cur_lap = cur_lap;
+			new_car_instance.lap_start_time = lap_start_time;
+			new_car_instance.lap1_time = lap1_time;
+			new_car_instance.lap2_time = lap2_time;
+			new_car_instance.lap3_time = lap3_time
+		}
+	}
+}

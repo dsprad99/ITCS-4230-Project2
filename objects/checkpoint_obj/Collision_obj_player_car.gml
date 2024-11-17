@@ -1,7 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-
 //Davis Spradling
 //show_message("Checkpoint complete");
 //Be used for when in tutorial room to know if a checkpoint is for a tutorial or

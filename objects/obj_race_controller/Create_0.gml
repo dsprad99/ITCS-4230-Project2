@@ -41,6 +41,55 @@ function draw_time_formatted(_x, _y, _time)
 
 #endregion
 
+//the cars will update themselves within this queue.
+
+car_placement_queue = ds_priority_create();
+
+//used when iterating through priority
+//in the draw GUI event.
+copy_queue = ds_priority_create();
+
+current_point = 0;
+
+cur_search_index = 0;
+
+path_len = path_get_length(track_path);
+
+//target_x = 0;
+//target_y = 0; 
+
+function get_closest_point_on_path(_x, _y, start_index = 0)
+{
+	var last_dist = 99999;//point_distance(obj_player_car.x, obj_player_car.y, target_x, target_y);
+
+	
+	var closest_index = -1;
+	
+	//LD Montello,
+	//loop through the remaining points 
+	//in the path
+	for (var i = start_index; i < path_len; i += 15)
+	{	
+		//get the point to search on the path.
+		var _x2 = path_get_x(track_path, i / path_len);
+		var _y2 = path_get_y(track_path, i / path_len);
+		
+		var dist_to_check = point_distance(_x, _y, _x2, _y2);
+		
+		//if this point is
+		//closer than our closest point,
+		//say this point is our closest point
+		if (dist_to_check < last_dist)
+		{
+			last_dist = dist_to_check;
+			closest_index = i;
+		}
+	}
+	
+	return closest_index;
+}
+
+
 #region start light
 
 //LD Montello

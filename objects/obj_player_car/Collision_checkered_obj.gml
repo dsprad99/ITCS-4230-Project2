@@ -59,15 +59,15 @@ else if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 	//lap 
 	if (cur_lap == 1)
 	{
-		lap1_time = obj_race_controller.time_taken;
+		lap1_time = obj_race_controller.time_taken - lap_start_time;
 	}
 	else if (cur_lap == 2)
 	{
-		lap2_time = obj_race_controller.time_taken;
+		lap2_time = obj_race_controller.time_taken - lap_start_time;
 	}
 	else if (cur_lap == 3)
 	{
-		lap3_time = obj_race_controller.time_taken;
+		lap3_time = obj_race_controller.time_taken - lap_start_time;
 	}
 	
 	if (cur_lap == 3)
@@ -90,6 +90,8 @@ else if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 	else
 		cur_lap++;
 
+	//reset the lap start time.
+	lap_start_time = obj_race_controller.time_taken;
 	
 	pass_thru = true
 	checkpoints_curr = [];

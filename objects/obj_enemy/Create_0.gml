@@ -1,6 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+car_name = "enemy" + string(instance_number(obj_enemy));
+
 //get the wall tile id for collision reasons in Step.
 wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
 
@@ -302,6 +304,91 @@ function separation()
 //current velocity.
 ui_layer = layer_get_id("UI");
 
+current_track_path_progression = 0;
+
+
+//LD Montello,
+//variables to store the
+//time for each lap
+#region lap info
+
+//did the car finish the race.
+did_finish = false;
+cur_lap = 1;
+
+lap1_time = 999999;
+lap2_time = 999999;
+lap3_time = 999999;
+
+#endregion
+
+#region update ourselves in the car placement queue
+
+function update_placement()
+{
+	if (instance_exists(obj_race_controller))
+	{
+		//if this car is in the priority queue already,
+		//then update it's priority.
+		if (ds_priority_find_priority(obj_race_controller.car_placement_queue, self) != undefined)
+		{
+			//calculate the progression along the current path.
+			current_track_path_progression = obj_race_controller.get_closest_point_on_path(x, y) / obj_race_controller.path_len;
+		
+			//calculate priority by adding the current lap to our
+			//distance in the track.
+			var priority = cur_lap + current_track_path_progression;
+			
+			//change the priority of ourselves
+			ds_priority_change_priority(obj_race_controller.car_placement_queue, self, priority);
+		}
+		//if we aren't in the priority queue,
+		//we need to add ourselves.
+		else
+		{
+			//calculate the progression along the current path.
+			current_track_path_progression = obj_race_controller.get_closest_point_on_path(x, y) / obj_race_controller.path_len;
+			
+			//calculate priority by adding the current lap to our
+			//distance in the track.
+			var priority = cur_lap + current_track_path_progression;
+			
+			//add our priority to the priority queue.
+			ds_priority_add(obj_race_controller.car_placement_queue, self, priority)
+		}
+	}
+}
+
+#endregion
+
+
+//Davis Spradling
+//Keep track of checkpoints completed
+checkpoints_curr = [];
+
+//Davis Spradling
+//Will be used to check if all the checkpoints have been completed
+//checkpoints_current are completed checkpoints
+//checkpoints_needed are all the ones that must be completed
+//for a full lap to count
+function checkpoints_complete(checkpoints_needed,checkpoints_current) {
+    for (var i = 0; i < array_length(checkpoints_needed); i++) {
+        var curr_val = checkpoints_needed[i]; 
+        
+        var found = false;
+        for (var j = 0; j < array_length(checkpoints_current); j++) {
+            if (checkpoints_current[j] == curr_val) {
+                found = true;
+                break; 
+            }
+        }
+
+        if(!found) {
+            return false;
+        }
+    }
+    return true;
+}
 
 #region underglow
 

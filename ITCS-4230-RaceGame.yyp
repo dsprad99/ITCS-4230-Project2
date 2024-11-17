@@ -76,6 +76,7 @@
     {"id":{"name":"main_menu","path":"rooms/main_menu/main_menu.yy",},},
     {"id":{"name":"playground","path":"rooms/playground/playground.yy",},},
     {"id":{"name":"tutorial","path":"rooms/tutorial/tutorial.yy",},},
+    {"id":{"name":"scr_global_vars","path":"scripts/scr_global_vars/scr_global_vars.yy",},},
     {"id":{"name":"scr_vector","path":"scripts/scr_vector/scr_vector.yy",},},
     {"id":{"name":"seq_checkpoint","path":"sequences/seq_checkpoint/seq_checkpoint.yy",},},
     {"id":{"name":"seq_finish","path":"sequences/seq_finish/seq_finish.yy",},},

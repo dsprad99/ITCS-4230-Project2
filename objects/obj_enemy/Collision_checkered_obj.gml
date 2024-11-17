@@ -1,0 +1,47 @@
+/// @description Insert description here
+// You can write your code in this editor
+
+//LD Copied most of this from davis' code.
+checkpoints_needed = [0,1,2]
+show_debug_message(checkpoints_curr)
+
+
+if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
+	//show_message("Lap completed");
+
+	//LD Montello
+	//Store whatever lap time we're
+	//at as the lap time for our current
+	//lap 
+	if (cur_lap == 1)
+	{
+		lap1_time = obj_race_controller.time_taken;
+	}
+	else if (cur_lap == 2)
+	{
+		lap2_time = obj_race_controller.time_taken;
+	}
+	else if (cur_lap == 3)
+	{
+		lap3_time = obj_race_controller.time_taken;
+	}
+	
+	if (cur_lap == 3)
+	{
+		//The race should end for the player here,
+		//and we should do some waiting for the other
+		//cars to finish and then the race controller
+		//will know which cars have finished
+		//because our car will tell it here that we've
+		//finished, we'll do the same thing in the enemies.
+		did_finish = true;
+		can_move = false;
+	
+	}
+	else
+		cur_lap++;
+
+	
+	//pass_thru = true
+	checkpoints_curr = [];
+}
