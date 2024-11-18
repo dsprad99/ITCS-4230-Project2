@@ -106,6 +106,7 @@
     {"id":{"name":"spr_grid","path":"sprites/spr_grid/spr_grid.yy",},},
     {"id":{"name":"spr_magenta_underglow","path":"sprites/spr_magenta_underglow/spr_magenta_underglow.yy",},},
     {"id":{"name":"spr_OverclockPowerup","path":"sprites/spr_OverclockPowerup/spr_OverclockPowerup.yy",},},
+    {"id":{"name":"spr_pixel","path":"sprites/spr_pixel/spr_pixel.yy",},},
     {"id":{"name":"spr_player_car","path":"sprites/spr_player_car/spr_player_car.yy",},},
     {"id":{"name":"spr_power_spawner","path":"sprites/spr_power_spawner/spr_power_spawner.yy",},},
     {"id":{"name":"spr_slider_bar_nine_slice","path":"sprites/spr_slider_bar_nine_slice/spr_slider_bar_nine_slice.yy",},},

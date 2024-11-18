@@ -70,7 +70,7 @@ else{
 
 //Davis Spradling
 //If up key is pressed accelerate car in a forward motion
-if (keyboard_check(vk_up) || keyboard_check(ord("W"))){
+if (!place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables) and (keyboard_check(vk_up) || keyboard_check(ord("W")))){
     //car_speed+=acceleration;
     //if(car_speed>max_speed){
 	//	car_speed = max_speed; 
@@ -112,7 +112,7 @@ else
 
 //Davis Spradling
 //If down key is pressed declerate car
-if(keyboard_check(vk_down) || keyboard_check(ord("S"))){
+if(!place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables) and ( keyboard_check(vk_down) || keyboard_check(ord("S")))){
     
 	
 	if (magnitude(vel_vec) == 0)
@@ -186,12 +186,22 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) ) {
     
 	image_angle -= turn_speed; 
+	
+	if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
+	{
+		image_angle += turn_speed;
+	}
 }
 
 //Davis Spradling
 //Steer Right
 if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) ) {
     image_angle += turn_speed;
+	
+	if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
+	{
+		image_angle -= turn_speed;
+	}
 }
 
 image_angle = image_angle % 360;
@@ -261,7 +271,7 @@ if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
 	{
 		normal = angle_to_vector(angle);
 	}
-
+	//normal = [x - (x+vel_vec[0]), y - (y+vel_vec[1])]
 	
 	//Davis Spradling
 	//This will act as the outline of our track and will make the 
@@ -277,15 +287,31 @@ if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
 	
 	var reflected = reflect(vel_vec, normalized(normal));
 	
+	//apply elasticity,
+	//basically,
+	//energy loss
+	reflected = multiply_scalar(reflected, 0.9);
+	
+	//var new_val = [vel_vec[0] * normalized(normal)[0], vel_vec[1] * normalized(normal)[1]]
+	
 	vel_vec = clamp_magnitude(reflected, -max_speed, max_speed)
+	
+	
 	
 	//this is for handling
 	//when the car rotates and could
 	//clip into an object.
 	//we always add the normal vector if
 	//we hit something.
+	//this combined with rotating
+	//the opposite direction
+	//when trying to rotate into an object
+	//100% guarantees that you don't
+	//clip into anything.
+	//it took forever to figure this out.
 	vel_vec = add(vel_vec, multiply_scalar(normalized(normal), 1));
-}  
+}
+
 
 
 

@@ -4,6 +4,17 @@
 if (should_draw)
 	draw_self()
 
+//draws the bounding box of the object
+draw_sprite_ext(spr_pixel, 0, x, y, sprite_width / 2, sprite_height / 2, image_angle, c_white, 0.5);
+
+draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, false); // Top line
+
+//draw_rectangle(topRightX, topRightY, bottomRightX, bottomRightY, c_white, false); // Right line
+
+//draw_rectangle(bottomRightX, bottomRightY, bottomLeftX, bottomLeftY, c_white, false); // Bottom line
+
+//draw_rectangle(bottomLeftX, bottomLeftY, topLeftX, topLeftY, c_white, false); // Left line
+
 //LD Montello
 #region used to verify that vectors worked as expected.
 
