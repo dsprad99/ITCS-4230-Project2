@@ -6,6 +6,8 @@ car_name = "enemy" + string(instance_number(obj_enemy));
 //get the wall tile id for collision reasons in Step.
 wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
 
+//should we draw this car?
+should_draw = true;
 
 //LD Montello
 //the array objects that we'll bounce against
@@ -396,6 +398,12 @@ function checkpoints_complete(checkpoints_needed,checkpoints_current) {
         }
     }
     return true;
+}
+
+
+function play_drift_particles()
+{
+	obj_particle_sys_controller.play_particle_system_layer("Instances_drawn_under_cars", ps_magenta_drift, x, y);
 }
 
 #region underglow

@@ -1,7 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-draw_self()
+if (should_draw)
+	draw_self()
 
 //LD Montello
 #region used to verify that vectors worked as expected.

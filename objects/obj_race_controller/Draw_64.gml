@@ -29,6 +29,40 @@ ds_priority_copy(copy_queue, car_placement_queue);
 var place = 1;
 var _y = 50;
 
+//loop through the cars
+//that have finished the race.
+for (i = 0; i < ds_list_size(final_placements_list); i++)
+{
+	//get the current car
+	var cur_car = ds_list_find_value(final_placements_list, i);
+	
+	var name_color = c_white;
+	
+	//if the car type is the player,
+	//make their name color be cyan
+	if (cur_car.object_index == obj_player_car)
+	{
+		name_color = global.neon_cyan;
+	}
+	//otherwise, it's an enemy name.
+	else
+	{
+		name_color = global.neon_magenta;
+	}
+	
+	draw_text_transformed_color(camera_get_view_width(cam) - 550, _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+	
+	//go down by 50 for the next drawing
+	//of the placement
+	_y += 50;
+	
+	//increment the place.
+	place++;
+}
+
+//loop through
+//the cars that
+//are still racing
 while (!ds_priority_empty(copy_queue))
 {
 	//get the current car
@@ -51,7 +85,7 @@ while (!ds_priority_empty(copy_queue))
 		name_color = global.neon_magenta;
 	}
 	
-	draw_text_transformed_color(camera_get_view_width(cam) - 550, _y, string(place) + " " + cur_car.car_name, 2, 2, 0, c_white, c_white, c_white, c_white, 1);
+	draw_text_transformed_color(camera_get_view_width(cam) - 550, _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
 	
 	//go down by 50 for the next drawing
 	//of the placement

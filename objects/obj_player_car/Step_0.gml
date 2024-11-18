@@ -1,12 +1,43 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+#region underglow
+
+if (should_draw)
+{
+
+	//LD Montello
+	//Draw underglow
+	layer_sprite_x(ug1, x);
+	layer_sprite_y(ug1, y);
+	layer_sprite_alpha(ug1, 1)
+
+}
+else
+{
+	layer_sprite_alpha(ug1, 0)
+}
+
+
+#endregion
+
 //LD Montello
 //if we  can't move,
 //don't execute the step event.
 if (!can_move)
 {
 	return;
+}
+
+
+//if the angle difference
+//between our velocity and 
+//the direction we're facing
+//is large enough, then play
+//the particles for drifting.
+if (abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
+{
+	play_drift_particles();
 }
 
 if (!place_meeting(x, y, checkered_obj)) {
@@ -330,14 +361,7 @@ y += vel_vec[1];
 
 #endregion
 
-#region underglow
 
-//LD Montello
-//Draw underglow
-layer_sprite_x(ug1, x);
-layer_sprite_y(ug1, y);
-
-#endregion
 
 //Set previous velocity
 prev_vel = vel_vec;

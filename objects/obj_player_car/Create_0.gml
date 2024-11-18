@@ -1,6 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+should_draw = true;
+
 //positions where the normal should be
 //drawn from.
 normal_x = 0;
@@ -119,6 +121,10 @@ braking_force = 0.5;
 
 function brake()
 {
+	//play drift particles
+	//to represent braking
+	play_drift_particles()
+	
 	//subtract the current velocity direction
 	//scaled by braking force from the current
 	//velocity to slow down linearly.
@@ -259,4 +265,9 @@ function reset_to_last_checkpoint()
 			new_car_instance.lap3_time = lap3_time
 		}
 	}
+}
+
+function play_drift_particles()
+{
+	obj_particle_sys_controller.play_particle_system_layer("Instances_drawn_under_cars", ps_cyan_drift, x, y);
 }

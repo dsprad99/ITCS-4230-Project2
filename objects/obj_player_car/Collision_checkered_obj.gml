@@ -7,6 +7,13 @@
 //the checkpoints
 
 
+//exit this event if
+//we already finished.
+if (did_finish)
+{
+	return;
+}
+
 checkpoints_needed = [0,1,2]
 show_debug_message(checkpoints_curr)
 
@@ -83,9 +90,47 @@ else if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 		//LD Montello show finish popup.
 		if (instance_exists(obj_popup_controller))
 		{
+			//stop drawing our object.
+			should_draw = false;
 			obj_popup_controller.show_finish_popup();
+			
+			//LD Montello
+			//Draw the "death" particles
+			//if they aren't in first,
+			//or draw the "escape" particles
+			//if they are in first
+			//This is because in the "story" of our game,
+			//they player's car is racing to escape before
+			//the malware can, so the first place winner
+			//will always be the one that "escapes".
+			//maybe we can make it so that you have to get first
+			//on each track to unlock the next?
+			//ehh, that may be too much work for such a small
+			//amount of time.
+			if (ds_list_empty(obj_race_controller.final_placements_list))
+			{
+				obj_particle_sys_controller.play_particle_system_angle(ps_cyan_derez_escape, x, y, vector_to_angle(normalized(vel_vec)));
+			}
+			else
+			{
+				obj_particle_sys_controller.play_particle_system(ps_cyan_derez_death, x, y);
+			}
+			
 		}
-	
+		
+		//here we are making sure that
+		//when the placements are drawn,
+		//we don't overwrite our placement
+		//that we finished at with another
+		//cars placement by separating them
+		//into two lists.
+		
+		//add ourselves to the finalized list
+		//as our placement should no longer change.
+		ds_list_add(obj_race_controller.final_placements_list, self);
+		//remove ourselves from the priority queue
+		ds_priority_delete_value(obj_race_controller.car_placement_queue, self);
+		
 	}
 	else
 		cur_lap++;

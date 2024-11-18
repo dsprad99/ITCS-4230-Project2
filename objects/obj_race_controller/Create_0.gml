@@ -12,6 +12,8 @@ seconds_till_race_start = 3;
 //and start the race
 //show_message("Start Race")
 
+final_placements_list = ds_list_create()
+
 #region race times
 
 //LD Montello
@@ -133,4 +135,13 @@ function start_race()
 	{
 		can_move = true;
 	}
+}
+
+//LD Montello
+//funciton called when
+//ever racer has finished.
+function end_race()
+{
+	show_message("Race Over!");
+	room_goto(main_menu);
 }

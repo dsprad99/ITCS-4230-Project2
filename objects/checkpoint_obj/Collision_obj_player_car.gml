@@ -49,23 +49,23 @@ if(tutorial_check_bool ==true){
 	checkpoint_msg_obj.txt2 = var2;
 	checkpoint_msg_obj.txt3 = var3;
 	
-	obj_player_car.can_move = false;
+	other.can_move = false;
 	
 	tutorial_check_bool = false;
 }
 
 
 
-if(!array_contains(obj_player_car.checkpoints_curr, checkpoint)) {
+if(!array_contains(other.checkpoints_curr, checkpoint)) {
 	//LD Montello
 	//Show the checkpoint popup
-	if (!obj_player_car.in_tutorial and instance_exists(obj_popup_controller))
+	if (!other.in_tutorial and instance_exists(obj_popup_controller))
 	{
 		obj_popup_controller.show_checkpoint_popup();
 	}
 	
-	array_push(obj_player_car.checkpoints_curr, checkpoint);
+	array_push(other.checkpoints_curr, checkpoint);
 }
-//show_debug_message(obj_player_car.checkpoints_curr)
+//show_debug_message(other.checkpoints_curr)
 	
 
