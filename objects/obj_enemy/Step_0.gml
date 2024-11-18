@@ -102,6 +102,7 @@ if (abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
 //	}
 //}
 
+
 var next_point = current_point + path_increment;
 var next_x = path_get_point_x(track_path, next_point)
 var next_y = path_get_point_y(track_path, next_point) 

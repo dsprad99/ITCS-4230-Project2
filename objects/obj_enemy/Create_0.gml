@@ -429,3 +429,10 @@ layer_sprite_xscale(ug1, 5);
 layer_sprite_yscale(ug1, 5);
 
 #endregion
+
+//LD Montello
+//start the timer
+//for searching
+//for the nearest point
+//along the path.
+alarm_set(2, 1);
