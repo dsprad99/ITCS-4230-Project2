@@ -70,7 +70,7 @@ else{
 
 //Davis Spradling
 //If up key is pressed accelerate car in a forward motion
-if (!place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables) and (keyboard_check(vk_up) || keyboard_check(ord("W")))){
+if (!is_colliding and (keyboard_check(vk_up) || keyboard_check(ord("W")))){
     //car_speed+=acceleration;
     //if(car_speed>max_speed){
 	//	car_speed = max_speed; 
@@ -112,7 +112,7 @@ else
 
 //Davis Spradling
 //If down key is pressed declerate car
-if(!place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables) and ( keyboard_check(vk_down) || keyboard_check(ord("S")))){
+if(!is_colliding and ( keyboard_check(vk_down) || keyboard_check(ord("S")))){
     
 	
 	if (magnitude(vel_vec) == 0)
@@ -186,22 +186,12 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) ) {
     
 	image_angle -= turn_speed; 
-	
-	if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
-	{
-		image_angle += turn_speed;
-	}
 }
 
 //Davis Spradling
 //Steer Right
 if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) ) {
     image_angle += turn_speed;
-	
-	if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
-	{
-		image_angle -= turn_speed;
-	}
 }
 
 image_angle = image_angle % 360;
@@ -251,66 +241,98 @@ vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
 
 #region collision handling.
 
+
+   //normal_x = x + vel_vec[0];
+   //normal_y =  y + vel_vec[1];
+
 //LD Montello, if we 
 //hit a track wall.
-if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
-{
-	//LD Montello,
-	//finding the normal vector
-	//of the object we hit,
-	//just find the direction from the other
-	//object to us.
-	//normal = //[(x+vel_vec[0]) - x, (y+vel_vec[1]) - y]
-	normal_x = x+vel_vec[0];
-	normal_y = y+vel_vec[1];
+//// Get the car's 4 corners based on its position and rotation (image_angle)
+//var half_width = sprite_width / 2;
+//var half_height = sprite_height / 2;
+
+//// Car's center point (current position)
+//var cx = x;
+//var cy = y;
+
+//// Calculate each corner relative to the center, rotated by image_angle
+//var corners = [
+//    [cx + dcos(-image_angle) * half_width - dsin(-image_angle) * half_height, cy + dsin(-image_angle) * half_width + dcos(-image_angle) * half_height], // Top-right corner
+//    [cx - dcos(-image_angle) * half_width - dsin(-image_angle) * half_height, cy - dsin(-image_angle) * half_width + dcos(-image_angle) * half_height], // Top-left corner
+//    [cx - half_width * dcos(-image_angle) + half_height * dsin(-image_angle), cy - half_width * dsin(-image_angle) - half_height *  dcos(-image_angle)], // Bottom-left corner
+//    [cx + half_width * dcos(-image_angle) + half_height * dsin(-image_angle), cy + half_width * dsin(-image_angle) - half_height * dcos(-image_angle)]  // Bottom-right corner
+//];
+
+//// Store original velocity vector for sliding and restoring speed later
+//var original_vel_vec = [vel_vec[0], vel_vec[1]];
+
+//// Get the target position (car's next position after applying velocity)
+//var target_x = x + vel_vec[0];
+//var target_y = y + vel_vec[1];
+
+
+//// Check if the car will collide at the target position (using place_meeting)
+//if (place_meeting(target_x, target_y, bounceables)) {
+    
+//	is_colliding = true;
 	
-	//where LD found the code to get the normal
-	//https://web.archive.org/web/20230810151732/https://www.gmlscripts.com/script/collision_normal
-	var angle = collision_normal(x+vel_vec[0], y+vel_vec[1], bounceables, 32 * 2, 1);
-	if (angle != -1)
-	{
-		normal = angle_to_vector(angle);
-	}
-	//normal = [x - (x+vel_vec[0]), y - (y+vel_vec[1])]
-	
-	//Davis Spradling
-	//This will act as the outline of our track and will make the 
-	//player bounce off the wall it hits
-	//LD Montello,
-	//just apply opposite speed so we bounce
-	//of in the direction we entered.
-	//var enter_speed = vel_vec.magnitude();
-	//maybe get the normal of the location
-	//we hit and bounce off in the direction
-	//of the normal instead.
-	vel_vec = multiply_scalar(vel_vec, -1);
-	
-	var reflected = reflect(vel_vec, normalized(normal));
-	
-	//apply elasticity,
-	//basically,
-	//energy loss
-	reflected = multiply_scalar(reflected, 0.9);
-	
-	//var new_val = [vel_vec[0] * normalized(normal)[0], vel_vec[1] * normalized(normal)[1]]
-	
-	vel_vec = clamp_magnitude(reflected, -max_speed, max_speed)
-	
-	
-	
-	//this is for handling
-	//when the car rotates and could
-	//clip into an object.
-	//we always add the normal vector if
-	//we hit something.
-	//this combined with rotating
-	//the opposite direction
-	//when trying to rotate into an object
-	//100% guarantees that you don't
-	//clip into anything.
-	//it took forever to figure this out.
-	vel_vec = add(vel_vec, multiply_scalar(normalized(normal), 1));
-}
+//    // Get the collision normal (this is the direction we need to offset the car)
+//    normal = angle_to_vector(collision_normal(x, y, bounceables, 32 * 5, 1));
+    
+//    // Track maximum penetration and direction to resolve collision
+//    var penetration = 0;
+//    var max_penetration = 0;
+//    var step_size = 1;  // Increment size for offsetting position gradually
+    
+//    // Check each corner for collision and calculate the overlap with the normal
+//    for (var i = 0; i < 4; i++) {
+//        var corner = corners[i];
+        
+//        // If the corner is colliding with a wall
+//        if (place_meeting(corner[0] + vel_vec[0], corner[1] + vel_vec[1], bounceables)) {
+//            // Calculate the penetration depth in the direction of the normal
+//            var penetration_depth = point_distance(corner[0], corner[1], target_x, target_y) - point_distance(x, y, corner[0], corner[1]);  // Distance to target position
+//            penetration = max(penetration, penetration_depth); // Track maximum penetration depth
+//        }
+//    }
+    
+//    // Step back from collision based on the maximum penetration and normal
+//    if (penetration > 0) {
+//        x += normal[0] * penetration; // Offset position along the normal direction
+//        y += normal[1] * penetration;
+//    }
+    
+//    // Reflect the velocity vector based on the collision normal (bounce effect)
+//    //var dp = dot(vel_vec, normal);
+//    //vel_vec[0] -= 2 * dp * normal[0];
+//    //vel_vec[1] -= 2 * dp * normal[1];
+    
+//    //// Calculate the tangent vector (perpendicular to the normal)
+//    //var tangent = [-normal[1], normal[0]];
+
+//    //// Project velocity onto the tangent to achieve sliding effect
+//    //var dot_tangent = dot(vel_vec, tangent);
+//    //var slide_vec = [dot_tangent * tangent[0], dot_tangent * tangent[1]];
+
+//    //// Maintain the original speed magnitude
+//    //var original_speed = point_distance(0, 0, original_vel_vec[0], original_vel_vec[1]);
+//    //vel_vec[0] = slide_vec[0];
+//    //vel_vec[1] = slide_vec[1];
+
+//    //// Re-normalize velocity and scale to maintain original speed
+//    //var slide_speed = point_distance(0, 0, vel_vec[0], vel_vec[1]);
+//    //if (slide_speed > 0) {
+//    //    vel_vec[0] *= (original_speed / slide_speed);
+//    //    vel_vec[1] *= (original_speed / slide_speed);
+//    //}
+    
+//}
+//else
+//{
+//	is_colliding = false;
+//}
+
+
 
 
 
@@ -323,43 +345,46 @@ if (place_meeting(x+vel_vec[0], y+vel_vec[1], bounceables))
 var _inst = instance_place(x + vel_vec[0], y + vel_vec[1], obj_enemy);
 if (_inst != noone)
 {
+	normal = angle_to_vector(collision_normal(x + vel_vec[0], y + vel_vec[1], obj_enemy, 32 * 2, 1));
 
-	//get collision direction.
-	var _dir = [_inst.x - x, _inst.y - y];
+	vel_vec = add(vel_vec, normalized(normal));
 
-    //var normal_x = dx / distance;
-	//var normal_y = dy / distance;
+	////get collision direction.
+	//var _dir = [_inst.x - x, _inst.y - y];
+
+    ////var normal_x = dx / distance;
+	////var normal_y = dy / distance;
 		
-	//Calculate overlap (for circle collision)
-	//we'll say the radius is 24 for now.
-	var car_radius = 24;
-	var overlap = max(0, car_radius * 2 - magnitude(_dir));
+	////Calculate overlap (for circle collision)
+	////we'll say the radius is 24 for now.
+	//var car_radius = 24;
+	//var overlap = max(0, car_radius * 2 - magnitude(_dir));
 
-	//normalize the direction
-	_dir = normalized(_dir);
+	////normalize the direction
+	//_dir = normalized(_dir);
 
-	//Resolve the overlap
-	if (overlap > 0)
-	{
-	    vel_vec[0] += overlap * _dir[0];
-	    vel_vec[1] += overlap * _dir[1];
-	}
+	////Resolve the overlap
+	//if (overlap > 0)
+	//{
+	//    vel_vec[0] += overlap * _dir[0];
+	//    vel_vec[1] += overlap * _dir[1];
+	//}
 
-	//Project velocity onto the collision direction
-	var self_proj = vel_vec[0] * _dir[0] + vel_vec[1] * _dir[1];
+	////Project velocity onto the collision direction
+	//var self_proj = vel_vec[0] * _dir[0] + vel_vec[1] * _dir[1];
 
-	//LD Montello
-	//Adjust only enough velocity to resolve collision
-	//it took me lots of trial and error to figure
-	//this out.
-	if (self_proj > 0)
-	{
-		//0.5 because the other car in the collision 
-		//will also do this calculation.
-	    var resolve_factor = 0.5; 
-	    vel_vec[0] -= self_proj * _dir[0] * resolve_factor;
-	    vel_vec[1] -= self_proj * _dir[1] * resolve_factor;
-	}
+	////LD Montello
+	////Adjust only enough velocity to resolve collision
+	////it took me lots of trial and error to figure
+	////this out.
+	//if (self_proj > 0)
+	//{
+	//	//0.5 because the other car in the collision 
+	//	//will also do this calculation.
+	//    var resolve_factor = 0.5; 
+	//    vel_vec[0] -= self_proj * _dir[0] * resolve_factor;
+	//    vel_vec[1] -= self_proj * _dir[1] * resolve_factor;
+	//}
 }
 
 #endregion

@@ -290,10 +290,24 @@ var targetRot = point_direction(x, y, target_x, target_y);
 if (angle_difference(image_angle, targetRot) > 0)
 {
 	image_angle -= turn_speed;
+	
+	//if we're going to intersect
+	//when turning, undo the turn.
+	if (place_meeting(x+vel_vec[0], y+vel_vec[1], array_concat(bounceables, [obj_enemy, obj_player_car])))
+	{
+		image_angle += turn_speed;
+	}
 }
 else if (angle_difference(image_angle, targetRot) < 0)
 {
 	image_angle += turn_speed;
+	
+	//if we're going to intersect
+	//when turning, undo the turn.
+	if (place_meeting(x+vel_vec[0], y+vel_vec[1], array_concat(bounceables, [obj_enemy, obj_player_car])))
+	{
+		image_angle -= turn_speed;
+	}
 }
 
 
@@ -350,42 +364,46 @@ var _inst = instance_place(x + vel_vec[0], y + vel_vec[1], [obj_enemy, obj_playe
 if (_inst != noone)
 {
 
-	//get collision direction.
-	var _dir = [_inst.x - x, _inst.y - y];
+	normal = angle_to_vector(collision_normal(x + vel_vec[0], y + vel_vec[1], obj_enemy, 32 * 2, 1));
 
-    //var normal_x = dx / distance;
-	//var normal_y = dy / distance;
+	vel_vec = add(vel_vec, normalized(normal));
+
+	////get collision direction.
+	//var _dir = [_inst.x - x, _inst.y - y];
+
+    ////var normal_x = dx / distance;
+	////var normal_y = dy / distance;
 		
-	//Calculate overlap (for circle collision)
-	//we'll say the radius is 24 for now.
-	var car_radius = 24;
-	var overlap = max(0, car_radius * 2 - magnitude(_dir));
+	////Calculate overlap (for circle collision)
+	////we'll say the radius is 24 for now.
+	//var car_radius = 24;
+	//var overlap = max(0, car_radius * 2 - magnitude(_dir));
 
-	//normalize the direction
-	_dir = normalized(_dir);
+	////normalize the direction
+	//_dir = normalized(_dir);
 
-	//Resolve the overlap
-	if (overlap > 0)
-	{
-	    vel_vec[0] += overlap * _dir[0];
-	    vel_vec[1] += overlap * _dir[1];
-	}
+	////Resolve the overlap
+	//if (overlap > 0)
+	//{
+	//    vel_vec[0] += overlap * _dir[0];
+	//    vel_vec[1] += overlap * _dir[1];
+	//}
 
-	//Project velocity onto the collision direction
-	var self_proj = vel_vec[0] * _dir[0] + vel_vec[1] * _dir[1];
+	////Project velocity onto the collision direction
+	//var self_proj = vel_vec[0] * _dir[0] + vel_vec[1] * _dir[1];
 
-	//LD Montello
-	//Adjust only enough velocity to resolve collision
-	//it took me lots of trial and error to figure
-	//this out.
-	if (self_proj > 0)
-	{
-		//0.5 because the other car in the collision 
-		//will also do this calculation.
-	    var resolve_factor = 0.5; 
-	    vel_vec[0] -= self_proj * _dir[0] * resolve_factor;
-	    vel_vec[1] -= self_proj * _dir[1] * resolve_factor;
-	}
+	////LD Montello
+	////Adjust only enough velocity to resolve collision
+	////it took me lots of trial and error to figure
+	////this out.
+	//if (self_proj > 0)
+	//{
+	//	//0.5 because the other car in the collision 
+	//	//will also do this calculation.
+	//    var resolve_factor = 0.5; 
+	//    vel_vec[0] -= self_proj * _dir[0] * resolve_factor;
+	//    vel_vec[1] -= self_proj * _dir[1] * resolve_factor;
+	//}
 }
 #endregion
 

@@ -3,6 +3,9 @@
 
 if (should_draw)
 	draw_self()
+	
+	
+
 
 //draws the bounding box of the object
 draw_sprite_ext(spr_pixel, 0, x, y, sprite_width / 2, sprite_height / 2, image_angle, c_white, 0.5);

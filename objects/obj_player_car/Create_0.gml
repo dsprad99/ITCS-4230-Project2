@@ -82,6 +82,8 @@ in_tutorial = false
 wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
 
 
+is_colliding = false;
+
 //LD Montello
 //the array objects that we'll bounce against
 bounceables = [wallTileID]
