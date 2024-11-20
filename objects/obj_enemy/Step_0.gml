@@ -25,13 +25,22 @@ if (!can_move)
 	return;
 }
 
+//LD Montello
+//check if we're still jumping
+if (is_jumping && !place_meeting(x, y, obj_ramp))
+{
+	//if we aren't on the ramp,
+	//set is jumping to false.
+	is_jumping = false;
+	cur_ramp = noone;
+}
 
 //if the angle difference
 //between our velocity and 
 //the direction we're facing
 //is large enough, then play
 //the particles for drifting.
-if (abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
+if (!is_jumping and abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
 {
 	play_drift_particles();
 }
@@ -119,7 +128,7 @@ var cur_y = path_get_y(track_path, current_point / path_get_length(track_path))
 //}
 
 //if we've reached our current point
-if (distance_to_point(target_x,target_y) < arrive_radius)
+if (!is_jumping and distance_to_point(target_x,target_y) < arrive_radius)
 {
 	//show_message("HREE");
 	//current_point++;
@@ -287,7 +296,7 @@ heading_vec = angle_to_vector(heading);
 
 var targetRot = point_direction(x, y, target_x, target_y);
 
-if (angle_difference(image_angle, targetRot) > 0)
+if (!is_jumping and angle_difference(image_angle, targetRot) > 0)
 {
 	image_angle -= turn_speed;
 	
@@ -298,7 +307,7 @@ if (angle_difference(image_angle, targetRot) > 0)
 	//	image_angle += turn_speed;
 	//}
 }
-else if (angle_difference(image_angle, targetRot) < 0)
+else if (!is_jumping and angle_difference(image_angle, targetRot) < 0)
 {
 	image_angle += turn_speed;
 	
@@ -321,7 +330,7 @@ direction = image_angle
 
 #region handle car physics
 
-if (shouldAccel)
+if (!is_jumping and shouldAccel)
 {
 	
 	//Stolen from Davis' code.
@@ -342,7 +351,7 @@ if (shouldAccel)
 	//}
 }
 
-if (shouldDeccel)
+if (!is_jumping and shouldDeccel)
 {
 	//Stolen from davis' code.
 	car_speed -= acceleration;
@@ -438,6 +447,8 @@ added_vel = clamp_vector_to_direction(added_vel, angle_to_vector(image_angle));
 //above essentially makes the AI
 //not be able to drift. 
 
+
+if (!is_jumping)
 vel_vec = clamp_magnitude(added_vel, -max_speed, max_speed);
 
 

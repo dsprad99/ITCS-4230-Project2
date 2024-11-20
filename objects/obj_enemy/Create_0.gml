@@ -1,6 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+is_jumping = false;
+cur_ramp = noone;
+
 car_name = "enemy" + string(instance_number(obj_enemy));
 
 //get the wall tile id for collision reasons in Step.
