@@ -31,10 +31,77 @@ if (!can_move)
 	return;
 }
 
+//we only want to start falling
+//if the center of our car
+//crosses over into the fall
+//object, basically,
+//if the center of mass is
+//on the fall object, we should
+//only fall then.
+//that way there can be close
+//calls and forgiveness for the player.
+if (!is_falling)
+	cur_fall_obj = collision_point(x, y, fall_obj, true, true)
+	
+
+if (cur_fall_obj != noone)
+{
+	//LD Montello
+	//Do the shrinking animation
+	//and slow down velocity.
+	//vel_vec = [0,0];
+	is_falling = true;
+	
+	
+	//reset_to_last_checkpoint();
+}
+
+if (is_falling)
+{
+	//if we aren't fully overlapping
+	//our current fall object,
+	//make sure we are fully overlapping
+	//it.
+	if (!is_fully_overlapping)
+		fully_overlap_object();
+	
+	is_jumping = false;
+	cur_fall_time++;
+	
+	//scale car to zero
+	//to visualize falling
+	image_xscale = lerp(5, 0, cur_fall_time / total_fall_time);
+	image_yscale = lerp(5, 0, cur_fall_time / total_fall_time);
+	
+	//slow down car
+	vel_vec = multiply_scalar(vel_vec, 0.9);
+	
+	//if we've reached the end of our lerp
+	if (total_fall_time - cur_fall_time <= 0.1)
+	{
+		//set scale to 0
+		image_xscale = 0;
+		image_yscale = 0;
+		//reset fall time
+		cur_fall_time = 0;
+		//say we are no longer falling
+		is_falling = false;
+		//say we can't move
+		can_move = false;
+		
+		//freeze
+		vel_vec = [0,0]
+		
+		//reset player car to last checkpoint.
+		reset_to_last_checkpoint_delayed();
+		return;
+	}
+}
+
 
 //LD Montello
 //check if we're still jumping
-if (is_jumping && !place_meeting(x, y, obj_ramp))
+if (!is_falling and is_jumping && !place_meeting(x, y, obj_ramp))
 {
 	//if we aren't on the ramp,
 	//set is jumping to false.
@@ -44,8 +111,9 @@ if (is_jumping && !place_meeting(x, y, obj_ramp))
 
 //LD Montello
 //Change our scale relative to how we're jumping.
-if (is_jumping && instance_exists(cur_ramp))
-{
+if (!is_falling and is_jumping && instance_exists(cur_ramp))
+{	
+	
 	//calculate max distance
 	//from centerpoint of
 	//the ramp to the outermost corners
@@ -76,7 +144,7 @@ if (is_jumping && instance_exists(cur_ramp))
 	//used to be in "Draw End"
 	//draw_line(x, y, x - proj_vec[0], y - proj_vec[1]);
 }
-else
+else if (!is_falling and image_xscale != 5 and image_yscale != 5)
 {
 	image_xscale = 5;
 	image_yscale = 5;
@@ -89,14 +157,16 @@ else
 //the direction we're facing
 //is large enough, then play
 //the particles for drifting.
-if (!is_jumping and abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
+if (!is_falling and !is_jumping and abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
 {
 	play_drift_particles();
 }
 
-if (!place_meeting(x, y, checkered_obj)) {
+if (!is_falling and !place_meeting(x, y, checkered_obj)) {
     pass_thru = false
 }
+
+
 
 //James Reneo
 //Max_Speed changed
@@ -122,9 +192,10 @@ else{
 
 
 
+
 //Davis Spradling
 //If up key is pressed accelerate car in a forward motion
-if (!is_jumping and !is_colliding and (keyboard_check(vk_up) || keyboard_check(ord("W")))){
+if (!is_falling and !is_jumping and !is_colliding and (keyboard_check(vk_up) || keyboard_check(ord("W")))){
     //car_speed+=acceleration;
     //if(car_speed>max_speed){
 	//	car_speed = max_speed; 
@@ -166,7 +237,7 @@ else
 
 //Davis Spradling
 //If down key is pressed declerate car
-if(!is_jumping and !is_colliding and ( keyboard_check(vk_down) || keyboard_check(ord("S")))){
+if(!is_falling and !is_jumping and !is_colliding and ( keyboard_check(vk_down) || keyboard_check(ord("S")))){
     
 	
 	if (magnitude(vel_vec) == 0)
@@ -205,14 +276,16 @@ else
 }
 
 //breaking
-if (!is_jumping and keyboard_check(vk_space))
+if (!is_falling and !is_jumping and keyboard_check(vk_space))
 {
 	brake();
 }
 
+
+
 //Davis Spradling
 //Apply firction when slowing down to help stop the car when decelerating
-if(!is_jumping and !keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W")) && !keyboard_check(ord("S"))){
+if(!is_falling and !is_jumping and !keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W")) && !keyboard_check(ord("S"))){
     
 	//Note the sign flips a value to 1 if pos and 0 if not
 	//this will help with deciding if the car is going forward/backward
@@ -234,38 +307,25 @@ if(!is_jumping and !keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboa
 }
 
 
+
+
 //Davis Spradling
 //Give player ability to steer but only if the car is moving
 //Steer Left
-if (!is_jumping and (keyboard_check(vk_right) || keyboard_check(ord("D"))) ) {
+if (!is_falling and !is_jumping and (keyboard_check(vk_right) || keyboard_check(ord("D"))) ) {
     
 	image_angle -= turn_speed; 
 }
 
 //Davis Spradling
 //Steer Right
-if (!is_jumping and (keyboard_check(vk_left) || keyboard_check(ord("A"))) ) {
+if (!is_falling and !is_jumping and (keyboard_check(vk_left) || keyboard_check(ord("A"))) ) {
     image_angle += turn_speed;
 }
 
 image_angle = image_angle % 360;
 
 
-
-
-
-
-if (!is_nan(vel_vec[0]) and !is_nan(vel_vec[1]))
-{
-
-if (cur_traction >= 1)
-{
-	cur_traction = traction;
-}
-else
-{
-	cur_traction += traction;
-}
 
 //LD Montello
 //The intention of traction
@@ -299,15 +359,19 @@ vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
 collision_resolution();
 
 
+
 //new Vector2(lengthdir_x(vel_vec[0], image_angle), lengthdir_y(vel_vec[1], image_angle))
 	
 //vel_vec = vel_vec.multiply_scalar(prev_vel);
 	
 //Davis Spradling
 //Update car object based on curr speed and the angle of the the object
+//LD Montello
+//apply velocity to current
+//position.
 x += vel_vec[0];
 y += vel_vec[1];
-}
+
 #region draw arrow for velocity debug
 
 //calculate velocity using 
