@@ -56,6 +56,7 @@
     {"id":{"name":"fall_obj","path":"objects/fall_obj/fall_obj.yy",},},
     {"id":{"name":"forward_arr_obj","path":"objects/forward_arr_obj/forward_arr_obj.yy",},},
     {"id":{"name":"obj_accel_slider","path":"objects/obj_accel_slider/obj_accel_slider.yy",},},
+    {"id":{"name":"obj_camera_controller","path":"objects/obj_camera_controller/obj_camera_controller.yy",},},
     {"id":{"name":"obj_car_spawnpoint","path":"objects/obj_car_spawnpoint/obj_car_spawnpoint.yy",},},
     {"id":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},},
     {"id":{"name":"obj_level_manager","path":"objects/obj_level_manager/obj_level_manager.yy",},},
