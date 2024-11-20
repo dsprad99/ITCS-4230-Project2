@@ -1,7 +1,13 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-draw_text_transformed(100, 500, fps, 2, 2, 0);
+//LD Montello
+//Display FPS 
+//if in debug mode.
+if (global.in_debug)
+{
+	draw_text_transformed(camera_get_view_width(cam) - 150, 500, "FPS: " + string(fps), 2, 2, 0);
+}
 
 //LD Montello
 //draw the overall time
@@ -18,8 +24,13 @@ if (instance_exists(obj_player_car))
 	
 	draw_text_transformed_color(camera_get_view_width(cam) - 150, 50, "Lap " + string(obj_player_car.cur_lap), 2, 2, 0, c_aqua, c_aqua, c_aqua, c_aqua, 1);
 
+	
 	cur_search_index = get_closest_point_on_path(obj_player_car.x, obj_player_car.y);
-	draw_text_transformed_color(camera_get_view_width(cam) - 250, 100, "Progress: " + string(cur_search_index / path_get_length(CircuitCity_track)), 2, 2, 0, c_white, c_white, c_white, c_white, 1);
+	
+	if (global.in_debug)
+	{
+		draw_text_transformed_color(camera_get_view_width(cam) - 250, 100, "Progress: " + string(cur_search_index / path_get_length(CircuitCity_track)), 2, 2, 0, c_white, c_white, c_white, c_white, 1);
+	}
 }
 
 //clear queue just in case.

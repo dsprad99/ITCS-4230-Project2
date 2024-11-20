@@ -373,7 +373,7 @@ function collision_resolution()
 			//an object at this point
 	        if (collision_point(point[0], point[1], collideables, true, true)) {
 	            //Draw a red circle for colliding points
-	            draw_circle_color(point[0], point[1], 5, c_red, c_red, false);
+	            //draw_circle_color(point[0], point[1], 5, c_red, c_red, false);
 
 	            //Resolve penetration depth
 				//by iterating through points
@@ -404,10 +404,10 @@ function collision_resolution()
 				//You can comment the section where we 
 				//push an object out of the other object
 				//to visualize how our depth is calculated.
-	            draw_line_width(point[0], point[1], point[0] + penetration_vec[0], point[1] + penetration_vec[1], 4);
+	            //draw_line_width(point[0], point[1], point[0] + penetration_vec[0], point[1] + penetration_vec[1], 4);
 	        } else {
 	            //Draw a white circle for non-colliding points
-	            draw_circle_color(point[0], point[1], 4, c_white, c_white, false);
+	            //draw_circle_color(point[0], point[1], 4, c_white, c_white, false);
 	        }
 	    }
 	}

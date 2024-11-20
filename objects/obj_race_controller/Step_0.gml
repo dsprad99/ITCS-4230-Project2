@@ -1,6 +1,11 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//switch debug mode if we press O
+if (keyboard_check_pressed(ord("O")))
+{
+	global.in_debug = !global.in_debug;
+}
 
 //get the number 
 //of enemies total

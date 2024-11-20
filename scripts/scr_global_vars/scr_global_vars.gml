@@ -22,6 +22,8 @@ global.neon_lime = #a6fd29;
 global.music_emitter = audio_emitter_create();
 global.sfx_emitter = audio_emitter_create();
 
+global.in_debug = false;
+
 #endregion
 
 #region mutables
