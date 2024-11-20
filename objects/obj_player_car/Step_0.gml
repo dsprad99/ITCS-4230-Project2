@@ -372,6 +372,10 @@ collision_resolution();
 x += vel_vec[0];
 y += vel_vec[1];
 
+
+
+
+
 #region draw arrow for velocity debug
 
 //calculate velocity using 

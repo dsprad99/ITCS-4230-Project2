@@ -302,6 +302,12 @@ function resolve_penetration(sample_x, sample_y, normal, max_depth) {
 	
 	penetration_vec = multiply_scalar(normal, max_depth / 2);
 	
+	var updated_collideables = collideables;
+	
+	if (pass_thru == false)
+	{
+		updated_collideables = collideables_and_checkered;
+	}
 	
 	
 	show_debug_message("START");
@@ -316,7 +322,7 @@ function resolve_penetration(sample_x, sample_y, normal, max_depth) {
 		//}
 				
 		var depth_normal = multiply_scalar(normal, j);
-		if (collision_point(sample_x + depth_normal[0], sample_y + depth_normal[1], collideables, true, true))
+		if (collision_point(sample_x + depth_normal[0], sample_y + depth_normal[1], updated_collideables, true, true))
 		{
 			penetration_vec = depth_normal;
 			//x += penetration_vec[0];
@@ -338,14 +344,48 @@ function resolve_penetration(sample_x, sample_y, normal, max_depth) {
     return penetration_vec;
 }
 
+//LD Montello
+//the collideables and the checkered_obj
+collideables_and_checkered = array_concat(collideables, [checkered_obj]);
+
 function collision_resolution()
 {
+	
 	var target_x = x + vel_vec[0];
 	var target_y = y + vel_vec[1];
+	
+	//LD Montello,
+	//we need to change the collideables
+	//we check depending on if we're allowed
+	//to pass through the checkered_obj or not.
+	var updated_collideables = collideables;
+	
+	if (pass_thru == false)
+	{
+		updated_collideables = collideables_and_checkered;
+	}
+	
+	
+	
 
-
-	if (place_meeting(target_x, target_y, collideables)) {
-	    // Calculate the normal for the overall collision
+	if (place_meeting(target_x, target_y, updated_collideables)) {
+	    
+		//LD Montello
+		//if pass_through is false,
+		//we need to call the on collision code
+		//if we collide with the checkered_obj
+		//so that we can descide if we're
+		//allowed to go through it or not.
+		if (pass_thru == false)
+		{
+			_inst = instance_place(target_x, target_y, checkered_obj);
+			if (instance_exists(_inst))
+			{
+				//show_message("HERE");
+				on_checkered_obj_collision(_inst);
+			}
+		}
+		// Calculate the normal for the overall collision
 		//These are the most optimal params for accuracy
 		//and speed of calculation.
 		//I wish I could bake the normals but I don't have time
@@ -353,7 +393,7 @@ function collision_resolution()
 		//this line is what slows down this code,
 		//theoretically if we didn't limit the points to check
 		//code here should only be O(n^3)
-	    normal = normalized(angle_to_vector(collision_normal(target_x, target_y, collideables, 32 * 4, 5)));
+	    normal = normalized(angle_to_vector(collision_normal(target_x, target_y, updated_collideables, 32 * 4, 5)));
 
 	    // Get the car's half dimensions
 	    var half_width = sprite_width / 2;
@@ -394,7 +434,7 @@ function collision_resolution()
 		
 			//if there's a collision with
 			//an object at this point
-	        if (collision_point(point[0], point[1], collideables, true, true)) {
+	        if (collision_point(point[0], point[1], updated_collideables, true, true)) {
 	            //Draw a red circle for colliding points
 	            //draw_circle_color(point[0], point[1], 5, c_red, c_red, false);
 
@@ -558,4 +598,154 @@ function fully_overlap_object()
 	        }
 	    }
 	}
+}
+
+function on_checkered_obj_collision(_other)
+{
+	//Davis Spradling
+	//This will check if we have crossed 
+	//the finish line and gone through all
+	//the checkpoints
+
+
+	//exit this event if
+	//we already finished.
+	if (did_finish)
+	{
+		return;
+	}
+
+	checkpoints_needed = [0,1,2]
+	show_debug_message(checkpoints_curr)
+
+	if(in_tutorial and checkpoints_complete(checkpoints_needed, checkpoints_curr) && _other.tutorial_check){
+		//Be used to break up the instructions into three different lines
+		//for readability
+		//var new_tut_next = instance_create_layer(obj_player_car.x, obj_player_car.y+300, "tutorial_popup", next_room_button_obj);
+		//new_tut_next.image_xscale = .5;
+		//new_tut_next.image_yscale = .5;
+		//new_tut_next.room_to = other.room_go
+	
+		var new_check = instance_create_layer(obj_player_car.x, obj_player_car.y, "tutorial_popup", tut_finish_msg_obj);
+		new_check.image_xscale = 1.8;
+		new_check.image_yscale = 1.8;
+		new_check.room_to = _other.room_go
+	
+	
+		var words_array = string_split(_other.text, " ");
+
+		// Calculate the total number of words
+		var total_words = array_length(words_array);
+		var half = total_words div 2;
+
+		var var1 = "";
+		var var2 = "";
+	
+		//Break the text into two seperate lines
+		for (var i = 0; i < total_words; i++) {
+		    if (i<half) {
+		        var1 += words_array[i] + " ";
+			}
+				else {
+		        var2 += words_array[i] + " ";
+		    }
+	}
+	
+		tut_finish_msg_obj.txt1 = var1;
+		tut_finish_msg_obj.txt2 = var2;
+		obj_player_car.can_move = false;
+	
+		_other.tutorial_check = false;
+	}
+
+	else if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
+		//show_message("Lap completed");
+
+		//LD Montello
+		//Store whatever lap time we're
+		//at as the lap time for our current
+		//lap 
+		if (cur_lap == 1)
+		{
+			lap1_time = obj_race_controller.time_taken - lap_start_time;
+		}
+		else if (cur_lap == 2)
+		{
+			lap2_time = obj_race_controller.time_taken - lap_start_time;
+		}
+		else if (cur_lap == 3)
+		{
+			lap3_time = obj_race_controller.time_taken - lap_start_time;
+		}
+	
+		if (cur_lap == 3)
+		{
+			//The race should end for the player here,
+			//and we should do some waiting for the other
+			//cars to finish and then the race controller
+			//will know which cars have finished
+			//because our car will tell it here that we've
+			//finished, we'll do the same thing in the enemies.
+			did_finish = true;
+			can_move = false;
+			//LD Montello show finish popup.
+			if (instance_exists(obj_popup_controller))
+			{
+				//stop drawing our object.
+				should_draw = false;
+				obj_popup_controller.show_finish_popup();
+			
+				//LD Montello
+				//Draw the "death" particles
+				//if they aren't in first,
+				//or draw the "escape" particles
+				//if they are in first
+				//This is because in the "story" of our game,
+				//they player's car is racing to escape before
+				//the malware can, so the first place winner
+				//will always be the one that "escapes".
+				//maybe we can make it so that you have to get first
+				//on each track to unlock the next?
+				//ehh, that may be too much work for such a small
+				//amount of time.
+				if (ds_list_empty(obj_race_controller.final_placements_list))
+				{
+					obj_particle_sys_controller.play_particle_system_angle(ps_cyan_derez_escape, x, y, vector_to_angle(normalized(vel_vec)));
+				}
+				else
+				{
+					obj_particle_sys_controller.play_particle_system(ps_cyan_derez_death, x, y);
+				}
+			
+			}
+		
+			//here we are making sure that
+			//when the placements are drawn,
+			//we don't overwrite our placement
+			//that we finished at with another
+			//cars placement by separating them
+			//into two lists.
+		
+			//add ourselves to the finalized list
+			//as our placement should no longer change.
+			ds_list_add(obj_race_controller.final_placements_list, self);
+			//remove ourselves from the priority queue
+			ds_priority_delete_value(obj_race_controller.car_placement_queue, self);
+		
+		}
+		else
+			cur_lap++;
+
+		//reset the lap start time.
+		lap_start_time = obj_race_controller.time_taken;
+	
+		pass_thru = true
+		checkpoints_curr = [];
+	}
+	if(!pass_thru){
+		car_speed=0;
+	}
+
+
+	//show_debug_message(checkpoints_curr)
 }
