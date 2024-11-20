@@ -1,6 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+draw_text_transformed(100, 500, fps, 2, 2, 0);
+
 //LD Montello
 //draw the overall time
 draw_time_formatted(50, 50, time_taken);

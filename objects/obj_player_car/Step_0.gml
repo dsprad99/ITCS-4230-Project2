@@ -242,6 +242,7 @@ vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
 #region collision handling.
 
 
+
    //normal_x = x + vel_vec[0];
    //normal_y =  y + vel_vec[1];
 

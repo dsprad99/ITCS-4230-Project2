@@ -273,3 +273,144 @@ function play_drift_particles()
 {
 	obj_particle_sys_controller.play_particle_system_layer("Instances_drawn_under_cars", ps_cyan_drift, x, y);
 }
+
+function resolve_penetration(sample_x, sample_y, normal, max_depth) {
+   var penetration_vec = [0,0];
+			
+	var sentinel = 100;
+	
+	penetration_vec = multiply_scalar(normal, max_depth / 2);
+	
+	
+	
+	show_debug_message("START");
+	//if (floor(point_distance(corner[0], corner[1], target_x, target_y)) >= 4)
+	for (j = max_depth; j > 0; j--)
+	{
+		//show_message(i);
+		show_debug_message(j);
+		//if (i > sentinel)
+		//{
+		//	break;
+		//}
+				
+		var depth_normal = multiply_scalar(normal, j);
+		if (collision_point(sample_x + depth_normal[0], sample_y + depth_normal[1], bounceables, true, true))
+		{
+			penetration_vec = depth_normal;
+			//x += penetration_vec[0];
+			//y += penetration_vec[1];
+			//vel_vec = add(vel_vec, penetration_vec);
+			//vel_vec = [0,0]
+			break;
+		}
+		else
+		{
+			//we are no longer colliding,
+			//so this is the final distance to 
+			//get the point out of this object.
+			penetration_vec = depth_normal;
+			continue;
+		}
+	}
+
+    return penetration_vec;
+}
+
+function collision_resolution()
+{
+	var target_x = x + vel_vec[0];
+	var target_y = y + vel_vec[1];
+
+
+	if (place_meeting(target_x, target_y, bounceables)) {
+	    // Calculate the normal for the overall collision
+		//These are the most optimal params for accuracy
+		//and speed of calculation.
+		//I wish I could bake the normals but I don't have time
+		//to figure that out.
+		//this line is what slows down this code,
+		//theoretically if we didn't limit the points to check
+		//code here should only be O(n^3)
+	    normal = normalized(angle_to_vector(collision_normal(target_x, target_y, bounceables, 32 * 4, 5)));
+
+	    // Get the car's half dimensions
+	    var half_width = sprite_width / 2;
+	    var half_height = sprite_height / 2;
+
+	    // Car's center point (current position)
+	    var cx = x;
+	    var cy = y;
+
+	    // Calculate each corner relative to the center, rotated by image_angle
+	    var corners = [
+	        [cx + dcos(-image_angle) * half_width - dsin(-image_angle) * half_height, cy + dsin(-image_angle) * half_width + dcos(-image_angle) * half_height], // Top-right
+	        [cx - dcos(-image_angle) * half_width - dsin(-image_angle) * half_height, cy - dsin(-image_angle) * half_width + dcos(-image_angle) * half_height], // Top-left
+	        [cx - half_width * dcos(-image_angle) + half_height * dsin(-image_angle), cy - half_width * dsin(-image_angle) - half_height * dcos(-image_angle)], // Bottom-left
+	        [cx + half_width * dcos(-image_angle) + half_height * dsin(-image_angle), cy + half_width * dsin(-image_angle) - half_height * dcos(-image_angle)]  // Bottom-right
+	    ];
+
+	    // Calculate midpoints of edges
+	    var edges = [
+	        [(corners[0][0] + corners[1][0]) / 2, (corners[0][1] + corners[1][1]) / 2], // Top edge
+	        [(corners[1][0] + corners[2][0]) / 2, (corners[1][1] + corners[2][1]) / 2], // Left edge
+	        [(corners[2][0] + corners[3][0]) / 2, (corners[2][1] + corners[3][1]) / 2], // Bottom edge
+	        [(corners[3][0] + corners[0][0]) / 2, (corners[3][1] + corners[0][1]) / 2]  // Right edge
+	    ];
+
+	    // Combine corners and edges into a single list of sample points
+	    var sample_points = array_concat(corners, edges);
+
+	    //Loop through all points
+	    for (var i = 0; i < array_length(sample_points); i++) {
+	        var point = sample_points[i];
+		
+			//add our velocity as we're 
+			//trying to prevent future collisions
+			//before they happen.
+	        point[0] += vel_vec[0];
+	        point[1] += vel_vec[1];
+		
+			//if there's a collision with
+			//an object at this point
+	        if (collision_point(point[0], point[1], bounceables, true, true)) {
+	            //Draw a red circle for colliding points
+	            draw_circle_color(point[0], point[1], 5, c_red, c_red, false);
+
+	            //Resolve penetration depth
+				//by iterating through points
+				//along our normal until there's
+				//no longer a collision.
+				//we use pythagorean theorem
+				//to find the longest distance between
+				//any two points on our car, (the diagonal corners)
+				//and use that as our maximum depth to check against,
+				//because if we're somehow deeper than that we don't
+				//want an infinite loop.
+	            var penetration_vec = resolve_penetration(point[0], point[1], normal, sqrt((sprite_width * sprite_width + sprite_height * sprite_height)));
+
+	            //Adjust position and velocity based on the penetration vector
+				//Why do we adjust both position and velocity you may ask?
+				//that's because moving the position will instantly
+				//resolve a collision, but we also want to simulate having
+				//lost momentum as if we hit it and were pushed out of it.
+				//it's an easy way to cut corners without having to do any
+				//derivation to only use acceleration and velocity.
+	            x += penetration_vec[0];
+	            y += penetration_vec[1];
+	            vel_vec = add(vel_vec, penetration_vec);
+
+	            //draw a line using our point and the
+				//penetration depth to visualize 
+				//the penetration amount.
+				//You can comment the section where we 
+				//push an object out of the other object
+				//to visualize how our depth is calculated.
+	            draw_line_width(point[0], point[1], point[0] + penetration_vec[0], point[1] + penetration_vec[1], 4);
+	        } else {
+	            //Draw a white circle for non-colliding points
+	            draw_circle_color(point[0], point[1], 4, c_white, c_white, false);
+	        }
+	    }
+	}
+}
