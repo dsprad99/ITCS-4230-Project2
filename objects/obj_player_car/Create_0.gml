@@ -83,15 +83,10 @@ wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");
 
 
 is_colliding = false;
-
-//LD Montello
-//the array objects that we'll bounce against
-bounceables = [wallTileID]
-
 //LD Montello
 //the array of objects that we'll get pushed
 //by or stopped by.
-collideables = [obj_enemy]
+collideables = [obj_enemy, wallTileID]
 
 //LD Montello
 //scale object 5 times larger
@@ -295,7 +290,7 @@ function resolve_penetration(sample_x, sample_y, normal, max_depth) {
 		//}
 				
 		var depth_normal = multiply_scalar(normal, j);
-		if (collision_point(sample_x + depth_normal[0], sample_y + depth_normal[1], bounceables, true, true))
+		if (collision_point(sample_x + depth_normal[0], sample_y + depth_normal[1], collideables, true, true))
 		{
 			penetration_vec = depth_normal;
 			//x += penetration_vec[0];
@@ -323,7 +318,7 @@ function collision_resolution()
 	var target_y = y + vel_vec[1];
 
 
-	if (place_meeting(target_x, target_y, bounceables)) {
+	if (place_meeting(target_x, target_y, collideables)) {
 	    // Calculate the normal for the overall collision
 		//These are the most optimal params for accuracy
 		//and speed of calculation.
@@ -332,7 +327,7 @@ function collision_resolution()
 		//this line is what slows down this code,
 		//theoretically if we didn't limit the points to check
 		//code here should only be O(n^3)
-	    normal = normalized(angle_to_vector(collision_normal(target_x, target_y, bounceables, 32 * 4, 5)));
+	    normal = normalized(angle_to_vector(collision_normal(target_x, target_y, collideables, 32 * 4, 5)));
 
 	    // Get the car's half dimensions
 	    var half_width = sprite_width / 2;
@@ -373,7 +368,7 @@ function collision_resolution()
 		
 			//if there's a collision with
 			//an object at this point
-	        if (collision_point(point[0], point[1], bounceables, true, true)) {
+	        if (collision_point(point[0], point[1], collideables, true, true)) {
 	            //Draw a red circle for colliding points
 	            draw_circle_color(point[0], point[1], 5, c_red, c_red, false);
 
