@@ -33,7 +33,7 @@
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"track_path","filters":[
         "GMPath",
-      ],"listItems":[],"multiselect":false,"name":"track_path","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"TutorialTrack","path":"paths/TutorialTrack/TutorialTrack.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"TutorialTrack","varType":5,},
+      ],"listItems":[],"multiselect":false,"name":"track_path","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"CircuitCity_track","path":"paths/CircuitCity_track/CircuitCity_track.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"CircuitCity_track","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

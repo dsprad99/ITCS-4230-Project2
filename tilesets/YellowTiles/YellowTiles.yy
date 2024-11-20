@@ -1,6 +1,6 @@
 {
   "$GMTileSet":"v1",
-  "%Name":"LDTileSetDontModify",
+  "%Name":"YellowTiles",
   "autoTileSets":[],
   "macroPageTiles":{
     "SerialiseHeight":8,
@@ -10,7 +10,7 @@
     ],
     "TileDataFormat":1,
   },
-  "name":"LDTileSetDontModify",
+  "name":"YellowTiles",
   "out_columns":5,
   "out_tilehborder":2,
   "out_tilevborder":2,
@@ -21,8 +21,8 @@
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
   "spriteId":{
-    "name":"WallTiles",
-    "path":"sprites/WallTiles/WallTiles.yy",
+    "name":"WallTilesYellow",
+    "path":"sprites/WallTilesYellow/WallTilesYellow.yy",
   },
   "spriteNoExport":false,
   "textureGroupId":{

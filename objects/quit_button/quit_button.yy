@@ -25,9 +25,7 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[
-    {"$GMObjectProperty":"v1","%Name":"room_to","filters":[],"listItems":[],"multiselect":false,"name":"room_to","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"tutorial","path":"rooms/tutorial/tutorial.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"tutorial","varType":5,},
-  ],
+  "properties":[],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
