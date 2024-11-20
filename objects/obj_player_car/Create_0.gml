@@ -1,6 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+is_jumping = false;
+cur_ramp = noone;
+
 should_draw = true;
 
 //positions where the normal should be

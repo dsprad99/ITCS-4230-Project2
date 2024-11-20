@@ -10,6 +10,8 @@ if (should_draw)
 	//Draw underglow
 	layer_sprite_x(ug1, x);
 	layer_sprite_y(ug1, y);
+	layer_sprite_xscale(ug1, image_xscale);
+	layer_sprite_yscale(ug1, image_yscale);
 	layer_sprite_alpha(ug1, 1)
 
 }
@@ -30,12 +32,26 @@ if (!can_move)
 }
 
 
+//LD Montello
+//check if we're still jumping
+if (is_jumping && !place_meeting(x, y, obj_ramp))
+{
+	//if we aren't on the ramp,
+	//set is jumping to false.
+	is_jumping = false;
+	cur_ramp = noone;
+}
+
+
+
+
+//LD Montello
 //if the angle difference
 //between our velocity and 
 //the direction we're facing
 //is large enough, then play
 //the particles for drifting.
-if (abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
+if (!is_jumping and abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
 {
 	play_drift_particles();
 }
@@ -70,7 +86,7 @@ else{
 
 //Davis Spradling
 //If up key is pressed accelerate car in a forward motion
-if (!is_colliding and (keyboard_check(vk_up) || keyboard_check(ord("W")))){
+if (!is_jumping and !is_colliding and (keyboard_check(vk_up) || keyboard_check(ord("W")))){
     //car_speed+=acceleration;
     //if(car_speed>max_speed){
 	//	car_speed = max_speed; 
@@ -112,7 +128,7 @@ else
 
 //Davis Spradling
 //If down key is pressed declerate car
-if(!is_colliding and ( keyboard_check(vk_down) || keyboard_check(ord("S")))){
+if(!is_jumping and !is_colliding and ( keyboard_check(vk_down) || keyboard_check(ord("S")))){
     
 	
 	if (magnitude(vel_vec) == 0)
@@ -151,14 +167,14 @@ else
 }
 
 //breaking
-if (keyboard_check(vk_space))
+if (!is_jumping and keyboard_check(vk_space))
 {
 	brake();
 }
 
 //Davis Spradling
 //Apply firction when slowing down to help stop the car when decelerating
-if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W")) && !keyboard_check(ord("S"))){
+if(!is_jumping and !keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W")) && !keyboard_check(ord("S"))){
     
 	//Note the sign flips a value to 1 if pos and 0 if not
 	//this will help with deciding if the car is going forward/backward
@@ -183,14 +199,14 @@ if(!keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(ord("W"
 //Davis Spradling
 //Give player ability to steer but only if the car is moving
 //Steer Left
-if ((keyboard_check(vk_right) || keyboard_check(ord("D"))) ) {
+if (!is_jumping and (keyboard_check(vk_right) || keyboard_check(ord("D"))) ) {
     
 	image_angle -= turn_speed; 
 }
 
 //Davis Spradling
 //Steer Right
-if ((keyboard_check(vk_left) || keyboard_check(ord("A"))) ) {
+if (!is_jumping and (keyboard_check(vk_left) || keyboard_check(ord("A"))) ) {
     image_angle += turn_speed;
 }
 
