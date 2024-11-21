@@ -36,14 +36,14 @@ if(tutorial_check_bool ==true){
 	var var3 = "";
 	
 	for (var i = 0; i < total_words; i++) {
-	    if (i < third) {
-	        var1 += words_array[i] + " ";
-	    } else if (i < third * 2) {
-	        var2 += words_array[i] + " ";
-	    } else {
-	        var3 += words_array[i] + " ";
-	    }
-}
+		    if (i < third) {
+		        var1 += words_array[i] + " ";
+		    } else if (i < third * 2) {
+		        var2 += words_array[i] + " ";
+		    } else {
+		        var3 += words_array[i] + " ";
+		    }
+	}
 	
 	checkpoint_msg_obj.txt1 = var1;
 	checkpoint_msg_obj.txt2 = var2;
@@ -65,7 +65,18 @@ if(!array_contains(other.checkpoints_curr, checkpoint)) {
 	}
 	
 	array_push(other.checkpoints_curr, checkpoint);
+	
+	//tell the car to check if it can now pass through
+	//the checkered object, that way we don't do the check
+	//on collisions.
+	other.check_pass_through()
 }
+
+//LD Montello
+//set the last checkpoint the user
+//hit.
+other.last_checkpoint = self;
+
 //show_debug_message(other.checkpoints_curr)
 	
 

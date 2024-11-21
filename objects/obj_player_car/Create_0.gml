@@ -170,6 +170,15 @@ checkpoints_curr = [];
 press_up = false;
 press_down = false;
 
+//LD Montello
+//get all the checkpoints for this track.
+checkpoints_needed = array_create(0);
+with (checkpoint_obj)
+{
+	//add checkpoint to the checkpoints needed
+	//list
+	array_push(other.checkpoints_needed, self);
+}
 
 //Davis Spradling
 //Will be used to check if all the checkpoints have been completed
@@ -177,22 +186,14 @@ press_down = false;
 //checkpoints_needed are all the ones that must be completed
 //for a full lap to count
 function checkpoints_complete(checkpoints_needed,checkpoints_current) {
-    for (var i = 0; i < array_length(checkpoints_needed); i++) {
-        var curr_val = checkpoints_needed[i]; 
-        
-        var found = false;
-        for (var j = 0; j < array_length(checkpoints_current); j++) {
-            if (checkpoints_current[j] == curr_val) {
-                found = true;
-                break; 
-            }
-        }
-
-        if(!found) {
-            return false;
-        }
-    }
-    return true;
+    
+	//LD Montello
+	//modified this method.
+	//if the player is missing any checkpoints,
+	//then return false.
+	//if they have the exact correct number of checkpoints,
+	//return true.
+	return array_length(checkpoints_current) == array_length(checkpoints_needed);
 }
 
 
@@ -222,6 +223,8 @@ layer_sprite_yscale(ug1, 5);
 #endregion
 
 
+last_checkpoint = noone;
+
 //LD Montello,
 //I turned davis'
 //code into this function so
@@ -230,21 +233,15 @@ layer_sprite_yscale(ug1, 5);
 //or power up.
 function reset_to_last_checkpoint()
 {
-	
-	
-	
 	//Davis Spradling
 	//This will rotate through the checkpoint objects
 	//and take the last object that was iterated through
 	//and respawn them there
 
-	for (var i = 0; i < instance_number(checkpoint_obj); ++i;){
-	show_debug_message(checkpoints_curr)
-	    var instanceid = instance_find(checkpoint_obj, i);
-		if(fall_obj.checkpoint_go_to ==	instanceid.checkpoint){
-        
-		    var inst_x = instanceid.x //+(instanceid.sprite_width/2);
-		    var inst_y = instanceid.y //+(instanceid.sprite_height/2);
+	if (instance_exists(last_checkpoint))
+	{
+		 var inst_x = last_checkpoint.x //+(instanceid.sprite_width/2);
+		    var inst_y = last_checkpoint.y //+(instanceid.sprite_height/2);
 		
 			//save progress made by car before destroying
 			curr_checkpoint_arr = obj_player_car.checkpoints_curr;
@@ -260,7 +257,7 @@ function reset_to_last_checkpoint()
 			//so the object will appear above the checkered race track
 		    var new_car_instance = instance_create_layer(inst_x, inst_y, "Instances", obj_player_car);
 		
-			var right_direction = (instanceid.image_angle+90)%360;
+			var right_direction = (last_checkpoint.image_angle+90)%360;
 			new_car_instance.image_angle = right_direction;
 		
 		
@@ -273,7 +270,6 @@ function reset_to_last_checkpoint()
 			new_car_instance.lap1_time = lap1_time;
 			new_car_instance.lap2_time = lap2_time;
 			new_car_instance.lap3_time = lap3_time
-		}
 	}
 }
 
@@ -600,6 +596,20 @@ function fully_overlap_object()
 	}
 }
 
+
+function check_pass_through()
+{
+	if (checkpoints_complete(checkpoints_needed, checkpoints_curr))
+	{
+		pass_thru = true;
+	}
+	else
+	{
+		pass_thru = false;
+	}
+}
+
+
 function on_checkered_obj_collision(_other)
 {
 	//Davis Spradling
@@ -615,7 +625,7 @@ function on_checkered_obj_collision(_other)
 		return;
 	}
 
-	checkpoints_needed = [0,1,2]
+	
 	show_debug_message(checkpoints_curr)
 
 	if(in_tutorial and checkpoints_complete(checkpoints_needed, checkpoints_curr) && _other.tutorial_check){
