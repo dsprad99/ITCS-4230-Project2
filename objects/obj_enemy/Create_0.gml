@@ -1,6 +1,13 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//LD Montello
+//if the car is falling
+is_falling = false;
+total_fall_time = game_get_speed(gamespeed_fps)*1;
+cur_fall_time = 0;
+cur_fall_obj = noone;
+
 is_jumping = false;
 cur_ramp = noone;
 
@@ -15,6 +22,8 @@ should_draw = true;
 //LD Montello
 //the array objects that we'll bounce against
 collideables = [obj_player_car, obj_enemy, wallTileID]
+
+last_checkpoint = noone;
 
 //LD Montello
 #region davis' params from the player
@@ -201,7 +210,7 @@ function collision_avoidance()
 	//var _inst = collision_line(x, y, x + ahead[0], y + ahead[1], wallTileID, false, true)
 	if (_inst)
 	{
-		show_message(_inst);
+		//show_message(_inst);
 		
 		var obstacle_vec = [_inst.x, _inst.y]
 	
@@ -443,12 +452,12 @@ function resolve_penetration(sample_x, sample_y, normal, max_depth) {
 	
 	
 	
-	show_debug_message("START");
+	//show_debug_message("START");
 	//if (floor(point_distance(corner[0], corner[1], target_x, target_y)) >= 4)
 	for (j = max_depth; j > 0; j--)
 	{
 		//show_message(i);
-		show_debug_message(j);
+		//show_debug_message(j);
 		//if (i > sentinel)
 		//{
 		//	break;
@@ -477,14 +486,48 @@ function resolve_penetration(sample_x, sample_y, normal, max_depth) {
     return penetration_vec;
 }
 
+//LD Montello
+//the collideables and the checkered_obj
+collideables_and_checkered = array_concat(collideables, [checkered_obj]);
+
 function collision_resolution()
 {
+	
 	var target_x = x + vel_vec[0];
 	var target_y = y + vel_vec[1];
+	
+	//LD Montello,
+	//we need to change the collideables
+	//we check depending on if we're allowed
+	//to pass through the checkered_obj or not.
+	var updated_collideables = collideables;
+	
+	//if (pass_thru == false)
+	//{
+	//	updated_collideables = collideables_and_checkered;
+	//}
+	
+	
+	
 
-
-	if (place_meeting(target_x, target_y, collideables)) {
-	    // Calculate the normal for the overall collision
+	if (place_meeting(target_x, target_y, updated_collideables)) {
+	    
+		//LD Montello
+		//if pass_through is false,
+		//we need to call the on collision code
+		//if we collide with the checkered_obj
+		//so that we can descide if we're
+		//allowed to go through it or not.
+		//if (pass_thru == false)
+		//{
+		//	_inst = instance_place(target_x, target_y, checkered_obj);
+		//	if (instance_exists(_inst))
+		//	{
+		//		//show_message("HERE");
+		//		on_checkered_obj_collision(_inst);
+		//	}
+		//}
+		// Calculate the normal for the overall collision
 		//These are the most optimal params for accuracy
 		//and speed of calculation.
 		//I wish I could bake the normals but I don't have time
@@ -492,7 +535,7 @@ function collision_resolution()
 		//this line is what slows down this code,
 		//theoretically if we didn't limit the points to check
 		//code here should only be O(n^3)
-	    normal = normalized(angle_to_vector(collision_normal(target_x, target_y, collideables, 32 * 4, 5)));
+	    normal = normalized(angle_to_vector(collision_normal(target_x, target_y, updated_collideables, 32 * 4, 5)));
 
 	    // Get the car's half dimensions
 	    var half_width = sprite_width / 2;
@@ -531,12 +574,28 @@ function collision_resolution()
 	        point[0] += vel_vec[0];
 	        point[1] += vel_vec[1];
 		
+			
+			//var _inst = collision_point(point[0], point[1], updated_collideables, true, true);
+			
+			////if the object we're colliding
+			////with is jumping or falling
+			////ignore that collision.
+			//if (instance_exists(_inst) and (_inst.object_index == obj_enemy and (_inst.is_falling or _inst.is_jumping)))
+			//{
+			//	break;
+			//}
+			
+			//if (instance_exists(_inst) and (_inst.object_index == obj_player_car and (_inst.is_falling or _inst.is_jumping)))
+			//{
+			//	break;
+			//}
+			
 			//if there's a collision with
 			//an object at this point
-	        if (collision_point(point[0], point[1], collideables, true, true)) {
+	        if (collision_point(point[0], point[1], updated_collideables, true, true)) {
 	            //Draw a red circle for colliding points
-	            draw_circle_color(point[0], point[1], 5, c_red, c_red, false);
-
+	            //draw_circle_color(point[0], point[1], 5, c_red, c_red, false);
+				
 	            //Resolve penetration depth
 				//by iterating through points
 				//along our normal until there's
@@ -566,13 +625,204 @@ function collision_resolution()
 				//You can comment the section where we 
 				//push an object out of the other object
 				//to visualize how our depth is calculated.
-	            draw_line_width(point[0], point[1], point[0] + penetration_vec[0], point[1] + penetration_vec[1], 4);
+	            //draw_line_width(point[0], point[1], point[0] + penetration_vec[0], point[1] + penetration_vec[1], 4);
 	        } else {
 	            //Draw a white circle for non-colliding points
-	            draw_circle_color(point[0], point[1], 4, c_white, c_white, false);
+	            //draw_circle_color(point[0], point[1], 4, c_white, c_white, false);
 	        }
 	    }
 	}
+}
+
+//used to indicate
+//if the car is fully
+//overlapping the fall object.
+is_fully_overlapping = false;
+
+//make sure the car fully
+//overlaps the fall object
+//when the player falls onto it.
+function fully_overlap_object()
+{
+		var target_x = x + vel_vec[0];
+		var target_y = y + vel_vec[1];
+
+
+	if (place_meeting(target_x, target_y, cur_fall_obj)) {
+	    // Calculate the normal for the overall collision
+		//These are the most optimal params for accuracy
+		//and speed of calculation.
+		//I wish I could bake the normals but I don't have time
+		//to figure that out.
+		//this line is what slows down this code,
+		//theoretically if we didn't limit the points to check
+		//code here should only be O(n^3)
+	    normal = normalized(angle_to_vector(collision_normal(target_x, target_y, cur_fall_obj, 32 * 4, 5)));
+
+	    // Get the car's half dimensions
+	    var half_width = sprite_width / 2;
+	    var half_height = sprite_height / 2;
+
+	    // Car's center point (current position)
+	    var cx = x;
+	    var cy = y;
+
+	    // Calculate each corner relative to the center, rotated by image_angle
+	    var corners = [
+	        [cx + dcos(-image_angle) * half_width - dsin(-image_angle) * half_height, cy + dsin(-image_angle) * half_width + dcos(-image_angle) * half_height], // Top-right
+	        [cx - dcos(-image_angle) * half_width - dsin(-image_angle) * half_height, cy - dsin(-image_angle) * half_width + dcos(-image_angle) * half_height], // Top-left
+	        [cx - half_width * dcos(-image_angle) + half_height * dsin(-image_angle), cy - half_width * dsin(-image_angle) - half_height * dcos(-image_angle)], // Bottom-left
+	        [cx + half_width * dcos(-image_angle) + half_height * dsin(-image_angle), cy + half_width * dsin(-image_angle) - half_height * dcos(-image_angle)]  // Bottom-right
+	    ];
+
+	    // Calculate midpoints of edges
+	    var edges = [
+	        [(corners[0][0] + corners[1][0]) / 2, (corners[0][1] + corners[1][1]) / 2], // Top edge
+	        [(corners[1][0] + corners[2][0]) / 2, (corners[1][1] + corners[2][1]) / 2], // Left edge
+	        [(corners[2][0] + corners[3][0]) / 2, (corners[2][1] + corners[3][1]) / 2], // Bottom edge
+	        [(corners[3][0] + corners[0][0]) / 2, (corners[3][1] + corners[0][1]) / 2]  // Right edge
+	    ];
+
+	    // Combine corners and edges into a single list of sample points
+	    var sample_points = array_concat(corners, edges);
+
+		var total_overlapping_points = 0;
+		
+	    //Loop through all points
+	    for (var i = 0; i < array_length(sample_points); i++) {
+	        var point = sample_points[i];
+		
+			//add our velocity as we're 
+			//trying to prevent future collisions
+			//before they happen.
+	        point[0] += vel_vec[0];
+	        point[1] += vel_vec[1];
+		
+			//if there's a collision with
+			//an object at this point
+	        if (collision_point(point[0], point[1], cur_fall_obj, true, true)) {
+	            //Draw a red circle for colliding points
+	            //draw_circle_color(point[0], point[1], 5, c_red, c_red, false);
+
+	            //Resolve penetration depth
+				//by iterating through points
+				//along our normal until there's
+				//no longer a collision.
+				//we use pythagorean theorem
+				//to find the longest distance between
+				//any two points on our car, (the diagonal corners)
+				//and use that as our maximum depth to check against,
+				//because if we're somehow deeper than that we don't
+				//want an infinite loop.
+	            var penetration_vec = resolve_penetration(point[0], point[1], normal, sqrt((sprite_width * sprite_width + sprite_height * sprite_height)));
+
+	            //Adjust position and velocity based on the penetration vector
+				//Why do we adjust both position and velocity you may ask?
+				//that's because moving the position will instantly
+				//resolve a collision, but we also want to simulate having
+				//lost momentum as if we hit it and were pushed out of it.
+				//it's an easy way to cut corners without having to do any
+				//derivation to only use acceleration and velocity.
+	            x -= penetration_vec[0];
+	            y -= penetration_vec[1];
+	            //vel_vec = add(vel_vec, penetration_vec);
+
+	            //draw a line using our point and the
+				//penetration depth to visualize 
+				//the penetration amount.
+				//You can comment the section where we 
+				//push an object out of the other object
+				//to visualize how our depth is calculated.
+	            //draw_line_width(point[0], point[1], point[0] + penetration_vec[0], point[1] + penetration_vec[1], 4);
+				
+				
+				//increment total overlapping
+				//points 
+				total_overlapping_points++;
+				
+				//if every point is overlapping
+				//then we're fully overlapping
+				//so the falling code should
+				//stop calling us.
+				if (total_overlapping_points == array_length(sample_points))
+				{
+					is_fully_overlapping = true;
+				}
+			} else {
+				//we are not fully overlapping.
+				is_fully_overlapping = false;
+	            //Draw a white circle for non-colliding points
+	            //draw_circle_color(point[0], point[1], 4, c_white, c_white, false);
+	        }
+	    }
+	}
+}
+//LD Montello
+//I copied this function from the 
+//player car's code.
+//LD Montello,
+//I turned davis'
+//code into this function so
+//we can just call this when a car
+//is "destroyed" by an obstacle
+//or power up.
+function reset_to_last_checkpoint()
+{
+	//Davis Spradling
+	//This will rotate through the checkpoint objects
+	//and take the last object that was iterated through
+	//and respawn them there
+
+	if (instance_exists(last_checkpoint))
+	{
+			var inst_x = last_checkpoint.x //+(instanceid.sprite_width/2);
+		    var inst_y = last_checkpoint.y //+(instanceid.sprite_height/2);
+		
+			//save progress made by car before destroying
+			//curr_checkpoint_arr = obj_enemy.checkpoints_curr;
+		
+		
+			//remove ourselves from the priority queue.
+			//otherwise we end up with duplicates
+			ds_priority_delete_value(obj_race_controller.car_placement_queue, self);
+		
+			//Note changed layer to UI where the instance is created 
+			//so the object will appear above the checkered race track
+		    var new_car_instance = instance_create_layer(inst_x, inst_y, "Instances", obj_enemy);
+		
+			var right_direction = (last_checkpoint.image_angle+90)%360;
+			new_car_instance.image_angle = right_direction;
+		
+		
+		
+			//Copy our data to the new car's data.
+			new_car_instance.checkpoints_curr = checkpoints_curr;
+			new_car_instance.last_checkpoint = last_checkpoint;
+			new_car_instance.can_move = true
+			new_car_instance.cur_lap = cur_lap;
+	
+			new_car_instance.lap1_time = lap1_time;
+			new_car_instance.lap2_time = lap2_time;
+			new_car_instance.lap3_time = lap3_time
+			new_car_instance.car_name = car_name;
+		
+		    instance_destroy();
+
+			
+	}
+}
+
+//LD Montello
+//reset the player after some delay,
+//currently 1 second.
+function reset_to_last_checkpoint_delayed()
+{
+	//LD Montello
+	//play the particle system
+	//for dying
+	obj_particle_sys_controller.play_particle_system(ps_magenta_derez_death, x, y);
+	
+	alarm_set(3, game_get_speed(gamespeed_fps)*1);
 }
 
 //LD Montello

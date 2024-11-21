@@ -240,18 +240,18 @@ function reset_to_last_checkpoint()
 
 	if (instance_exists(last_checkpoint))
 	{
-		 var inst_x = last_checkpoint.x //+(instanceid.sprite_width/2);
+			var inst_x = last_checkpoint.x //+(instanceid.sprite_width/2);
 		    var inst_y = last_checkpoint.y //+(instanceid.sprite_height/2);
 		
 			//save progress made by car before destroying
-			curr_checkpoint_arr = obj_player_car.checkpoints_curr;
+			//curr_checkpoint_arr = obj_player_car.checkpoints_curr;
 		
 		
 			//remove ourselves from the priority queue.
 			//otherwise we end up with duplicates
 			ds_priority_delete_value(obj_race_controller.car_placement_queue, self);
 		
-		    instance_destroy(obj_player_car);
+		  
 
 			//Note changed layer to UI where the instance is created 
 			//so the object will appear above the checkered race track
@@ -261,15 +261,18 @@ function reset_to_last_checkpoint()
 			new_car_instance.image_angle = right_direction;
 		
 		
-		
-			//readd that progress
-			new_car_instance.checkpoints_curr=curr_checkpoint_arr;
+			//copy our data to the new instance's data.
+			new_car_instance.checkpoints_curr=checkpoints_curr;
 			new_car_instance.can_move = true
 			new_car_instance.cur_lap = cur_lap;
 			new_car_instance.lap_start_time = lap_start_time;
 			new_car_instance.lap1_time = lap1_time;
 			new_car_instance.lap2_time = lap2_time;
 			new_car_instance.lap3_time = lap3_time
+			
+			//destroy ourselves,
+			//the instance that "died"
+			instance_destroy()
 	}
 }
 
@@ -306,12 +309,12 @@ function resolve_penetration(sample_x, sample_y, normal, max_depth) {
 	}
 	
 	
-	show_debug_message("START");
+
 	//if (floor(point_distance(corner[0], corner[1], target_x, target_y)) >= 4)
 	for (j = max_depth; j > 0; j--)
 	{
 		//show_message(i);
-		show_debug_message(j);
+		
 		//if (i > sentinel)
 		//{
 		//	break;
@@ -427,7 +430,18 @@ function collision_resolution()
 			//before they happen.
 	        point[0] += vel_vec[0];
 	        point[1] += vel_vec[1];
-		
+			
+			//var _inst = collision_point(point[0], point[1], updated_collideables, true, true);
+			
+			////if the object we're colliding
+			////with is jumping or falling
+			////ignore that collision.
+			//if (instance_exists(_inst) and (_inst.object_index == obj_enemy and (_inst.is_falling or _inst.is_jumping)))
+			//{
+			//	show_debug_message(string(_inst.is_falling));
+			//	continue;
+			//}
+			
 			//if there's a collision with
 			//an object at this point
 	        if (collision_point(point[0], point[1], updated_collideables, true, true)) {
@@ -626,7 +640,7 @@ function on_checkered_obj_collision(_other)
 	}
 
 	
-	show_debug_message(checkpoints_curr)
+	//show_debug_message(checkpoints_curr)
 
 	if(in_tutorial and checkpoints_complete(checkpoints_needed, checkpoints_curr) && _other.tutorial_check){
 		//Be used to break up the instructions into three different lines

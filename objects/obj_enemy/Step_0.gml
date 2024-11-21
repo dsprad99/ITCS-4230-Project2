@@ -25,9 +25,78 @@ if (!can_move)
 	return;
 }
 
+//we only want to start falling
+//if the center of our car
+//crosses over into the fall
+//object, basically,
+//if the center of mass is
+//on the fall object, we should
+//only fall then.
+//that way there can be close
+//calls and forgiveness for the player.
+if (!is_falling)
+	cur_fall_obj = collision_point(x, y, fall_obj, true, true)
+	
+
+if (cur_fall_obj != noone)
+{
+	//LD Montello
+	//Do the shrinking animation
+	//and slow down velocity.
+	//vel_vec = [0,0];
+	is_falling = true;
+	
+	
+	//reset_to_last_checkpoint();
+}
+
+if (is_falling)
+{
+	//if we aren't fully overlapping
+	//our current fall object,
+	//make sure we are fully overlapping
+	//it.
+	if (!is_fully_overlapping)
+		fully_overlap_object();
+	
+	is_jumping = false;
+	cur_fall_time++;
+	
+	//scale car to zero
+	//to visualize falling
+	image_xscale = lerp(5, 0, cur_fall_time / total_fall_time);
+	image_yscale = lerp(5, 0, cur_fall_time / total_fall_time);
+	
+	//slow down car
+	vel_vec = multiply_scalar(vel_vec, 0.9);
+	
+	//if we've reached the end of our lerp
+	if (total_fall_time - cur_fall_time <= 0.1)
+	{
+		//set scale to 0
+		image_xscale = 0;
+		image_yscale = 0;
+		//reset fall time
+		cur_fall_time = 0;
+		//say we are no longer falling
+		is_falling = false;
+		//say we can't move
+		can_move = false;
+		
+		//freeze
+		vel_vec = [0,0]
+		
+		//reset car to last checkpoint.
+		reset_to_last_checkpoint_delayed();
+		
+		//exit this event.
+		return;
+	}
+}
+
 //LD Montello
 //check if we're still jumping
-if (is_jumping && !place_meeting(x, y, obj_ramp))
+if (!is_falling and is_jumping && !place_meeting(x, y, obj_ramp))
 {
 	//if we aren't on the ramp,
 	//set is jumping to false.
@@ -37,7 +106,7 @@ if (is_jumping && !place_meeting(x, y, obj_ramp))
 
 //LD Montello
 //Change our scale relative to how we're jumping.
-if (is_jumping && instance_exists(cur_ramp))
+if (!is_falling and is_jumping && instance_exists(cur_ramp))
 {
 	//calculate max distance
 	//from centerpoint of
@@ -65,7 +134,10 @@ if (is_jumping && instance_exists(cur_ramp))
 	
 	draw_line(x, y, x - proj_vec[0], y - proj_vec[1]);
 }
-else
+//we only set scale back to 5
+//if we aren't falling,
+//and we aren't jumping.
+else if (!is_falling)
 {
 	image_xscale = 5;
 	image_yscale = 5;
@@ -76,7 +148,7 @@ else
 //the direction we're facing
 //is large enough, then play
 //the particles for drifting.
-if (!is_jumping and abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
+if (!is_falling and !is_jumping and abs(angle_difference(vector_to_angle(vel_vec), image_angle)) >= 15)
 {
 	play_drift_particles();
 }
@@ -164,7 +236,7 @@ var cur_y = path_get_y(track_path, current_point / path_get_length(track_path))
 //}
 
 //if we've reached our current point
-if (!is_jumping and distance_to_point(target_x,target_y) < arrive_radius)
+if (!is_falling and !is_jumping and distance_to_point(target_x,target_y) < arrive_radius)
 {
 	//show_message("HREE");
 	//current_point++;
@@ -332,7 +404,7 @@ heading_vec = angle_to_vector(heading);
 
 var targetRot = point_direction(x, y, target_x, target_y);
 
-if (!is_jumping and angle_difference(image_angle, targetRot) > 0)
+if (!is_falling and !is_jumping and angle_difference(image_angle, targetRot) > 0)
 {
 	image_angle -= turn_speed;
 	
@@ -343,7 +415,7 @@ if (!is_jumping and angle_difference(image_angle, targetRot) > 0)
 	//	image_angle += turn_speed;
 	//}
 }
-else if (!is_jumping and angle_difference(image_angle, targetRot) < 0)
+else if (!is_falling and !is_jumping and angle_difference(image_angle, targetRot) < 0)
 {
 	image_angle += turn_speed;
 	
@@ -366,7 +438,7 @@ direction = image_angle
 
 #region handle car physics
 
-if (!is_jumping and shouldAccel)
+if (!is_falling and !is_jumping and shouldAccel)
 {
 	
 	//Stolen from Davis' code.
@@ -387,7 +459,7 @@ if (!is_jumping and shouldAccel)
 	//}
 }
 
-if (!is_jumping and shouldDeccel)
+if (!is_falling and !is_jumping and shouldDeccel)
 {
 	//Stolen from davis' code.
 	car_speed -= acceleration;
@@ -484,7 +556,7 @@ added_vel = clamp_vector_to_direction(added_vel, angle_to_vector(image_angle));
 //not be able to drift. 
 
 
-if (!is_jumping)
+if (!is_falling and !is_jumping)
 vel_vec = clamp_magnitude(added_vel, -max_speed, max_speed);
 
 
@@ -513,7 +585,9 @@ vel_vec = clamp_magnitude(added_vel, -max_speed, max_speed);
 
 //LD Montello 
 //Do collision resolution
-collision_resolution();
+//only when not jumping/falling.
+if (!is_falling and !is_jumping)
+	collision_resolution();
 
 x += vel_vec[0];
 y += vel_vec[1];

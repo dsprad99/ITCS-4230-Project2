@@ -10,7 +10,7 @@ if (did_finish)
 
 //LD Copied most of this from davis' code.
 checkpoints_needed = [0,1,2]
-show_debug_message(checkpoints_curr)
+//show_debug_message(checkpoints_curr)
 
 
 if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){

@@ -369,6 +369,7 @@ vel_vec[1] = lerp(vel_vec[1], target_vec[1], traction)
 //LD Montello
 //Do collision resolution 
 //algorithm.
+if (!is_falling and !is_jumping)
 collision_resolution();
 
 

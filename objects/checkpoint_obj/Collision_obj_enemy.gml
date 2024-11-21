@@ -10,3 +10,5 @@ if(!array_contains(other.checkpoints_curr, checkpoint)) {
 	//Add the checkpoint to the array.
 	array_push(other.checkpoints_curr, checkpoint);
 }
+
+other.last_checkpoint = self;
