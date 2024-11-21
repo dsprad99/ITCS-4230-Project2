@@ -94,6 +94,7 @@ if (is_falling)
 		
 		//reset player car to last checkpoint.
 		reset_to_last_checkpoint_delayed();
+		//exit this event.
 		return;
 	}
 }
@@ -113,6 +114,18 @@ if (!is_falling and is_jumping && !place_meeting(x, y, obj_ramp))
 //Change our scale relative to how we're jumping.
 if (!is_falling and is_jumping && instance_exists(cur_ramp))
 {	
+	//if we're not going fast enough, then
+	//we should fall to our death
+	//and reset to the last checkpoint.
+	if (magnitude(vel_vec) < 0.8 * max_speed)
+	{
+		is_jumping = false;
+		is_falling = true;
+		cur_fall_time = 0;
+		is_fully_overlapping = true;
+		return;
+	}
+	
 	
 	//calculate max distance
 	//from centerpoint of

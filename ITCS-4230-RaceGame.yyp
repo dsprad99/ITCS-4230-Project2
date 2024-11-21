@@ -118,6 +118,7 @@
     {"id":{"name":"spr_slider_bar_nine_slice","path":"sprites/spr_slider_bar_nine_slice/spr_slider_bar_nine_slice.yy",},},
     {"id":{"name":"spr_StartLight_race_start","path":"sprites/spr_StartLight_race_start/spr_StartLight_race_start.yy",},},
     {"id":{"name":"spr_StartLightDropDown","path":"sprites/spr_StartLightDropDown/spr_StartLightDropDown.yy",},},
+    {"id":{"name":"spr_void","path":"sprites/spr_void/spr_void.yy",},},
     {"id":{"name":"tutorial_check_sprite","path":"sprites/tutorial_check_sprite/tutorial_check_sprite.yy",},},
     {"id":{"name":"WallTiles","path":"sprites/WallTiles/WallTiles.yy",},},
     {"id":{"name":"WallTilesGreen","path":"sprites/WallTilesGreen/WallTilesGreen.yy",},},
