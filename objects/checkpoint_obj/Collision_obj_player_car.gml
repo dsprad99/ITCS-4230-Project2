@@ -66,6 +66,8 @@ if(!array_contains(other.checkpoints_curr, checkpoint)) {
 	
 	array_push(other.checkpoints_curr, checkpoint);
 	
+
+	
 	//tell the car to check if it can now pass through
 	//the checkered object, that way we don't do the check
 	//on collisions.

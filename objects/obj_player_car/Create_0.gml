@@ -187,6 +187,9 @@ with (checkpoint_obj)
 //for a full lap to count
 function checkpoints_complete(checkpoints_needed,checkpoints_current) {
     
+	//Debug checkpoint progression.
+	//show_message("Count: " + string(array_length(checkpoints_current)) + "Total: " + string(array_length(checkpoints_needed)))
+	
 	//LD Montello
 	//modified this method.
 	//if the player is missing any checkpoints,
@@ -375,15 +378,15 @@ function collision_resolution()
 		//if we collide with the checkered_obj
 		//so that we can descide if we're
 		//allowed to go through it or not.
-		if (pass_thru == false)
-		{
-			_inst = instance_place(target_x, target_y, checkered_obj);
-			if (instance_exists(_inst))
-			{
-				//show_message("HERE");
-				on_checkered_obj_collision(_inst);
-			}
-		}
+		//if (pass_thru == false)
+		//{
+		//	_inst = instance_place(target_x, target_y, checkered_obj);
+		//	if (instance_exists(_inst))
+		//	{
+		//		//show_message("HERE");
+		//		on_checkered_obj_collision(_inst);
+		//	}
+		//}
 		// Calculate the normal for the overall collision
 		//These are the most optimal params for accuracy
 		//and speed of calculation.
@@ -613,6 +616,7 @@ function fully_overlap_object()
 
 function check_pass_through()
 {
+	
 	if (checkpoints_complete(checkpoints_needed, checkpoints_curr))
 	{
 		pass_thru = true;

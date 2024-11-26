@@ -175,10 +175,6 @@ if (!is_falling and !is_jumping and abs(angle_difference(vector_to_angle(vel_vec
 	play_drift_particles();
 }
 
-if (!is_falling and !place_meeting(x, y, checkered_obj)) {
-    pass_thru = false
-}
-
 
 
 //James Reneo
