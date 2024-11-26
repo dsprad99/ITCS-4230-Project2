@@ -42,7 +42,10 @@ if (is_reversing)
 	//set our image
 	//angle using the lerp function
 	//based on our current time's progression.
-	image_angle = lerp(cur_angle_min, cur_angle_max, cur_time / total_time);
+	//smoothstep makes the function ease to each target
+	//instead of just locking to it, this makes
+	//it look much more natural.
+	image_angle = lerp(cur_angle_min, cur_angle_max, smoothstep(cur_time / total_time));
 	
 	//LD Montello
 	//Create varying speed
@@ -91,7 +94,10 @@ else
 	//set our image
 	//angle using the lerp function
 	//based on our current time's progression.
-	image_angle = lerp(cur_angle_min, cur_angle_max, cur_time / total_time);
+	//smoothstep makes the function ease to each target
+	//instead of just locking to it, this makes
+	//it look much more natural.
+	image_angle = lerp(cur_angle_min, cur_angle_max, smoothstep(cur_time / total_time));
 	
 	//LD Montello
 	//Create varying speed

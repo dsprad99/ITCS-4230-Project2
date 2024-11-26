@@ -18,8 +18,8 @@ is_reversing = false;
 //The max and min
 //for randomly selecting 
 //the next lerp angles.
-angle_max = 45;
-angle_min = 15;
+angle_max = 15;
+angle_min = 5;
 
 //LD Montello
 //The current lerp
@@ -28,21 +28,24 @@ cur_angle_max = random_range(angle_min, angle_max);
 cur_angle_min = -1 * random_range(angle_min, angle_max);
 
 
-min_lerp_speed = 1;
-max_lerp_speed = 1.5;
+min_lerp_speed = 0.1;
+max_lerp_speed = 0.5;
 
 
 //current lerp speed
-cur_lerp_speed = 1//random_range(min_lerp_speed, max_lerp_speed);
-//scale lerp speed based on our 
-//max angle distance for lerping.
+//set randomly once when game starts,
+//so that every individual leaf moves a little
+//differently.
+cur_lerp_speed = random_range(min_lerp_speed, max_lerp_speed);
+//scale lerp speed based on
+//the distance from -45 to 45 degrees.
 //that way it's the same speed
 //the entire time regardless
 //of lerp distance between angles.
 //this means smaller angles
 //are lerping faster
 //than larger angles.
-cur_lerp_speed_scaled = cur_lerp_speed * ((2*angle_max) / (cur_angle_max + abs(cur_angle_min)))
+cur_lerp_speed_scaled = cur_lerp_speed * (90 / (cur_angle_max + abs(cur_angle_min)))
 
 //scale the total time
 //so that it takes the same
@@ -58,12 +61,24 @@ function scale_lerp_speed()
 	
 	//we want to increase the speed
 	//of the lerp as if the entire
-	//lerp distance was 2*angle_max
+	//lerp distance was 90 degrees
 	//that way it's the "same speed" 
 	//the entire time, regardless
 	//of the distance between angles.
 	//this means smaller angles
 	//are lerping faster
 	//than larger angles.
-	cur_lerp_speed_scaled = cur_lerp_speed * ((2*angle_max) / (cur_angle_max + abs(cur_angle_min)));
+	cur_lerp_speed_scaled = cur_lerp_speed * (90 / (cur_angle_max + abs(cur_angle_min)));
+}
+
+//LD Montello
+//Smoothstep formula.
+//Reference:
+//https://en.wikipedia.org/wiki/Smoothstep
+//I'm not sure where I initially
+//learned how to do smoothstep so I just
+//included the wikipedia link.
+function smoothstep(value)
+{
+	return 3 * value * value - 2 * value * value * value;
 }
