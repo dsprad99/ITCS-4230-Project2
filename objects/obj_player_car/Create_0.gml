@@ -156,7 +156,7 @@ cur_traction = 0.03;
 car_speed = 0; 
 //Apply acceleration through step event ot gradually increase/decrease speed of card
 acceleration = 0.2;     
-base_max_speed = 16;   
+base_max_speed = 16;
 max_speed = 16;
 prev_base_max_speed = base_max_speed;
 

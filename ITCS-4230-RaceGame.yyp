@@ -93,6 +93,7 @@
     {"id":{"name":"circuit_city","path":"rooms/circuit_city/circuit_city.yy",},},
     {"id":{"name":"james_track","path":"rooms/james_track/james_track.yy",},},
     {"id":{"name":"main_menu","path":"rooms/main_menu/main_menu.yy",},},
+    {"id":{"name":"rm_credits","path":"rooms/rm_credits/rm_credits.yy",},},
     {"id":{"name":"tutorial","path":"rooms/tutorial/tutorial.yy",},},
     {"id":{"name":"scr_global_vars","path":"scripts/scr_global_vars/scr_global_vars.yy",},},
     {"id":{"name":"scr_vector","path":"scripts/scr_vector/scr_vector.yy",},},
@@ -114,6 +115,7 @@
     {"id":{"name":"spr_3","path":"sprites/spr_3/spr_3.yy",},},
     {"id":{"name":"spr_arrow","path":"sprites/spr_arrow/spr_arrow.yy",},},
     {"id":{"name":"spr_checkpoint","path":"sprites/spr_checkpoint/spr_checkpoint.yy",},},
+    {"id":{"name":"spr_credits","path":"sprites/spr_credits/spr_credits.yy",},},
     {"id":{"name":"spr_cyan_underglow","path":"sprites/spr_cyan_underglow/spr_cyan_underglow.yy",},},
     {"id":{"name":"spr_file_lime_small","path":"sprites/spr_file_lime_small/spr_file_lime_small.yy",},},
     {"id":{"name":"spr_file_lime","path":"sprites/spr_file_lime/spr_file_lime.yy",},},
@@ -154,6 +156,7 @@
     {"roomId":{"name":"tutorial","path":"rooms/tutorial/tutorial.yy",},},
     {"roomId":{"name":"circuit_city","path":"rooms/circuit_city/circuit_city.yy",},},
     {"roomId":{"name":"james_track","path":"rooms/james_track/james_track.yy",},},
+    {"roomId":{"name":"rm_credits","path":"rooms/rm_credits/rm_credits.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
