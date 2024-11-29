@@ -94,6 +94,7 @@
     {"id":{"name":"james_track","path":"rooms/james_track/james_track.yy",},},
     {"id":{"name":"main_menu","path":"rooms/main_menu/main_menu.yy",},},
     {"id":{"name":"rm_credits","path":"rooms/rm_credits/rm_credits.yy",},},
+    {"id":{"name":"rm_track_select","path":"rooms/rm_track_select/rm_track_select.yy",},},
     {"id":{"name":"tutorial","path":"rooms/tutorial/tutorial.yy",},},
     {"id":{"name":"scr_global_vars","path":"scripts/scr_global_vars/scr_global_vars.yy",},},
     {"id":{"name":"scr_vector","path":"scripts/scr_vector/scr_vector.yy",},},
@@ -134,6 +135,7 @@
     {"id":{"name":"spr_title_updated_v4","path":"sprites/spr_title_updated_v4/spr_title_updated_v4.yy",},},
     {"id":{"name":"spr_tree","path":"sprites/spr_tree/spr_tree.yy",},},
     {"id":{"name":"spr_void","path":"sprites/spr_void/spr_void.yy",},},
+    {"id":{"name":"track_select","path":"sprites/track_select/track_select.yy",},},
     {"id":{"name":"tutorial_check_sprite","path":"sprites/tutorial_check_sprite/tutorial_check_sprite.yy",},},
     {"id":{"name":"WallTiles","path":"sprites/WallTiles/WallTiles.yy",},},
     {"id":{"name":"WallTilesGreen","path":"sprites/WallTilesGreen/WallTilesGreen.yy",},},
@@ -157,6 +159,7 @@
     {"roomId":{"name":"circuit_city","path":"rooms/circuit_city/circuit_city.yy",},},
     {"roomId":{"name":"james_track","path":"rooms/james_track/james_track.yy",},},
     {"roomId":{"name":"rm_credits","path":"rooms/rm_credits/rm_credits.yy",},},
+    {"roomId":{"name":"rm_track_select","path":"rooms/rm_track_select/rm_track_select.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
