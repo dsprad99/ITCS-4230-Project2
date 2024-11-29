@@ -38,7 +38,7 @@
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"track_path","filters":[
         "GMPath",
-      ],"listItems":[],"multiselect":false,"name":"track_path","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"James_track","path":"paths/James_track/James_track.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"James_track","varType":5,},
+      ],"listItems":[],"multiselect":false,"name":"track_path","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"CircuitCity_track","path":"paths/CircuitCity_track/CircuitCity_track.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"CircuitCity_track","varType":5,},
     {"$GMObjectProperty":"v1","%Name":"max_bounce_speed","filters":[],"listItems":[],"multiselect":false,"name":"max_bounce_speed","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"5","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"max_dist_from_path","filters":[],"listItems":[],"multiselect":false,"name":"max_dist_from_path","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"100","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"can_move","filters":[],"listItems":[],"multiselect":false,"name":"can_move","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},

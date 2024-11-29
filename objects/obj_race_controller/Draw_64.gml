@@ -1,6 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+
+
 //LD Montello
 //Display FPS 
 //if in debug mode.
@@ -33,9 +35,13 @@ if (instance_exists(obj_player_car))
 	}
 }
 
+
+
+//LD Montello
 //clear queue just in case.
 if (!ds_priority_empty(copy_queue))
 	ds_priority_clear(copy_queue);
+//LD Montello
 //copy the queue before we iterate through it.
 ds_priority_copy(copy_queue, car_placement_queue);
 
@@ -80,6 +86,11 @@ while (!ds_priority_empty(copy_queue))
 {
 	//get the current car
 	var cur_car = ds_priority_find_max(copy_queue);
+	
+	//get the priority
+	//of the car.
+	var car_priority = ds_priority_find_priority(copy_queue, cur_car);
+	
 	//remove the current car, effectively "popping" it from
 	//the queue.
 	ds_priority_delete_max(copy_queue);
@@ -98,7 +109,12 @@ while (!ds_priority_empty(copy_queue))
 		name_color = global.neon_magenta;
 	}
 	
-	draw_text_transformed_color(camera_get_view_width(cam) - 550, _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+	draw_text_transformed_color(camera_get_view_width(cam) - 550, _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+	
+	//LD Montello
+	//Store the race position
+	//for this car.
+	cur_car.race_position = place;
 	
 	//go down by 50 for the next drawing
 	//of the placement
@@ -108,3 +124,29 @@ while (!ds_priority_empty(copy_queue))
 	place++;
 }
 
+//LD Montello
+#region draw the player's position in the race
+
+if (obj_player_car.race_position == 1)
+{
+	draw_sprite(spr_1st, 0, camera_get_view_width(cam) - 150, 100);
+}
+else if (obj_player_car.race_position == 2)
+{
+	draw_sprite(spr_2nd, 0, camera_get_view_width(cam) - 150, 100);
+}
+else if (obj_player_car.race_position == 3)
+{
+	draw_sprite(spr_3rd, 0, camera_get_view_width(cam) - 150, 100);
+}
+else if (obj_player_car.race_position == 4)
+{
+	draw_sprite(spr_4th, 0, camera_get_view_width(cam) - 150, 100);
+}
+else if (obj_player_car.race_position == 5)
+{
+	draw_sprite(spr_5th, 0, camera_get_view_width(cam) - 150, 100);
+}
+
+
+#endregion

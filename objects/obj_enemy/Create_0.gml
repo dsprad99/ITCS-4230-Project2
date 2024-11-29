@@ -2,6 +2,11 @@
 // You can write your code in this editor
 
 //LD Montello
+//Get the current path
+//from our race controller.
+track_path = obj_race_controller.track_path;
+
+//LD Montello
 //if the car is falling
 is_falling = false;
 total_fall_time = game_get_speed(gamespeed_fps)*1;
@@ -342,6 +347,10 @@ lap1_time = 999999;
 lap2_time = 999999;
 lap3_time = 999999;
 
+//LD Montello,
+//this car's race position.
+race_position = -1;
+
 #endregion
 
 #region update ourselves in the car placement queue
@@ -355,7 +364,7 @@ function update_placement()
 		if (ds_priority_find_priority(obj_race_controller.car_placement_queue, self) != undefined)
 		{
 			//calculate the progression along the current path.
-			current_track_path_progression = obj_race_controller.get_closest_point_on_path(x, y) / obj_race_controller.path_len;
+			current_track_path_progression = floor(obj_race_controller.get_closest_point_on_path(x, y)) / obj_race_controller.path_len;
 		
 			//calculate priority by adding the current lap to our
 			//distance in the track.

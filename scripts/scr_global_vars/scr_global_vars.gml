@@ -24,6 +24,10 @@ global.sfx_emitter = audio_emitter_create();
 
 global.in_debug = false;
 
+//LD Montello
+//variable for setting the game to be paused.
+global.paused = false;
+
 #endregion
 
 #region mutables

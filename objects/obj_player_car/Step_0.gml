@@ -24,6 +24,14 @@ else
 #endregion
 
 //LD Montello
+//if the game is paused,
+//return so we simulate being frozen.
+if (global.paused)
+{
+	return;
+}
+
+//LD Montello
 //if we  can't move,
 //don't execute the step event.
 if (!can_move)

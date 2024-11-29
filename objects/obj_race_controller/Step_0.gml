@@ -41,8 +41,12 @@ if (instance_exists(obj_player_car) and obj_player_car.did_finish)
 }
 else
 {
-	//set the time taken
-	time_taken = current_time-start_time;
+	//LD Montello
+	//only update the time if we're not paused.
+	if (!global.paused)
+	{
+		time_taken = current_time-start_time;
+	}
 }
 
 
