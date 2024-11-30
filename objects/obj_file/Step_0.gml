@@ -1,7 +1,12 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-
+//if we're paused,
+//just return.
+if (global.paused)
+{
+	return;
+}
 
 //LD Montello
 //decrement cur_time

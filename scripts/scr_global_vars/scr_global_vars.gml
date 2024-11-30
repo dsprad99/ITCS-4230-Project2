@@ -33,3 +33,35 @@ global.paused = false;
 #region mutables
 
 #endregion
+
+
+//Global functions
+
+//LD Montello 
+//Get all sequences in the game
+//Here's where I found the base for this code:
+//https://www.reddit.com/r/gamemaker/comments/j0f8eb/destroying_looping_sequences_how_to_get_sequence/
+function get_all_sequences()
+{
+	//LD Montello
+	//create a large enough array to store
+	//our sequenecs
+	var arr = array_create(10);
+	
+	//LD Montello
+	//get all the elements on the sequences layer
+	var elements = layer_get_all_elements("Sequences")
+	//Loop through all the elements,
+	//verify they are sequences,
+	//and add them to the array.
+	for (var i = 0; i < array_length(elements); i++)
+	{
+	    if layer_get_element_type(elements[i]) == layerelementtype_sequence
+	    {
+			array_push(arr, elements[i]);
+	    }
+	}
+	
+	//return the array.
+	return arr;
+}
