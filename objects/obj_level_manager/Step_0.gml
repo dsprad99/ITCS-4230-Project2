@@ -29,6 +29,16 @@ if keyboard_check_pressed(vk_escape) {
 		{
 			image_speed = 0;
 		}
+		
+		//LD Montello
+		//turn off auto-update
+		//for all particle systems
+		//so they appear frozen.
+		for (var i = 0; i < array_length(obj_particle_sys_controller.arr_psystems); i++)
+		{
+			if (part_system_exists(obj_particle_sys_controller.arr_psystems[i]))
+			part_system_automatic_update(obj_particle_sys_controller.arr_psystems[i], false);
+		}
 	}
 	else
 	{
@@ -48,15 +58,32 @@ if keyboard_check_pressed(vk_escape) {
 		//for all the sequences resume them.
 		for (var i = 0; i < array_length(_sequences); i++)
 		{
-			layer_sequence_play(_sequences[i])
+			//LD Montello
+			//if a sequence already finished, don't
+			//play it again.
+			if (!layer_sequence_is_finished(_sequences[i]))
+				layer_sequence_play(_sequences[i])
 		}
 		
 		//LD Montello
 		//Set all images speed
 		//back to 1.
+		//Ideally, we'd use an array
+		//to store their pre-pause speed
+		//speed and restore it here.
 		with (all)
 		{
 			image_speed = 1;
+		}
+		
+		//LD Montello
+		//turn on auto-update
+		//for all particle systems
+		//so they continue playing.
+		for (var i = 0; i < array_length(obj_particle_sys_controller.arr_psystems); i++)
+		{
+			if (part_system_exists(obj_particle_sys_controller.arr_psystems[i]))
+			part_system_automatic_update(obj_particle_sys_controller.arr_psystems[i], true);
 		}
 	}
 }
