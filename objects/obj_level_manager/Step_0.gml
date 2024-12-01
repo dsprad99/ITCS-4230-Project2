@@ -21,6 +21,14 @@ if keyboard_check_pressed(vk_escape) {
 		{
 			layer_sequence_pause(_sequences[i])
 		}
+		
+		//LD Montello
+		//Set all images speed
+		//to 0 to pause them.
+		with (all)
+		{
+			image_speed = 0;
+		}
 	}
 	else
 	{
@@ -41,6 +49,14 @@ if keyboard_check_pressed(vk_escape) {
 		for (var i = 0; i < array_length(_sequences); i++)
 		{
 			layer_sequence_play(_sequences[i])
+		}
+		
+		//LD Montello
+		//Set all images speed
+		//back to 1.
+		with (all)
+		{
+			image_speed = 1;
 		}
 	}
 }
