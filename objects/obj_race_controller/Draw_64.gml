@@ -129,24 +129,25 @@ while (!ds_priority_empty(copy_queue))
 
 if (obj_player_car.race_position == 1)
 {
-	draw_sprite(spr_1st, 0, camera_get_view_width(cam) - 150, 100);
+	draw_sprite(spr_1st, 0, camera_get_view_width(cam) - 250, 100);
 }
 else if (obj_player_car.race_position == 2)
 {
-	draw_sprite(spr_2nd, 0, camera_get_view_width(cam) - 150, 100);
+	draw_sprite(spr_2nd, 0, camera_get_view_width(cam) - 250, 100);
 }
 else if (obj_player_car.race_position == 3)
 {
-	draw_sprite(spr_3rd, 0, camera_get_view_width(cam) - 150, 100);
+	draw_sprite(spr_3rd, 0, camera_get_view_width(cam) - 250, 100);
 }
 else if (obj_player_car.race_position == 4)
 {
-	draw_sprite(spr_4th, 0, camera_get_view_width(cam) - 150, 100);
+	draw_sprite(spr_4th, 0, camera_get_view_width(cam) - 250, 100);
 }
 else if (obj_player_car.race_position == 5)
 {
-	draw_sprite(spr_5th, 0, camera_get_view_width(cam) - 150, 100);
+	draw_sprite(spr_5th, 0, camera_get_view_width(cam) - 250, 100);
 }
 
 
 #endregion
+
