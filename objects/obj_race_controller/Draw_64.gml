@@ -44,15 +44,15 @@ if (instance_exists(obj_player_car))
 if (player_finished)
 {
 	//draw the finish
-	//UI that's full screen
-	draw_leaderboard_GUI();
+	//UI that takes up most of the screen
+	draw_leaderboard_GUI(camera_get_view_width(cam) / 2, camera_get_view_height(cam) / 2, 0.75, 0.75);
 }
 else
 {
 	//draw the mini version
 	//of the leaderboard in the
 	//top right.
-	draw_mini_leaderboard_GUI();
+	draw_leaderboard_GUI(camera_get_view_width(cam) - (camera_get_view_width(cam) / 8), 400, 0.25, 0.25);
 }
 
 

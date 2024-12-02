@@ -21,7 +21,7 @@ cur_fall_obj = noone;
 is_jumping = false;
 cur_ramp = noone;
 
-car_name = "malware_" + string(instance_number(obj_enemy));
+car_name = "malware " + string(instance_number(obj_enemy));
 
 //get the wall tile id for collision reasons in Step.
 wallTileID = layer_tilemap_get_id("Wall_Tiles_Layer");

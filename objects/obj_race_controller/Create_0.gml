@@ -241,16 +241,184 @@ function get_racer_order()
 	return new_arr;
 }
 
-function draw_mini_leaderboard_GUI()
-{
-	var start_x =  camera_get_view_width(cam) - (camera_get_view_width(cam) / 8)
-	var start_y = (camera_get_view_height(cam) / 4);
+//function draw_mini_leaderboard_GUI()
+//{
+//	var start_x =  camera_get_view_width(cam) - (camera_get_view_width(cam) / 8)
+//	var start_y = (camera_get_view_height(cam) / 4);
 	
-	var x_scale = 0.25;
-	var y_scale = 0.25;
+//	var x_scale = 0.25;
+//	var y_scale = 0.25;
+	
+//	var scaled_width = x_scale * 1920;
+//	var scaled_height = y_scale * 1080;
+	
+//	var x_text_scale = x_scale * 8;
+//	var y_text_scale = y_scale * 8;
+	
+//	//LD Montello
+//	//Draw the leaderboard sprite
+//	//with slight alpha
+//	draw_sprite_ext(spr_leaderboard, 0, start_x, start_y, x_scale, y_scale, 0, c_white, 0.5)
+	
+	
+//	#region drawing race placements.
+	
+//	//LD Montello
+//	//clear queue just in case.
+//	if (!ds_priority_empty(copy_queue))
+//		ds_priority_clear(copy_queue);
+//	//LD Montello
+//	//copy the queue before we iterate through it.
+//	ds_priority_copy(copy_queue, car_placement_queue);
+
+//	var place = 1;
+//	var _y = (start_y - scaled_height / 2) + (y_scale * 200);
+	
+//	//loop through the cars
+//	//that have finished the race.
+//	for (i = 0; i < ds_list_size(final_placements_list); i++)
+//	{
+//		//get the current car
+//		var cur_car = ds_list_find_value(final_placements_list, i);
+	
+//		var name_color = c_white;
+	
+//		//if the car type is the player,
+//		//make their name color be cyan
+//		if (cur_car.object_index == obj_player_car)
+//		{
+//			name_color = global.neon_cyan;
+//		}
+//		//otherwise, it's an enemy name.
+//		else
+//		{
+//			name_color = global.neon_magenta;
+//		}
+	
+//		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+//		//draw the position
+//		draw_text_transformed_color(start_x - (scaled_width / 2) + (40 * x_scale), _y, string(place), x_text_scale, y_text_scale, 0, name_color, name_color, name_color, name_color, 1);
+		
+//		//draw the name
+//		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, x_text_scale, y_text_scale, 0, name_color, name_color, name_color, name_color, 1);
+	
+		
+//		//draw the time
+//		//of the current lap.
+//		if (cur_car.cur_lap == 1)
+//		{
+//			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, x_text_scale, y_text_scale)
+//		}
+//		else if (cur_car.cur_lap == 2)
+//		{
+//			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, x_text_scale, y_text_scale)
+//		}
+//		else if (cur_car.cur_lap == 3)
+//		{
+//			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, x_text_scale, y_text_scale)
+//		}
+		
+//		//go down by 50 for the next drawing
+//		//of the placement
+//		_y += (y_scale * 200);
+	
+//		//increment the place.
+//		place++;
+//	}
+
+//	//loop through
+//	//the cars that
+//	//are still racing
+//	while (!ds_priority_empty(copy_queue))
+//	{
+//		//get the current car
+//		var cur_car = ds_priority_find_max(copy_queue);
+	
+//		//get the priority
+//		//of the car.
+//		var car_priority = ds_priority_find_priority(copy_queue, cur_car);
+	
+//		//remove the current car, effectively "popping" it from
+//		//the queue.
+//		ds_priority_delete_max(copy_queue);
+	
+//		var name_color = c_white;
+	
+//		//if the car type is the player,
+//		//make their name color be cyan
+//		if (cur_car.object_index == obj_player_car)
+//		{
+//			name_color = global.neon_cyan;
+//		}
+//		//otherwise, it's an enemy name.
+//		else
+//		{
+//			name_color = global.neon_magenta;
+//		}
+		
+//		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+//		//draw the position
+//		draw_text_transformed_color(start_x - (scaled_width / 2) + (40 * x_scale), _y, string(place), x_text_scale, y_text_scale, 0, name_color, name_color, name_color, name_color, 1);
+		
+//		//draw the name
+//		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, x_text_scale, y_text_scale, 0, name_color, name_color, name_color, name_color, 1);
+	
+//		//draw the time
+//		//of the current lap.
+//		if (cur_car.cur_lap == 1)
+//		{
+//			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, x_text_scale, y_text_scale)
+//		}
+//		else if (cur_car.cur_lap == 2)
+//		{
+//			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, x_text_scale, y_text_scale)
+//		}
+//		else if (cur_car.cur_lap == 3)
+//		{
+//			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, x_text_scale, y_text_scale)
+//		}
+	
+//		//LD Montello
+//		//Store the race position
+//		//for this car.
+//		cur_car.race_position = place;
+	
+//		//go down by 50 for the next drawing
+//		//of the placement
+//		_y += (y_scale * 200);
+	
+//		//increment the place.
+//		place++;
+//	}
+//}
+
+//LD Montello
+//draw the leaderboard
+//at a set position
+//and scale on the screen in GUI coordinates.
+function draw_leaderboard_GUI(start_x, start_y, x_scale, y_scale)
+{
+	
+	//LD Montello
+	//Set the font
+	//Make the text aligned to the left.
+	draw_set_font(fnt_gamecuben)
+	//draw_set_valign(fa_middle)
+	draw_set_color(c_white);
+	
+	//var start_x = camera_get_view_width(cam) / 2
+	//var start_y = camera_get_view_height(cam) / 2
+	
+	//var x_scale = 1;
+	//var y_scale = 1;
 	
 	var scaled_width = x_scale * 1920;
 	var scaled_height = y_scale * 1080;
+	
+	var x_text_scale = x_scale * (64 / 72);
+	var y_text_scale = y_scale * (64 / 72);
 	
 	//LD Montello
 	//Draw the leaderboard sprite
@@ -268,8 +436,10 @@ function draw_mini_leaderboard_GUI()
 	//copy the queue before we iterate through it.
 	ds_priority_copy(copy_queue, car_placement_queue);
 
+	var y_offset = (y_scale * (1080 / 5));
+
 	var place = 1;
-	var _y = (start_y - scaled_height / 2) + 50;
+	var _y = (start_y - scaled_height / 2) + y_offset;
 	
 	//loop through the cars
 	//that have finished the race.
@@ -295,30 +465,30 @@ function draw_mini_leaderboard_GUI()
 		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
 		
 		//draw the position
-		draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (40 * x_scale), _y, string(place), x_text_scale, y_text_scale, 0, name_color, name_color, name_color, name_color, 1);
 		
 		//draw the name
-		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, x_text_scale, y_text_scale, 0, name_color, name_color, name_color, name_color, 1);
 	
 		
 		//draw the time
 		//of the current lap.
 		if (cur_car.cur_lap == 1)
 		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, x_text_scale / 1.5, y_text_scale / 1.5)
 		}
 		else if (cur_car.cur_lap == 2)
 		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, x_text_scale / 1.5, y_text_scale / 1.5)
 		}
 		else if (cur_car.cur_lap == 3)
 		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, x_text_scale / 1.5, y_text_scale / 1.5)
 		}
 		
 		//go down by 50 for the next drawing
 		//of the placement
-		_y += 50;
+		_y += y_offset;
 	
 		//increment the place.
 		place++;
@@ -357,24 +527,24 @@ function draw_mini_leaderboard_GUI()
 		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
 		
 		//draw the position
-		draw_text_transformed_color(start_x - (scaled_width / 2) + (40 * x_scale), _y, string(place), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (40 * x_scale), _y, string(place), x_text_scale, y_text_scale, 0, name_color, name_color, name_color, name_color, 1);
 		
 		//draw the name
-		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, x_text_scale, y_text_scale, 0, name_color, name_color, name_color, name_color, 1);
 	
 		//draw the time
 		//of the current lap.
 		if (cur_car.cur_lap == 1)
 		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, x_text_scale / 1.5, y_text_scale / 1.5)
 		}
 		else if (cur_car.cur_lap == 2)
 		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, x_text_scale / 1.5, y_text_scale / 1.5)
 		}
 		else if (cur_car.cur_lap == 3)
 		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, x_text_scale / 1.5, y_text_scale / 1.5)
 		}
 	
 		//LD Montello
@@ -384,158 +554,17 @@ function draw_mini_leaderboard_GUI()
 	
 		//go down by 50 for the next drawing
 		//of the placement
-		_y += 50;
+		_y += y_offset;
 	
 		//increment the place.
 		place++;
 	}
-}
-
-
-function draw_leaderboard_GUI()
-{
-	var start_x = camera_get_view_width(cam) / 2
-	var start_y = camera_get_view_height(cam) / 2
-	
-	var x_scale = 1;
-	var y_scale = 1;
-	
-	var scaled_width = x_scale * 1920;
-	var scaled_height = y_scale * 1080;
 	
 	//LD Montello
-	//Draw the leaderboard sprite
-	//with slight alpha
-	draw_sprite_ext(spr_leaderboard, 0, start_x, start_y, x_scale, y_scale, 0, c_white, 0.5)
-	
-	
-	#region drawing race placements.
-	
-	//LD Montello
-	//clear queue just in case.
-	if (!ds_priority_empty(copy_queue))
-		ds_priority_clear(copy_queue);
-	//LD Montello
-	//copy the queue before we iterate through it.
-	ds_priority_copy(copy_queue, car_placement_queue);
-
-	var place = 1;
-	var _y = (start_y - scaled_height / 2) + 50;
-	
-	//loop through the cars
-	//that have finished the race.
-	for (i = 0; i < ds_list_size(final_placements_list); i++)
-	{
-		//get the current car
-		var cur_car = ds_list_find_value(final_placements_list, i);
-	
-		var name_color = c_white;
-	
-		//if the car type is the player,
-		//make their name color be cyan
-		if (cur_car.object_index == obj_player_car)
-		{
-			name_color = global.neon_cyan;
-		}
-		//otherwise, it's an enemy name.
-		else
-		{
-			name_color = global.neon_magenta;
-		}
-	
-		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
-		
-		//draw the position
-		draw_text_transformed_color(start_x - (scaled_width / 2) + (40 * x_scale), _y, string(place), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
-		
-		//draw the name
-		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
-	
-		//draw the time
-		//of the current lap.
-		if (cur_car.cur_lap == 1)
-		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
-		}
-		else if (cur_car.cur_lap == 2)
-		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
-		}
-		else if (cur_car.cur_lap == 3)
-		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
-		}
-		
-		
-		//go down by 50 for the next drawing
-		//of the placement
-		_y += 50;
-	
-		//increment the place.
-		place++;
-	}
-
-	//loop through
-	//the cars that
-	//are still racing
-	while (!ds_priority_empty(copy_queue))
-	{
-		//get the current car
-		var cur_car = ds_priority_find_max(copy_queue);
-	
-		//get the priority
-		//of the car.
-		var car_priority = ds_priority_find_priority(copy_queue, cur_car);
-	
-		//remove the current car, effectively "popping" it from
-		//the queue.
-		ds_priority_delete_max(copy_queue);
-	
-		var name_color = c_white;
-	
-		//if the car type is the player,
-		//make their name color be cyan
-		if (cur_car.object_index == obj_player_car)
-		{
-			name_color = global.neon_cyan;
-		}
-		//otherwise, it's an enemy name.
-		else
-		{
-			name_color = global.neon_magenta;
-		}
-		
-		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
-		
-		//draw the position
-		draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
-		
-		//draw the name
-		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
-	
-		//draw the priority
-		if (cur_car.cur_lap == 1)
-		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
-		}
-		else if (cur_car.cur_lap == 2)
-		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
-		}
-		if (cur_car.cur_lap == 3)
-		{
-			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
-		}
-		//LD Montello
-		//Store the race position
-		//for this car.
-		cur_car.race_position = place;
-	
-		//go down by 50 for the next drawing
-		//of the placement
-		_y += 50;
-	
-		//increment the place.
-		place++;
-	}
+	//Go back to default alignment.
+	draw_set_valign(-1)
+	draw_set_halign(-1)
+	//Go back to default font
+	draw_set_font(-1)
+	draw_set_color(-1);
 }

@@ -751,6 +751,11 @@ function on_checkered_obj_collision(_other)
 			//because our car will tell it here that we've
 			//finished, we'll do the same thing in the enemies.
 			did_finish = true;
+			
+			//Tell the race controller
+			//that the player has finished
+			obj_race_controller.player_finished = true;
+			
 			can_move = false;
 			//LD Montello show finish popup.
 			if (instance_exists(obj_popup_controller))
