@@ -34,7 +34,7 @@ time_taken = 0;
 //LD Montello
 //Draw the time with formatting given a position
 //and a time.
-function draw_time_formatted(_x, _y, _time)
+function draw_time_formatted(_x, _y, _time, _color = c_aqua, _x_scale = 2, _y_scale = 2)
 {
 	//LD Montello
 //Where I found the way to calculate the time values:
@@ -43,7 +43,7 @@ function draw_time_formatted(_x, _y, _time)
 	var seconds = floor((milliseconds / 1000) % 60)
 	var minutes = floor((milliseconds / (1000*60)) % 60);
 	var hours = floor((milliseconds / (1000*60*60)) % 24);
-	draw_text_transformed_color(_x, _y, string(minutes) + "m " + string(seconds) + "s " + string(milliseconds % 1000) + "ms ", 2, 2, 0, c_aqua, c_aqua, c_aqua, c_aqua, 1);
+	draw_text_transformed_color(_x, _y, string(minutes) + "m " + string(seconds) + "s " + string(milliseconds % 1000) + "ms ", _x_scale, _y_scale, 0, _color, _color, _color, _color, 1);
 }
 
 #endregion
@@ -244,7 +244,7 @@ function get_racer_order()
 function draw_mini_leaderboard_GUI()
 {
 	var start_x =  camera_get_view_width(cam) - (camera_get_view_width(cam) / 8)
-	var start_y = (camera_get_view_width(cam) / 4);
+	var start_y = (camera_get_view_height(cam) / 4);
 	
 	var x_scale = 0.25;
 	var y_scale = 0.25;
@@ -292,8 +292,30 @@ function draw_mini_leaderboard_GUI()
 			name_color = global.neon_magenta;
 		}
 	
-		draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+		//draw the position
+		draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+		//draw the name
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
 	
+		
+		//draw the time
+		//of the current lap.
+		if (cur_car.cur_lap == 1)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
+		}
+		else if (cur_car.cur_lap == 2)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
+		}
+		if (cur_car.cur_lap == 3)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
+		}
+		
 		//go down by 50 for the next drawing
 		//of the placement
 		_y += 50;
@@ -331,8 +353,29 @@ function draw_mini_leaderboard_GUI()
 		{
 			name_color = global.neon_magenta;
 		}
+		
+		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+		//draw the position
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (40 * x_scale), _y, string(place), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+		//draw the name
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
 	
-		draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		//draw the time
+		//of the current lap.
+				if (cur_car.cur_lap == 1)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
+		}
+		else if (cur_car.cur_lap == 2)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
+		}
+		if (cur_car.cur_lap == 3)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
+		}
 	
 		//LD Montello
 		//Store the race position
@@ -351,13 +394,19 @@ function draw_mini_leaderboard_GUI()
 
 function draw_leaderboard_GUI()
 {
-	var top = 0;
-	var left = 0;
+	var start_x = camera_get_view_width(cam) / 2
+	var start_y = camera_get_view_height(cam) / 2
+	
+	var x_scale = 1;
+	var y_scale = 1;
+	
+	var scaled_width = x_scale * 1920;
+	var scaled_height = y_scale * 1080;
 	
 	//LD Montello
 	//Draw the leaderboard sprite
 	//with slight alpha
-	draw_sprite_ext(spr_leaderboard, 0, left + camera_get_view_width(cam) / 2, top + camera_get_view_height(cam) / 2, 1, 1, 0, c_white, 0.5)
+	draw_sprite_ext(spr_leaderboard, 0, start_x, start_y, x_scale, y_scale, 0, c_white, 0.5)
 	
 	
 	#region drawing race placements.
@@ -371,7 +420,7 @@ function draw_leaderboard_GUI()
 	ds_priority_copy(copy_queue, car_placement_queue);
 
 	var place = 1;
-	var _y = 50;
+	var _y = (start_y - scaled_height / 2) + 50;
 	
 	//loop through the cars
 	//that have finished the race.
@@ -394,8 +443,30 @@ function draw_leaderboard_GUI()
 			name_color = global.neon_magenta;
 		}
 	
-		draw_text_transformed_color(left + (camera_get_view_width(cam) - 550), top + _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+		//draw the position
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (40 * x_scale), _y, string(place), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+		//draw the name
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
 	
+		//draw the time
+		//of the current lap.
+		if (cur_car.cur_lap == 1)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
+		}
+		else if (cur_car.cur_lap == 2)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
+		}
+		if (cur_car.cur_lap == 3)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
+		}
+		
+		
 		//go down by 50 for the next drawing
 		//of the placement
 		_y += 50;
@@ -421,7 +492,7 @@ function draw_leaderboard_GUI()
 		ds_priority_delete_max(copy_queue);
 	
 		var name_color = c_white;
-		
+	
 		//if the car type is the player,
 		//make their name color be cyan
 		if (cur_car.object_index == obj_player_car)
@@ -433,9 +504,28 @@ function draw_leaderboard_GUI()
 		{
 			name_color = global.neon_magenta;
 		}
+		
+		//draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+		//draw the position
+		draw_text_transformed_color(start_x - (scaled_width / 2), _y, string(place), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+		
+		//draw the name
+		draw_text_transformed_color(start_x - (scaled_width / 2) + (400 * x_scale), _y, cur_car.car_name, 2, 2, 0, name_color, name_color, name_color, name_color, 1);
 	
-		draw_text_transformed_color(left + (camera_get_view_width(cam) - 550), top + _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
-	
+		//draw the priority
+		if (cur_car.cur_lap == 1)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
+		}
+		else if (cur_car.cur_lap == 2)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
+		}
+		if (cur_car.cur_lap == 3)
+		{
+			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
+		}
 		//LD Montello
 		//Store the race position
 		//for this car.
