@@ -348,6 +348,8 @@ current_track_path_progression = 0;
 did_finish = false;
 cur_lap = 1;
 
+lap_start_time = 0;
+
 lap1_time = 999999;
 lap2_time = 999999;
 lap3_time = 999999;
@@ -838,7 +840,7 @@ function reset_to_last_checkpoint()
 			new_car_instance.last_checkpoint = last_checkpoint;
 			new_car_instance.can_move = true
 			new_car_instance.cur_lap = cur_lap;
-	
+			new_car_instance.lap_start_time = lap_start_time;
 			new_car_instance.lap1_time = lap1_time;
 			new_car_instance.lap2_time = lap2_time;
 			new_car_instance.lap3_time = lap3_time

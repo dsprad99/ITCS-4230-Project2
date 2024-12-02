@@ -88,6 +88,9 @@ if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 	else
 		cur_lap++;
 
+	//reset the lap start time.
+	lap_start_time = obj_race_controller.time_taken;
+	
 	
 	//pass_thru = true
 	checkpoints_curr = [];

@@ -34,6 +34,26 @@ if (!can_move)
 	return;
 }
 
+
+//LD Montello
+//Update current lap time
+//LD Montello
+//Store whatever lap time we're
+//at as the lap time for our current
+//lap 
+if (cur_lap == 1)
+{
+	lap1_time = obj_race_controller.time_taken - lap_start_time;
+}
+else if (cur_lap == 2)
+{
+	lap2_time = obj_race_controller.time_taken - lap_start_time;
+}
+else if (cur_lap == 3)
+{
+	lap3_time = obj_race_controller.time_taken - lap_start_time;
+}
+
 //LD Montello
 //if we're
 //no longer on a checkered

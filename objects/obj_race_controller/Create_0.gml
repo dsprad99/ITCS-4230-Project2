@@ -311,7 +311,7 @@ function draw_mini_leaderboard_GUI()
 		{
 			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
 		}
-		if (cur_car.cur_lap == 3)
+		else if (cur_car.cur_lap == 3)
 		{
 			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
 		}
@@ -364,7 +364,7 @@ function draw_mini_leaderboard_GUI()
 	
 		//draw the time
 		//of the current lap.
-				if (cur_car.cur_lap == 1)
+		if (cur_car.cur_lap == 1)
 		{
 			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap1_time, name_color, 2, 2)
 		}
@@ -372,7 +372,7 @@ function draw_mini_leaderboard_GUI()
 		{
 			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
 		}
-		if (cur_car.cur_lap == 3)
+		else if (cur_car.cur_lap == 3)
 		{
 			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
 		}
@@ -461,7 +461,7 @@ function draw_leaderboard_GUI()
 		{
 			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap2_time, name_color, 2, 2)
 		}
-		if (cur_car.cur_lap == 3)
+		else if (cur_car.cur_lap == 3)
 		{
 			draw_time_formatted(start_x - (scaled_width / 2) + (1350 * x_scale), _y, cur_car.lap3_time, name_color, 2, 2)
 		}
