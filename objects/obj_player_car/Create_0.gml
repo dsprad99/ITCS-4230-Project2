@@ -670,7 +670,7 @@ function on_checkered_obj_collision(_other)
 	//This will check if we have crossed 
 	//the finish line and gone through all
 	//the checkpoints
-
+	
 
 	//exit this event if
 	//we already finished.
@@ -757,6 +757,21 @@ function on_checkered_obj_collision(_other)
 			obj_race_controller.player_finished = true;
 			
 			can_move = false;
+			
+			//LD Montello,
+			//Switch the camera controller
+			//to follow a different object
+			//or not follow any objects anymore.
+			obj_camera_controller.cam_target = noone;
+			
+			//set the player car
+			//to be out of the way
+			//so it's collision mask
+			//doesn't block enemies that are
+			//still racing.
+			x = 0;
+			y = 0;
+			
 			//LD Montello show finish popup.
 			if (instance_exists(obj_popup_controller))
 			{

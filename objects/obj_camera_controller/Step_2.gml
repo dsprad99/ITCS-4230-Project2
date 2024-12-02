@@ -2,13 +2,18 @@
 // You can write your code in this editor
 
 //LD Montello
+//only set cam position
+//if it has a target.
+if (instance_exists(cam_target))
+{
+//LD Montello
 //at the end of each step
 //Set the camera position
 //to be centered on the position.
 //This fixes the jittering that
 //the built in camera follow had.
-camera_set_view_pos(cam, obj_player_car.vel_vec[0] + obj_player_car.x - camera_get_view_width(cam) / 2, obj_player_car.vel_vec[1] +  obj_player_car.y - camera_get_view_height(cam) / 2)
-
+camera_set_view_pos(cam, cam_target.vel_vec[0] + cam_target.x - camera_get_view_width(cam) / 2, cam_target.vel_vec[1] +  cam_target.y - camera_get_view_height(cam) / 2)
+}
 
 
 //LD Montello
