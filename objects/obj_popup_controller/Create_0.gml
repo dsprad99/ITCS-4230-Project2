@@ -21,9 +21,8 @@ function show_finish_popup()
 {
 	if (has_popup)
 	{
-		//TODO:
-		//kill the previous popup and 
-		//make the new popup show up instead.
+		//kill the previous popup
+		layer_sequence_destroy(cur_popup);
 	}
 	
 	//create the traffic light for the start of the race.
@@ -35,12 +34,51 @@ function show_checkpoint_popup()
 {
 	if (has_popup)
 	{
-		//TODO:
-		//kill the previous popup and 
-		//make the new popup show up instead.
+		//kill the previous popup
+		layer_sequence_destroy(cur_popup);
 	}
 	
-	//create the traffic light for the start of the race.
+	//create the checkpoint popup sequence.
 	cur_popup = layer_sequence_create("Sequences", center_x, center_y, seq_checkpoint);
+	has_popup = true;
+}
+
+
+function show_lap_1_popup()
+{
+	if (has_popup)
+	{
+		//kill the previous popup
+		layer_sequence_destroy(cur_popup);
+	}
+	
+	//create the lap sequence
+	cur_popup = layer_sequence_create("Sequences", center_x, center_y, seq_lap1);
+	has_popup = true;
+}
+
+function show_lap_2_popup()
+{
+	if (has_popup)
+	{
+		//kill the previous popup
+		layer_sequence_destroy(cur_popup);
+	}
+	
+	//create the lap sequence
+	cur_popup = layer_sequence_create("Sequences", center_x, center_y, seq_lap2);
+	has_popup = true;
+}
+
+function show_lap_3_popup()
+{
+	if (has_popup)
+	{
+		//kill the previous popup
+		layer_sequence_destroy(cur_popup);
+	}
+	
+	//create the lap sequence
+	cur_popup = layer_sequence_create("Sequences", center_x, center_y, seq_lap3);
 	has_popup = true;
 }

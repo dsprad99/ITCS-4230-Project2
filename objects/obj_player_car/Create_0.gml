@@ -732,10 +732,12 @@ function on_checkered_obj_collision(_other)
 		if (cur_lap == 1)
 		{
 			lap1_time = obj_race_controller.time_taken - lap_start_time;
+			obj_popup_controller.show_lap_2_popup();
 		}
 		else if (cur_lap == 2)
 		{
 			lap2_time = obj_race_controller.time_taken - lap_start_time;
+			obj_popup_controller.show_lap_3_popup();
 		}
 		else if (cur_lap == 3)
 		{
