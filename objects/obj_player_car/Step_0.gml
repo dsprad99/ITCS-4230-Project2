@@ -39,6 +39,16 @@ if (!can_move)
 	return;
 }
 
+//LD Montello
+//if we're
+//no longer on a checkered
+//object, set the on_checkered_obj
+//boolean to false.
+if (on_checkered_obj and !place_meeting(x, y, checkered_obj))
+{
+	on_checkered_obj = false
+}
+
 //we only want to start falling
 //if the center of our car
 //crosses over into the fall

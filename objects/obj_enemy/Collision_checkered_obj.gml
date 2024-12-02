@@ -1,6 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+on_checkered_obj = true;
+
 //exit this event if
 //we already finished.
 if (did_finish)

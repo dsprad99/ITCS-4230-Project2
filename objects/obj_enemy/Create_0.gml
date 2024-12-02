@@ -2,6 +2,11 @@
 // You can write your code in this editor
 
 //LD Montello
+//if the car is on the checkered
+//object.
+on_checkered_obj = false;
+
+//LD Montello
 //Get the current path
 //from our race controller.
 track_path = obj_race_controller.track_path;
@@ -363,8 +368,20 @@ function update_placement()
 		//then update it's priority.
 		if (ds_priority_find_priority(obj_race_controller.car_placement_queue, self) != undefined)
 		{
-			//calculate the progression along the current path.
-			current_track_path_progression = floor(obj_race_controller.get_closest_point_on_path(x, y)) / obj_race_controller.path_len;
+			//When on the 
+			//finish line, ignore
+			//their current
+			//progression
+			//because it may be innacurate.
+			if (on_checkered_obj)
+			{
+				current_track_path_progression = 0;
+			}
+			else
+			{
+				//calculate the progression along the current path.
+				current_track_path_progression = floor(obj_race_controller.get_closest_point_on_path(x, y)) / obj_race_controller.path_len;
+			}
 		
 			//calculate priority by adding the current lap to our
 			//distance in the track.
@@ -377,8 +394,20 @@ function update_placement()
 		//we need to add ourselves.
 		else
 		{
-			//calculate the progression along the current path.
-			current_track_path_progression = obj_race_controller.get_closest_point_on_path(x, y) / obj_race_controller.path_len;
+			//When on the 
+			//finish line, ignore
+			//their current
+			//progression
+			//because it may be innacurate.
+			if (on_checkered_obj)
+			{
+				current_track_path_progression = 0;
+			}
+			else
+			{
+				//calculate the progression along the current path.
+				current_track_path_progression = floor(obj_race_controller.get_closest_point_on_path(x, y)) / obj_race_controller.path_len;
+			}
 			
 			//calculate priority by adding the current lap to our
 			//distance in the track.

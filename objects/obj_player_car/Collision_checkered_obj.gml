@@ -1,6 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+on_checkered_obj = true;
+
 //LD Montello
 //This event is
 //only called when we're allowed
