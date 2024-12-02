@@ -568,3 +568,25 @@ function draw_leaderboard_GUI(start_x, start_y, x_scale, y_scale)
 	draw_set_font(-1)
 	draw_set_color(-1);
 }
+
+time_to_switch_camera = 1;
+
+//LD Montello
+//called by a car when it finishes the race.
+function on_car_finished()
+{
+	//if the player has finished,
+	//we need to switch the camera target.
+	if (player_finished) 
+	{
+		//LD Montello
+		obj_camera_controller.cam_target = noone
+		
+		//start the alarm
+		//to go off after time_to_switch_camera
+		//time.
+		//when the alarm goes off it will switch the camera to
+		//the furthest racer so we can spectate.
+		alarm_set(1, time_to_switch_camera * game_get_speed(gamespeed_fps));
+	}
+}

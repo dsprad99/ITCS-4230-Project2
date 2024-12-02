@@ -84,6 +84,10 @@ if(checkpoints_complete(checkpoints_needed, checkpoints_curr)){
 		//remove ourselves from the priority queue
 		ds_priority_delete_value(obj_race_controller.car_placement_queue, self);
 			
+		//tell the race controller
+		//that a car has finished so that
+		//it can handle swapping the camera
+		obj_race_controller.on_car_finished();
 	}
 	else
 		cur_lap++;

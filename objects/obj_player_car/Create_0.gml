@@ -752,25 +752,7 @@ function on_checkered_obj_collision(_other)
 			//finished, we'll do the same thing in the enemies.
 			did_finish = true;
 			
-			//Tell the race controller
-			//that the player has finished
-			obj_race_controller.player_finished = true;
-			
 			can_move = false;
-			
-			//LD Montello,
-			//Switch the camera controller
-			//to follow a different object
-			//or not follow any objects anymore.
-			obj_camera_controller.cam_target = noone;
-			
-			//set the player car
-			//to be out of the way
-			//so it's collision mask
-			//doesn't block enemies that are
-			//still racing.
-			x = 0;
-			y = 0;
 			
 			//LD Montello show finish popup.
 			if (instance_exists(obj_popup_controller))
@@ -815,6 +797,22 @@ function on_checkered_obj_collision(_other)
 			ds_list_add(obj_race_controller.final_placements_list, self);
 			//remove ourselves from the priority queue
 			ds_priority_delete_value(obj_race_controller.car_placement_queue, self);
+		
+			
+			//Tell the race controller
+			//that the player has finished
+			obj_race_controller.player_finished = true;
+			
+			//Tell the controller that a car has finished.
+			obj_race_controller.on_car_finished();
+			
+			//set the player car
+			//to be out of the way
+			//so it's collision mask
+			//doesn't block enemies that are
+			//still racing.
+			x = 0;
+			y = 0;
 		
 		}
 		else
