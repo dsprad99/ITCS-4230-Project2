@@ -79,21 +79,69 @@ for (i = 0; i < ds_list_size(final_placements_list); i++)
 	place++;
 }
 
+////loop through
+////the cars that
+////are still racing
+//while (!ds_priority_empty(copy_queue))
+//{
+//	//get the current car
+//	var cur_car = ds_priority_find_max(copy_queue);
+	
+//	//get the priority
+//	//of the car.
+//	var car_priority = ds_priority_find_priority(copy_queue, cur_car);
+	
+//	//remove the current car, effectively "popping" it from
+//	//the queue.
+//	ds_priority_delete_max(copy_queue);
+	
+//	var name_color = c_white;
+	
+//	//if the car type is the player,
+//	//make their name color be cyan
+//	if (cur_car.object_index == obj_player_car)
+//	{
+//		name_color = global.neon_cyan;
+//	}
+//	//otherwise, it's an enemy name.
+//	else
+//	{
+//		name_color = global.neon_magenta;
+//	}
+	
+//	draw_text_transformed_color(camera_get_view_width(cam) - 550, _y, string(place) + " " + cur_car.car_name + " " + string(car_priority), 2, 2, 0, name_color, name_color, name_color, name_color, 1);
+	
+//	//LD Montello
+//	//Store the race position
+//	//for this car.
+//	cur_car.race_position = place;
+	
+//	//go down by 50 for the next drawing
+//	//of the placement
+//	_y += 50;
+	
+//	//increment the place.
+//	place++;
+//}
+
+
+var cur_race_order = get_racer_order();
 //loop through
 //the cars that
 //are still racing
-while (!ds_priority_empty(copy_queue))
+for (var i = 0; i < array_length(cur_race_order); i++)
 {
+	//show_message(string(cur_race_order[i]))
 	//get the current car
-	var cur_car = ds_priority_find_max(copy_queue);
+	var cur_car = cur_race_order[i][0];
 	
 	//get the priority
 	//of the car.
-	var car_priority = ds_priority_find_priority(copy_queue, cur_car);
+	var car_priority = cur_race_order[i][1] + cur_race_order[i][2];
 	
 	//remove the current car, effectively "popping" it from
 	//the queue.
-	ds_priority_delete_max(copy_queue);
+	//ds_priority_delete_max(copy_queue);
 	
 	var name_color = c_white;
 	

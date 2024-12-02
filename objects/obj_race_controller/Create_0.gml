@@ -145,3 +145,93 @@ function end_race()
 	show_message("Race Over!");
 	room_goto(main_menu);
 }
+
+function compare_racers(r1, r2)
+{
+	//show_message(r1)
+	//if the lap 
+	//number is the same,
+	//we need to compare their
+	//progression amount
+	if (r1[1] == r2[1])
+	{
+		//if r2 has progressed along
+		//the track farther than r1,
+		//then r2 is the "larger" value.
+		if (r1[2] < r2[2])
+		{
+			return 1;
+		}
+		//r1 has progressed farther than r2.
+		else if (r1[2] > r2[2])
+		{
+			return -1;
+		}
+		//they are equal.
+		else if (r1[2] == r2[2])
+		{
+			return 0;
+		}
+	}
+	//if r1 is less than r2 in lap count,
+	//r2 is greater.
+	else if (r1[1] < r2[1])
+	{
+		return 1;
+	}
+	//r1 is greater in lap count,
+	//r1 is greater.
+	else if (r1[1] > r2[1])
+	{
+		return -1;
+	}
+}
+
+function get_racer_order()
+{
+	//create array of currently alive 
+	//cars.
+	//it took me forever to realize 
+	//that array_push would only
+	//push new values and increase
+	//the size of the array,
+	//instead of filling the empty
+	//indexes.
+	//this was broken for a long time before
+	//I figured that out.
+	new_arr = array_create(0);
+	
+	//new_arr is an array
+	//of 3 element arrays
+	//containing [car_instance, lap, progress_on_lap];
+	
+	//add all player
+	//cars + lap values
+	//to the array
+	with (obj_player_car)
+	{
+		array_push(other.new_arr, [self, self.cur_lap, self.current_track_path_progression]);
+	}
+	
+	//add all enemy
+	//cars + lap values
+	//to the array
+	with (obj_enemy)
+	{
+		array_push(other.new_arr, [self, self.cur_lap, self.current_track_path_progression]);
+	}
+	
+	//for (var i = 0; i < array_length(new_arr); i++)
+	//{
+	//	show_message(array_length(new_arr));
+	//	show_message(new_arr[i]);
+	//}
+	
+	//sort the array using
+	//our custom car sorting
+	//function
+	array_sort(new_arr, compare_racers);
+	
+	//return the sorted array
+	return new_arr;
+}

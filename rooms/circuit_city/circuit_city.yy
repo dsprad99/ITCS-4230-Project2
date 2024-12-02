@@ -13,7 +13,6 @@
     {"name":"inst_71E54876","path":"rooms/circuit_city/circuit_city.yy",},
     {"name":"inst_6106CF1A","path":"rooms/circuit_city/circuit_city.yy",},
     {"name":"inst_3E204615","path":"rooms/circuit_city/circuit_city.yy",},
-    {"name":"inst_3D223534","path":"rooms/circuit_city/circuit_city.yy",},
     {"name":"inst_7E4D1F3E","path":"rooms/circuit_city/circuit_city.yy",},
     {"name":"inst_3FFB9CE","path":"rooms/circuit_city/circuit_city.yy",},
     {"name":"inst_5E1EA09C","path":"rooms/circuit_city/circuit_city.yy",},
@@ -29,6 +28,7 @@
     {"name":"inst_5125FE01","path":"rooms/circuit_city/circuit_city.yy",},
     {"name":"inst_6982101D","path":"rooms/circuit_city/circuit_city.yy",},
     {"name":"inst_6FAE14A8","path":"rooms/circuit_city/circuit_city.yy",},
+    {"name":"inst_3D223534","path":"rooms/circuit_city/circuit_city.yy",},
   ],
   "isDnd":false,
   "layers":[

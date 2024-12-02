@@ -18,7 +18,6 @@
     {"name":"inst_71E54876_1","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_6106CF1A_1","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_3E204615_1","path":"rooms/tutorial/tutorial.yy",},
-    {"name":"inst_3D223534_1","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_2F698C1C","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_4B52C93E","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_3DF95773","path":"rooms/tutorial/tutorial.yy",},
@@ -34,6 +33,7 @@
     {"name":"inst_2D167400","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_269E3725","path":"rooms/tutorial/tutorial.yy",},
     {"name":"inst_A9B9C0C","path":"rooms/tutorial/tutorial.yy",},
+    {"name":"inst_3D223534_1","path":"rooms/tutorial/tutorial.yy",},
   ],
   "isDnd":false,
   "layers":[
