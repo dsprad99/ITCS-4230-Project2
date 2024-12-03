@@ -28,6 +28,22 @@ global.in_debug = false;
 //variable for setting the game to be paused.
 global.paused = false;
 
+//LD Montello
+//the player's spawn point
+//when we start the race.
+//we need to reset this variable on
+//room start.
+global.player_start_slot = floor(random_range(1, 5));
+
+//LD Montello
+//select a random slot when the room starts,
+//this is called in the room creation code.
+function random_slot_on_room_start()
+{
+	show_message("HERE2");
+	global.player_start_slot = floor(random_range(1, 5));
+}
+
 #endregion
 
 #region mutables
