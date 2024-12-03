@@ -12,12 +12,10 @@ slot_taken = false;
 image_xscale = 5;
 image_yscale = 5;
 
-show_message(string(global.player_start_slot) + " " + string(slot_index));
 //if we're the player's
 //slot, indicate that using a boolean.
 if (global.player_start_slot == slot_index)
 {
-	show_message("HERE");
 	slot_taken = true;
 }
 

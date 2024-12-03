@@ -34,7 +34,7 @@ if (instance_exists(obj_player_car) and obj_player_car.did_finish)
 	//if every enemy has finished,
 	//and the player has also finished,
 	//the race is over.
-	if (total == finishers)
+	if (total == finishers and !race_over)
 	{
 		end_race();
 	}
@@ -58,3 +58,14 @@ center_x = camera_get_view_x(cam) + camera_get_view_width(cam) / 2
 center_y = camera_get_view_y(cam) + (64 * 5)
 layer_sequence_x(light_drop_down_start, center_x)
 layer_sequence_y(light_drop_down_start, center_y)
+
+
+
+//LD Montello
+//if the race is 
+//over and the player presses space,
+//return to the main menu.
+if (race_over and keyboard_check_pressed(vk_space))
+{
+	room_goto(main_menu);
+}

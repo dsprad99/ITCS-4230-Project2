@@ -142,13 +142,14 @@ function start_race()
 	}
 }
 
+race_over = false;
+
 //LD Montello
 //funciton called when
 //ever racer has finished.
 function end_race()
-{
-	show_message("Race Over!");
-	room_goto(main_menu);
+{	
+	race_over = true;
 }
 
 function compare_racers(r1, r2)

@@ -40,7 +40,6 @@ global.player_start_slot = floor(random_range(1, 5));
 //this is called in the room creation code.
 function random_slot_on_room_start()
 {
-	show_message("HERE2");
 	global.player_start_slot = floor(random_range(1, 5));
 }
 
