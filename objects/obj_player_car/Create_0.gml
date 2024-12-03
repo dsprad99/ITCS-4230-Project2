@@ -42,9 +42,9 @@ cur_lap = 1;
 
 lap_start_time = 0;
 
-lap1_time = 999999;
-lap2_time = 999999;
-lap3_time = 999999;
+lap1_time = 0;
+lap2_time = 0;
+lap3_time = 0;
 
 //LD Montello,
 //this car's race position.
