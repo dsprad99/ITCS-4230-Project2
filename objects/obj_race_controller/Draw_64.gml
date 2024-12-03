@@ -53,6 +53,22 @@ else
 	//of the leaderboard in the
 	//top right.
 	draw_leaderboard_GUI(camera_get_view_width(cam) - (camera_get_view_width(cam) / 8), 400, 0.25, 0.25);
+
+	//draw the player's current lap number in the GUI
+	//at the top center of the screen.
+	if (obj_player_car.cur_lap == 1)
+	{
+		draw_sprite_ext(spr_lap1, 0, camera_get_view_width(cam) / 2, sprite_get_height(spr_lap1) * 0.25, 0.25, 0.25, 0, c_white, 1);
+	}
+	else if (obj_player_car.cur_lap == 2)
+	{
+		draw_sprite_ext(spr_lap2, 0, camera_get_view_width(cam) / 2, sprite_get_height(spr_lap2) * 0.25, 0.25, 0.25, 0, c_white, 1);
+	}
+	else if (obj_player_car.cur_lap == 3)
+	{
+		draw_sprite_ext(spr_lap3, 0, camera_get_view_width(cam) / 2, sprite_get_height(spr_lap3) * 0.25, 0.25, 0.25, 0, c_white, 1);
+	}
+
 }
 
 
