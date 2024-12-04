@@ -36,6 +36,8 @@ if (global.paused)
 //don't execute the step event.
 if (!can_move)
 {
+	//stop playing engine sound.
+	audio_sound_loop(engine_sound, false);
 	return;
 }
 
@@ -81,7 +83,7 @@ if (!is_falling)
 	cur_fall_obj = collision_point(x, y, fall_obj, true, true)
 	
 
-if (cur_fall_obj != noone)
+if (cur_fall_obj != noone and !is_falling)
 {
 	//LD Montello
 	//Do the shrinking animation
@@ -89,6 +91,9 @@ if (cur_fall_obj != noone)
 	//vel_vec = [0,0];
 	is_falling = true;
 	
+	//LD Montello
+	//Play falling sound.
+	audio_play_sound_on(global.sfx_emitter, snd_fall, false, 2)
 	
 	//reset_to_last_checkpoint();
 }
@@ -247,6 +252,12 @@ if (!is_falling and !is_jumping and !is_colliding and (keyboard_check(vk_up) || 
 	//	car_speed = max_speed; 
 	//}
 	
+	//LD Montello.
+	//play engine audio.
+	try_play_engine_audio();
+	
+	
+	
 	//if we're not moving,
 	//decide what "gear" we're
 	//in by setting is_reversing to false.
@@ -278,6 +289,7 @@ if (!is_falling and !is_jumping and !is_colliding and (keyboard_check(vk_up) || 
 }
 else
 {
+
 	press_up = false;
 }
 
@@ -285,6 +297,9 @@ else
 //If down key is pressed declerate car
 if(!is_falling and !is_jumping and !is_colliding and ( keyboard_check(vk_down) || keyboard_check(ord("S")))){
     
+	//LD Montello.
+	//play engine audio.
+	try_play_engine_audio();
 	
 	if (magnitude(vel_vec) == 0)
 	{
@@ -327,7 +342,14 @@ if (!is_falling and !is_jumping and keyboard_check(vk_space))
 	brake();
 }
 
-
+//LD Montello
+//if the player
+//isn't accelerating,
+//turn off the engine audio.
+if (!press_up and !press_down and !is_jumping)
+{
+	audio_sound_loop(engine_sound, false);
+}
 
 //Davis Spradling
 //Apply firction when slowing down to help stop the car when decelerating

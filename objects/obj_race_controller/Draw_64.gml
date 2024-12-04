@@ -9,6 +9,16 @@
 if (global.in_debug)
 {
 	draw_text_transformed(camera_get_view_width(cam) - 150, 500, "FPS: " + string(fps), 2, 2, 0);
+
+	//LD Montello
+	//Display the audio data
+	//about the engine sound.
+	if (instance_exists(obj_player_car) and audio_exists(obj_player_car.engine_sound))
+	{
+		draw_text_transformed(camera_get_view_width(cam) / 2 - 150, 600, "Engine audio track time: " + string(audio_sound_get_track_position(obj_player_car.engine_sound)), 2, 2, 0);
+		draw_text_transformed(camera_get_view_width(cam) / 2 - 150, 650, "Start: " + string(audio_sound_get_loop_start(obj_player_car.engine_sound)), 2, 2, 0);
+		draw_text_transformed(camera_get_view_width(cam) / 2 - 150, 700, "End: " + string(audio_sound_get_loop_end(obj_player_car.engine_sound)), 2, 2, 0);
+	}
 }
 
 

@@ -204,7 +204,41 @@ checkpoints_curr = [];
 press_up = false;
 press_down = false;
 
+//LD Montello,
+//the start loop only after
+//the fade in, and 
+//end loop before the fade out
+//sections of the audio.
+audio_sound_loop_start(snd_player_engine, 0.6735);
+audio_sound_loop_end(snd_player_engine, 2.5685);
 
+function try_play_engine_audio()
+{
+	//LD Montello
+	//only start looping
+	//the player engine audio
+	//if it isn't playing
+	if (!audio_is_playing(snd_player_engine))
+	{
+		
+		//LD Montello
+		//Play escape audio to show that you escaped.
+		engine_sound = audio_play_sound_on(global.sfx_emitter, snd_player_engine, true, 2)
+	
+		
+		//LD Montello,
+		//the start loop only after
+		//the fade in, and 
+		//end loop before the fade out
+		//sections of the audio.
+		audio_sound_loop_start(snd_player_engine, 0.6735);
+		audio_sound_loop_end(snd_player_engine, 2);
+	}
+}
+
+//LD Montello
+//we store the engine sound here.
+engine_sound = noone;
 
 //LD Montello
 //get all the checkpoints for this track.
@@ -324,6 +358,10 @@ function reset_to_last_checkpoint_delayed()
 	//play the particle system
 	//for dying
 	obj_particle_sys_controller.play_particle_system(ps_cyan_derez_death, x, y);
+	
+	//LD Montello
+	//Play dying sound.
+	audio_play_sound_on(global.sfx_emitter, snd_death, false, 2)
 	
 	alarm_set(2, game_get_speed(gamespeed_fps)*1);
 }
@@ -778,10 +816,23 @@ function on_checkered_obj_collision(_other)
 				//amount of time.
 				if (ds_list_empty(obj_race_controller.final_placements_list))
 				{
+					
+					//LD Montello
+					//Play escape audio to show that you escaped.
+					audio_play_sound_on(global.sfx_emitter, snd_escape_race, false, 2)
+					
 					obj_particle_sys_controller.play_particle_system_angle(ps_cyan_derez_escape, x, y, vector_to_angle(normalized(vel_vec)));
 				}
 				else
 				{
+					
+					
+					//LD Montello
+					//Play dying sound because
+					//it's supposed to imply that you die
+					//if you don't get first.
+					audio_play_sound_on(global.sfx_emitter, snd_death, false, 2)
+					
 					obj_particle_sys_controller.play_particle_system(ps_cyan_derez_death, x, y);
 				}
 			

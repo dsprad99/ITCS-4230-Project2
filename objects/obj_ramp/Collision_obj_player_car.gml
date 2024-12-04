@@ -10,5 +10,11 @@
 //applying their previous velocity until they
 //stop colliding with the ramp.
 
+if (other.is_jumping != true)
+//LD Montello
+//Play jumping sound.
+audio_play_sound_on(global.sfx_emitter, snd_jump, false, 2)
+
 other.is_jumping = true;
 other.cur_ramp = self;
+

@@ -12,3 +12,4 @@
 
 other.is_jumping = true;
 other.cur_ramp = self;
+
