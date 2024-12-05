@@ -19,6 +19,13 @@ if (global.in_debug)
 		draw_text_transformed(camera_get_view_width(cam) / 2 - 150, 650, "Start: " + string(audio_sound_get_loop_start(obj_player_car.engine_sound)), 2, 2, 0);
 		draw_text_transformed(camera_get_view_width(cam) / 2 - 150, 700, "End: " + string(audio_sound_get_loop_end(obj_player_car.engine_sound)), 2, 2, 0);
 	}
+	
+	if (instance_exists(obj_music_looper) and audio_exists(global.cur_song))
+	{
+		draw_text_transformed(150, 600, "Song Track Time: " + string(audio_sound_get_track_position(global.cur_song)), 2, 2, 0);
+		draw_text_transformed(150, 650, "Start: " + string(audio_sound_get_loop_start(global.cur_song)), 2, 2, 0);
+		draw_text_transformed(150, 700, "End: " + string(audio_sound_get_loop_end(global.cur_song)), 2, 2, 0);
+	}
 }
 
 

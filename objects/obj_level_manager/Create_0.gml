@@ -68,6 +68,10 @@ function pause()
 		instance_activate_object(obj_pause_UI);
 		instance_activate_object(obj_quit_to_menu_button);
 		instance_activate_object(obj_resume_button);
+		
+		//LD Montello
+		//Pause all audio.
+		audio_pause_all();
 	}
 	else
 	{
@@ -125,6 +129,10 @@ function pause()
 		instance_deactivate_object(obj_pause_UI);
 		instance_deactivate_object(obj_quit_to_menu_button);
 		instance_deactivate_object(obj_resume_button);
+		
+		//LD Montello
+		//Resume all audio.
+		audio_resume_all();
 	}
 }
 

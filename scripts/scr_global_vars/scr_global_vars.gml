@@ -47,6 +47,15 @@ function random_slot_on_room_start()
 
 #region mutables
 
+//LD Montello
+//We'll store the current song
+//that's being played here
+//so that on room end we
+//can stop the music and then
+//check on room start that it's
+//been stopped before another song starts.
+global.cur_song = noone;
+
 #endregion
 
 
