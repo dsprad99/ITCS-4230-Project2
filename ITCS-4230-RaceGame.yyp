@@ -50,7 +50,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.0.169",
+    "IDEVersion":"2024.8.1.171",
   },
   "name":"ITCS-4230-RaceGame",
   "resources":[
@@ -122,6 +122,7 @@
     {"id":{"name":"snd_tutorial_music","path":"sounds/snd_tutorial_music/snd_tutorial_music.yy",},},
     {"id":{"name":"Arrows","path":"sprites/Arrows/Arrows.yy",},},
     {"id":{"name":"car_slot","path":"sprites/car_slot/car_slot.yy",},},
+    {"id":{"name":"controls_spr","path":"sprites/controls_spr/controls_spr.yy",},},
     {"id":{"name":"EnemyCar","path":"sprites/EnemyCar/EnemyCar.yy",},},
     {"id":{"name":"finishline_hitbox","path":"sprites/finishline_hitbox/finishline_hitbox.yy",},},
     {"id":{"name":"FinishLineRainbow_Small","path":"sprites/FinishLineRainbow_Small/FinishLineRainbow_Small.yy",},},

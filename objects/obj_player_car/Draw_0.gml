@@ -63,46 +63,11 @@ draw_text_transformed_color(x, y, image_angle, 5, 5, 0, c_black, c_black, c_blac
 //show the controls for the player to move a car
 if(in_tutorial){
 	var cam = view_camera[0];
-	var cam_x = camera_get_view_x(cam)-100;
-	var cam_y = camera_get_view_y(cam)+100;
+	var cam_x = camera_get_view_x(cam)+1650;
+	var cam_y = camera_get_view_y(cam)+860;
 
-	//add margin to create an offset
-	var margin = 20;
-	var draw_x = cam_x+camera_get_view_width(cam)-margin;
-	var draw_y = cam_y+margin;
-	var arrow_size = 20;
-
-	draw_set_halign(fa_left);
-	draw_set_valign(fa_middle);
-
-	//spacing variables to help space out text for arrow controls
-	var horizontal_spacing = 200;  
-	var vertical_spacing = 80;   
-
-	draw_set_color(c_white);
-
-	draw_set_font(fnt_gamecuben);
-	draw_text_transformed(draw_x - horizontal_spacing-200, draw_y-50, "Controls", 0.4, 0.4, 0);
-
-	//draw up arrow
-	draw_triangle(draw_x-horizontal_spacing, draw_y, draw_x-horizontal_spacing-arrow_size, draw_y+arrow_size, draw_x-horizontal_spacing + arrow_size, draw_y+arrow_size, false);
-	draw_text_transformed(draw_x-horizontal_spacing-200, draw_y, "Forward", 0.3, 0.3, 0); 
-
-	//draw right arrow
-	draw_triangle(draw_x-horizontal_spacing, draw_y + vertical_spacing, draw_x-horizontal_spacing+arrow_size, draw_y+vertical_spacing - arrow_size, draw_x-horizontal_spacing+arrow_size, draw_y+vertical_spacing+arrow_size, false);
-	draw_text_transformed(draw_x-horizontal_spacing-200, draw_y + vertical_spacing, "Left", 0.3, 0.3, 0);
-
-	//draw left arrow
-	draw_triangle(draw_x-horizontal_spacing, draw_y+vertical_spacing*2, draw_x-horizontal_spacing-arrow_size, draw_y+vertical_spacing*2 - arrow_size, draw_x-horizontal_spacing - arrow_size, draw_y+vertical_spacing*2+arrow_size, false);
-	draw_text_transformed(draw_x-horizontal_spacing-200, draw_y+vertical_spacing * 2, "Right", 0.3, 0.3, 0); 
-
-	//draw down arrow
-	draw_triangle(draw_x-horizontal_spacing, draw_y + vertical_spacing*3, draw_x-horizontal_spacing-arrow_size, draw_y+vertical_spacing*3 - arrow_size, draw_x-horizontal_spacing + arrow_size, draw_y+vertical_spacing*3-arrow_size, false);
-	draw_text_transformed(draw_x-horizontal_spacing-200, draw_y + vertical_spacing * 3, "Down", 0.3, 0.3, 0);
-
-	//reset allignment for any other drawing
-	draw_set_halign(fa_left);
-	draw_set_valign(fa_top);
+	draw_sprite(controls_spr, 0, cam_x, cam_y)
+	
 
 }
 
