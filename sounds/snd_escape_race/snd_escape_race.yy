@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"snd_escape_race.wav",
   "type":0,
-  "volume":1.0,
+  "volume":0.69,
 }
