@@ -30,6 +30,7 @@
     {"$GMObjectProperty":"v1","%Name":"tutorial_check","filters":[],"listItems":[],"multiselect":false,"name":"tutorial_check","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
     {"$GMObjectProperty":"v1","%Name":"text","filters":[],"listItems":[],"multiselect":false,"name":"text","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Nice job! You completed the tutorial!","varType":2,},
     {"$GMObjectProperty":"v1","%Name":"room_go","filters":[],"listItems":[],"multiselect":false,"name":"room_go","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"circuit_city","path":"rooms/circuit_city/circuit_city.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"circuit_city","varType":5,},
+    {"$GMObjectProperty":"v1","%Name":"tutorial_popup","filters":[],"listItems":[],"multiselect":false,"name":"tutorial_popup","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"tutorial_3","path":"sprites/tutorial_3/tutorial_3.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"tutorial_3","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

@@ -43,6 +43,7 @@
         "\"special abilities!\"",
       ],"multiselect":false,"name":"text","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Go through powerups to help gain special abilities!","varType":2,},
     {"$GMObjectProperty":"v1","%Name":"tutorial_check","filters":[],"listItems":[],"multiselect":false,"name":"tutorial_check","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"tutorial_check_1","varType":2,},
+    {"$GMObjectProperty":"v1","%Name":"tutorial_popup","filters":[],"listItems":[],"multiselect":false,"name":"tutorial_popup","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"tutorial_1","path":"sprites/tutorial_1/tutorial_1.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"tutorial_1","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

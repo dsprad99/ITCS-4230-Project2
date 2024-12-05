@@ -727,10 +727,17 @@ function on_checkered_obj_collision(_other)
 		//new_tut_next.image_xscale = .5;
 		//new_tut_next.image_yscale = .5;
 		//new_tut_next.room_to = other.room_go
-	
-		var new_check = instance_create_layer(obj_player_car.x, obj_player_car.y, "tutorial_popup", tut_finish_msg_obj);
-		new_check.image_xscale = 1.8;
-		new_check.image_yscale = 1.8;
+		var cam = view_camera[0];
+
+		//Davis Spradling
+		//get the top left corner of the camera and add half way 
+		//values to get to the center camera view
+		var camera_x = camera_get_view_x(cam)+960;
+		var camera_y = camera_get_view_y(cam)+540;
+		var new_check = instance_create_layer(camera_x, camera_y, "tutorial_popup", tut_finish_msg_obj);
+		new_check.sprite_index = _other.tutorial_popup;
+		//new_check.image_xscale = 1.8;
+		//new_check.image_yscale = 1.8;
 		new_check.room_to = _other.room_go
 	
 	
@@ -753,8 +760,7 @@ function on_checkered_obj_collision(_other)
 		    }
 	}
 	
-		tut_finish_msg_obj.txt1 = var1;
-		tut_finish_msg_obj.txt2 = var2;
+
 		obj_player_car.can_move = false;
 	
 		_other.tutorial_check = false;

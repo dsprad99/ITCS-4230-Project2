@@ -49,7 +49,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.0.169",
+    "IDEVersion":"2024.8.1.171",
   },
   "name":"ITCS-4230-RaceGame",
   "resources":[
@@ -160,6 +160,9 @@
     {"id":{"name":"spr_tree","path":"sprites/spr_tree/spr_tree.yy",},},
     {"id":{"name":"spr_void","path":"sprites/spr_void/spr_void.yy",},},
     {"id":{"name":"track_select","path":"sprites/track_select/track_select.yy",},},
+    {"id":{"name":"tutorial_1","path":"sprites/tutorial_1/tutorial_1.yy",},},
+    {"id":{"name":"tutorial_2","path":"sprites/tutorial_2/tutorial_2.yy",},},
+    {"id":{"name":"tutorial_3","path":"sprites/tutorial_3/tutorial_3.yy",},},
     {"id":{"name":"tutorial_check_sprite","path":"sprites/tutorial_check_sprite/tutorial_check_sprite.yy",},},
     {"id":{"name":"WallTiles","path":"sprites/WallTiles/WallTiles.yy",},},
     {"id":{"name":"WallTilesGreen","path":"sprites/WallTilesGreen/WallTilesGreen.yy",},},

@@ -19,8 +19,9 @@ if(tutorial_check_bool ==true){
 	//new_tut_next.image_yscale = .5;
 	
 	var new_check = instance_create_layer(camera_x, camera_y, "tutorial_popup", checkpoint_msg_obj);
-	new_check.image_xscale = 1.8;
-	new_check.image_yscale = 1.8;
+	new_check.sprite_index = tutorial_popup;
+	new_check.image_xscale =1.0
+	new_check.image_xscale=1.0
 	
 
 	//Used to break up the instructions into three different lines
@@ -34,20 +35,6 @@ if(tutorial_check_bool ==true){
 	var var1 = "";
 	var var2 = "";
 	var var3 = "";
-	
-	for (var i = 0; i < total_words; i++) {
-		    if (i < third) {
-		        var1 += words_array[i] + " ";
-		    } else if (i < third * 2) {
-		        var2 += words_array[i] + " ";
-		    } else {
-		        var3 += words_array[i] + " ";
-		    }
-	}
-	
-	checkpoint_msg_obj.txt1 = var1;
-	checkpoint_msg_obj.txt2 = var2;
-	checkpoint_msg_obj.txt3 = var3;
 	
 	other.can_move = false;
 	
