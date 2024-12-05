@@ -80,29 +80,33 @@ if (instance_exists(obj_player_car))
 	draw_set_color(-1);
 }
 
+if (race_over)
+{
 
-//LD Montello
-//Set the font
-//Make the text aligned to the left.
-draw_set_font(fnt_gamecuben)
-//draw_set_valign(fa_middle)
-draw_set_color(global.neon_cyan);
-draw_set_halign(fa_center)
+	//LD Montello
+	//Set the font
+	//Make the text aligned to the left.
+	draw_set_font(fnt_gamecuben)
+	//draw_set_valign(fa_middle)
+	draw_set_color(global.neon_cyan);
+	draw_set_halign(fa_center)
 
-//LD Montello
+	//LD Montello
 	//draw the UI
 	//for pressing space
 	//to exit back to menu
 	//only when the race is completely over.
 	draw_text_transformed_color(camera_get_view_width(cam) / 2, camera_get_view_height(cam) / 2 + 450, "Space to Continue", 32 / 72, 32 / 72, 0, c_white, c_white, c_white, c_white, 1);
 
-//LD Montello
-//Go back to default alignment.
-draw_set_valign(-1)
-draw_set_halign(-1)
-//Go back to default font
-draw_set_font(-1)
-draw_set_color(-1);
+	//LD Montello
+	//Go back to default alignment.
+	draw_set_valign(-1)
+	draw_set_halign(-1)
+	//Go back to default font
+	draw_set_font(-1)
+	draw_set_color(-1);
+
+}
 
 //LD Montello
 //draw the leaderboard
