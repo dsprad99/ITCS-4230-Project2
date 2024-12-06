@@ -3,15 +3,15 @@
 
 //draw_self()
 
-var total = 100;
+var total = 50;
 
-var height_between_segments = 2;
+var height_between_segments = 0.2;
 
 for (var i = total; i > 0; i--)
 {
 	//calculated the scaled width and height of this segment.
-	var scaled_width = i / total * sprite_get_width(spr_building_segment) * 5
-	var scaled_height = i / total * sprite_get_height(spr_building_segment) * 5
+	var scaled_width = i / total * sprite_get_width(spr_spike) * 5
+	var scaled_height = i / total * sprite_get_height(spr_spike) * 5
 	
 	//get the center of our building.
 	var x_pos = (x - (image_xscale * 96 / 2));
@@ -35,5 +35,5 @@ for (var i = total; i > 0; i--)
 	//scale relative to our current segment.
 	y_offset *= height_between_segments * (1 - i / total);
 	
-	draw_sprite_stretched(spr_building_segment, 0, x_pos + x_offset, y_pos + y_offset, scaled_width, scaled_height);
+	draw_sprite_stretched(spr_spike, 0, x_pos + x_offset, y_pos + y_offset, scaled_width, scaled_height);
 }
