@@ -143,6 +143,7 @@
     {"id":{"name":"spr_5th","path":"sprites/spr_5th/spr_5th.yy",},},
     {"id":{"name":"spr_arrow","path":"sprites/spr_arrow/spr_arrow.yy",},},
     {"id":{"name":"spr_building_segment","path":"sprites/spr_building_segment/spr_building_segment.yy",},},
+    {"id":{"name":"spr_BuildingRoof","path":"sprites/spr_BuildingRoof/spr_BuildingRoof.yy",},},
     {"id":{"name":"spr_checkpoint","path":"sprites/spr_checkpoint/spr_checkpoint.yy",},},
     {"id":{"name":"spr_controls_withfx","path":"sprites/spr_controls_withfx/spr_controls_withfx.yy",},},
     {"id":{"name":"spr_credits","path":"sprites/spr_credits/spr_credits.yy",},},

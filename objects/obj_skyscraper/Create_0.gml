@@ -7,3 +7,5 @@ image_yscale = 5;
 //LD Montello
 //Get the camera
 cam = view_get_camera(0);
+
+base_depth = depth;
